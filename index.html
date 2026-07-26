@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MOHAMMED_IBRAHIM // BACKEND_ENGINEER</title>
-  <meta name="description" content="Mohammed Ibrahim (Ayan) — 17 y/o backend engineer aspirant. Python, C, SQL, Linux, Git/GitHub. Hyderabad, IN.">
+  <meta name="description" content="Mohammed Ibrahim — 17 y/o backend engineer aspirant. Python, C, SQL, Linux, Git/GitHub. Hyderabad, IN.">
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 66 66' fill='none'%3E%3Cdefs%3E%3ClinearGradient id='lg' x1='0' y1='0' x2='66' y2='66' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0%25' stop-color='%23FF3300'/%3E%3Cstop offset='100%25' stop-color='%2300FFFF'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect x='3' y='10' width='9' height='38' fill='url(%23lg)'/%3E%3Crect x='3' y='10' width='14' height='9' fill='url(%23lg)'/%3E%3Crect x='14' y='10' width='9' height='20' fill='url(%23lg)'/%3E%3Crect x='23' y='10' width='9' height='20' fill='url(%23lg)'/%3E%3Crect x='23' y='10' width='14' height='9' fill='url(%23lg)'/%3E%3Crect x='32' y='10' width='9' height='38' fill='url(%23lg)'/%3E%3C/svg%3E">
 
@@ -969,6 +969,10 @@
 
 <!-- CANVAS BACKGROUND -->
 <canvas id="bgCanvas"></canvas>
+<!-- MATRIX RAIN BACKGROUND -->
+<canvas id="matrixCanvas" style="position:fixed; top:0; left:0; width:100vw; height:100vh; pointer-events:none; z-index:-1; opacity:0; transition: opacity 1s ease;"></canvas>
+<!-- CURSOR FLASHLIGHT -->
+<div id="cursorFlashlight" style="position:fixed; inset:0; pointer-events:none; z-index:999998; mix-blend-mode: screen; transition: background 0.1s ease-out;"></div>
 
 <!-- BOOT LOADING SCREEN -->
 <div id="bootScreen" style="
@@ -980,6 +984,22 @@
 ">
   <!-- LOADING SEQUENCE -->
   <div id="bootLoader" style="display:flex; flex-direction:column; align-items:center; gap:clamp(12px, 3vh, 20px); width:100%; padding:20px; box-sizing:border-box;">
+    
+    <!-- ASCII LOGO -->
+    <pre class="glitch" style="font-size:clamp(4px, 0.75vw, 10px); color:var(--accent-color); line-height:1.15; text-align:center; font-weight:bold; margin-bottom:10px; margin-top:-20px;">
+&lt;  ____    _    ____  ____    ___  _   _ 
+  / ___|  / \  |  _ \| __ )  / _ \| \ | |
+ | |     / _ \ | |_) |  _ \ | | | |  \| |
+ | |___ / ___ \|  _ &lt;| |_) || |_| | |\  |
+  \____/_/   \_\_| \_\____/  \___/|_| \_|
+
+   _____ _   _ _____     ____ ___  ____  _____ ____    /&gt;
+  |_   _| | | | ____|   / ___/ _ \|  _ \| ____|  _ \ 
+    | | | |_| |  _|    | |  | | | | | | |  _| | |_) |
+    | | |  _  | |___   | |__| |_| | |_| | |___|  _ &lt; 
+    |_| |_| |_|_____|   \____\___/|____/|_____|_| \_\
+    </pre>
+
     <div style="font-size:clamp(10px, 3vw, 14px); color:rgba(255,255,255,0.5); letter-spacing:clamp(2px, 1vw, 4px); font-weight:800; text-align:center;">
       REGENERATING...
     </div>
@@ -1038,6 +1058,7 @@
 
 <!-- LIVE METRICS -->
 <div class="live-metrics" id="liveMetrics">
+  <div>SYS_TIME: <span id="timeMetric">--:--:-- IST</span></div>
   <div>CPU: <span id="cpuMetric">0</span>%</div>
   <div>RAM: <span id="ramMetric">0</span>MB</div>
   <div>UPTIME: <span id="uptimeMetric">00:00:00</span></div>
@@ -1298,7 +1319,7 @@
       </div>
  
       <div class="snap-in snap-delay-1" style="font-family:'JetBrains Mono',monospace; font-size:clamp(18px,3vw,28px); font-weight:800; letter-spacing:4px; color:var(--accent-color); text-transform:uppercase; margin-bottom:8px;">
-        Y'ALL, I'M
+        I'M
       </div>
       <h1 class="glitch snap-in snap-delay-1"
         id="heroTitle"
@@ -1326,7 +1347,7 @@
       </div>
  
       <p class="blur-reveal" style="font-size:14px;color:rgba(255,255,255,0.5);line-height:1.9;max-width:540px;margin-bottom:32px;">
-        Y'all, I'm a 17 y/o backend aspirant (aka Ayan/Ibu) 🚀<br>
+        I'm a 17 y/o backend aspirant 🚀<br>
         I build things, break things, and figure out exactly how they work.
       </p>
  
@@ -1363,7 +1384,7 @@
     <!-- Badge -->
     <div class="reveal" style="display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,0.1);padding:10px 18px;font-size:12px;color:rgba(255,255,255,0.6);margin-bottom:24px;flex-wrap:wrap;">
       <span style="color:var(--accent-color);font-size:11px;">@</span>
-      Mohammed Ibrahim, Alias Ayan/Ibu &nbsp;·&nbsp; 17 y/o &nbsp;·&nbsp; Hyderabad, IN 🇮🇳
+      Mohammed Ibrahim &nbsp;·&nbsp; 17 y/o &nbsp;·&nbsp; Hyderabad, IN 🇮🇳
     </div>
     
     
@@ -1743,16 +1764,16 @@
         </div>
       </a>
 
-      <a class="flip-card" href="https://github.com/mrayannn18" target="_blank" style="text-decoration:none;">
+      <a class="flip-card" href="https://github.com/carbonthecoder" target="_blank" style="text-decoration:none;">
         <div class="flip-inner">
           <div class="flip-front">
             <img src="https://cdn.simpleicons.org/github/ffffff" style="width:20px;height:20px;" alt="">
             <div>
               <div style="font-size:12px;font-weight:700;">GitHub</div>
-              <div style="font-size:10px;color:rgba(255,255,255,0.4);margin-top:2px;">mrayannn18</div>
+              <div style="font-size:10px;color:rgba(255,255,255,0.4);margin-top:2px;">carbonthecoder</div>
             </div>
           </div>
-          <div class="flip-back"><span>github.com/mrayannn18</span><span>↗</span></div>
+          <div class="flip-back"><span>github.com/carbonthecoder</span><span>↗</span></div>
         </div>
       </a>
 
@@ -1814,7 +1835,7 @@
     <div style="margin-top:24px; display:flex; justify-content:flex-start;">
       <a href="https://open.spotify.com/playlist/7w7u4uTg9ZLsnjScZHsi2c?si=fed3cf6f24e64eb2" target="_blank" class="brutal-border btn-slide-fill" style="text-decoration:none; padding:12px 20px; background:rgba(255,255,255,0.02); color:var(--accent-color); font-size:11px; font-weight:700; letter-spacing:2px; display:inline-flex; align-items:center; gap:8px;">
         <img src="https://cdn.simpleicons.org/spotify/1DB954" style="width:16px; height:16px;">
-        VIBES: MY CODING PLAYLIST ↗
+        VIBES: THE MASTERPIECE PLAYLIST ↗
       </a>
     </div>
 
@@ -2769,8 +2790,7 @@ async function fetchDiscordStatus() {
         mainText += ` <span style="color:var(--accent-color); font-weight:bold;">(+${additionalCount} more)</span>`;
       }
       
-      const username = data.data.discord_user ? data.data.discord_user.username : 'versatileayann';
-      const finalDisplay = `<span style="color:#fff; font-weight:bold; letter-spacing:1px;">@${username}</span> <span style="margin:0 4px; color:rgba(255,255,255,0.3);">|</span> ${mainText}`;
+      const finalDisplay = `${mainText}`;
       
       const heroBanner = document.getElementById('heroDiscordBanner');
       if (heroBanner) {
@@ -2965,7 +2985,7 @@ setInterval(fetchDiscordStatus, 30000);
         mouse.y = e.clientY;
       }
       mouse.active = true;
-      if (Math.random() > 0.3) {
+      if (Math.random() > 0.1) {
         particles.push({
           x: mouse.x + (Math.random() * 10 - 5),
           y: mouse.y + (Math.random() * 10 - 5),
@@ -2974,7 +2994,7 @@ setInterval(fetchDiscordStatus, 30000);
           size: Math.random() > 0.5 ? 4 : 8,
           color: colors[Math.floor(Math.random() * colors.length)],
           life: 1.0,
-          decay: Math.random() * 0.02 + 0.015
+          decay: Math.random() * 0.01 + 0.008
         });
       }
     }
@@ -3111,6 +3131,100 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 
+<!-- Flashlight Cursor, Timezone Clock, and Matrix Rain Logic -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  // 1. Flashlight Cursor
+  const flashlight = document.getElementById('cursorFlashlight');
+  if (flashlight) {
+    document.addEventListener('mousemove', (e) => {
+      let colorHex = window.getComputedStyle(document.body).getPropertyValue('--accent-color').trim() || '#FF3300';
+      let r = parseInt(colorHex.slice(1, 3), 16) || 255;
+      let g = parseInt(colorHex.slice(3, 5), 16) || 51;
+      let b = parseInt(colorHex.slice(5, 7), 16) || 0;
+      flashlight.style.background = `radial-gradient(circle 400px at ${e.clientX}px ${e.clientY}px, rgba(${r}, ${g}, ${b}, 0.03), transparent 80%)`;
+    });
+  }
+
+  // 2. IST Timezone Clock
+  const timeMetric = document.getElementById('timeMetric');
+  if (timeMetric) {
+    setInterval(() => {
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString('en-IN', { timeZone: 'Asia/Kolkata', hour12: false });
+      timeMetric.innerText = `${timeStr} IST`;
+    }, 1000);
+  }
+
+  // 3. Matrix Rain Easter Egg
+  const matrixCanvas = document.getElementById('matrixCanvas');
+  const navLogo = document.getElementById('navLogo');
+  let matrixRunning = false;
+  
+  if (matrixCanvas && navLogo) {
+    const ctx = matrixCanvas.getContext('2d');
+    let width = matrixCanvas.width = window.innerWidth;
+    let height = matrixCanvas.height = window.innerHeight;
+    const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレゲゼデベペオォコソトノホモヨョロゴゾドボポヴッン';
+    const charArray = letters.split('');
+    const fontSize = 16;
+    let columns = width / fontSize;
+    const drops = [];
+    for (let x = 0; x < columns; x++) drops[x] = 1;
+    
+    let matrixInterval;
+
+    function drawMatrix() {
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+      ctx.fillRect(0, 0, width, height);
+      ctx.fillStyle = '#0F0';
+      ctx.font = fontSize + 'px monospace';
+      
+      for (let i = 0; i < drops.length; i++) {
+        const text = charArray[Math.floor(Math.random() * charArray.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+        
+        if (drops[i] * fontSize > height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+    }
+
+    navLogo.addEventListener('dblclick', () => {
+      if (!matrixRunning) {
+        matrixRunning = true;
+        matrixCanvas.style.opacity = '0.5'; // Keeping it semi-transparent so you can still read the site
+        matrixInterval = setInterval(drawMatrix, 33);
+        
+        if(window.punchSfx) {
+          window.punchSfx.currentTime = 0;
+          window.punchSfx.play().catch(()=>{});
+        }
+        
+        // Auto-stop after 10 seconds
+        setTimeout(() => {
+          matrixCanvas.style.opacity = '0';
+          setTimeout(() => {
+            clearInterval(matrixInterval);
+            matrixRunning = false;
+            // Clear canvas entirely
+            ctx.clearRect(0, 0, width, height);
+            drops.fill(1);
+          }, 1000); 
+        }, 10000);
+      }
+    });
+
+    window.addEventListener('resize', () => {
+      width = matrixCanvas.width = window.innerWidth;
+      height = matrixCanvas.height = window.innerHeight;
+      columns = width / fontSize;
+      while(drops.length < columns) drops.push(1);
+    });
+  }
+});
+</script>
 </body>
 
 </html>
