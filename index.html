@@ -1478,7 +1478,29 @@
           <div style="font-size:10px;font-weight:700;text-align:center;">VS Code</div>
           <div style="font-size:8px;color:rgba(255,255,255,0.3);letter-spacing:1px;">EDITOR</div>
         </div>
-        
+        <div class="brutal-border draw-card" style="padding:14px 8px;display:flex;flex-direction:column;align-items:center;gap:8px;transition:all .15s;">
+          <img src="https://cdn.jsdelivr.net/gh/glincker/thesvg@main/public/icons/claude-code/default.svg" style="width:24px;height:24px;" alt="">
+          <div style="font-size:10px;font-weight:700;text-align:center;">Claude AI</div>
+          <div style="font-size:8px;color:rgba(255,255,255,0.3);letter-spacing:1px;">EXPERT</div>
+        </div>
+        <div class="brutal-border draw-card" style="padding:14px 8px;display:flex;flex-direction:column;align-items:center;gap:8px;transition:all .15s;">
+          <img src="https://cdn.simpleicons.org/virtualbox/ffffff" style="width:24px;height:24px;" alt="">
+          <div style="font-size:10px;font-weight:700;text-align:center;">VirtualBox</div>
+          <div style="font-size:8px;color:rgba(255,255,255,0.3);letter-spacing:1px;">VIRTUALIZATION</div>
+        </div>
+        <div class="brutal-border draw-card" style="padding:14px 8px;display:flex;flex-direction:column;align-items:center;gap:8px;transition:all .15s;">
+          <img src="https://img.icons8.com/color/48/microsoft-office-2019.png" style="width:24px;height:24px;" alt="">
+          <div style="font-size:10px;font-weight:700;text-align:center;">MS Office</div>
+          <div style="font-size:8px;color:rgba(255,255,255,0.3);letter-spacing:1px;">DOCS & DATA</div>
+        </div>
+      </div>
+ 
+      <button onclick="openArchive()" class="btn-slide-fill"
+        style="border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.45);background:transparent;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;padding:10px 22px;cursor:pointer;text-transform:uppercase;transition:all 0.1s;">
+        📦 VIEW ARCHIVE — SECONDARY TOOLS
+      </button>
+
+      <div id="archiveGrid" style="display:none; grid-template-columns:repeat(auto-fit, minmax(110px, 1fr)); gap:8px; max-width:520px; margin-top:16px;">
         <div class="brutal-border draw-card" style="padding:14px 8px;display:flex;flex-direction:column;align-items:center;gap:8px;transition:all .15s;">
           <img src="https://cdn.simpleicons.org/replit/FF3300" style="width:24px;height:24px;" alt="">
           <div style="font-size:10px;font-weight:700;text-align:center;">Replit</div>
@@ -1489,23 +1511,23 @@
           <div style="font-size:10px;font-weight:700;text-align:center;">Discord</div>
           <div style="font-size:8px;color:rgba(255,255,255,0.3);letter-spacing:1px;">BOTS / API</div>
         </div>
-        
         <div class="brutal-border draw-card" style="padding:14px 8px;display:flex;flex-direction:column;align-items:center;gap:8px;transition:all .15s;">
           <img src="https://img.icons8.com/color/48/chatgpt.png" style="width:24px;height:24px;" alt="">
           <div style="font-size:10px;font-weight:700;text-align:center;">ChatGPT</div>
-          <div style="font-size:8px;color:rgba(255,255,255,0.3);letter-spacing:1px;">EXPERT</div>
-        </div>
-        <div class="brutal-border draw-card" style="padding:14px 8px;display:flex;flex-direction:column;align-items:center;gap:8px;transition:all .15s;">
-          <img src="https://cdn.jsdelivr.net/gh/glincker/thesvg@main/public/icons/claude-code/default.svg" style="width:24px;height:24px;" alt="">
-          <div style="font-size:10px;font-weight:700;text-align:center;">Claude AI</div>
-          <div style="font-size:8px;color:rgba(255,255,255,0.3);letter-spacing:1px;">EXPERT</div>
+          <div style="font-size:8px;color:rgba(255,255,255,0.3);letter-spacing:1px;">AI ASSISTANT</div>
         </div>
       </div>
- 
-      <button onclick="openArchive()" class="btn-slide-fill"
-        style="border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.45);background:transparent;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;padding:10px 22px;cursor:pointer;text-transform:uppercase;transition:all 0.1s;">
-        📦 VIEW ARCHIVE — SECONDARY TOOLS
-      </button>
+
+      <script>
+        function openArchive() {
+          const archive = document.getElementById('archiveGrid');
+          if (archive.style.display === 'none') {
+            archive.style.display = 'grid';
+          } else {
+            archive.style.display = 'none';
+          }
+        }
+      </script>
     </div>
   </div>
 </section>
@@ -1588,20 +1610,7 @@
     <!-- Flip contact grid -->
     <div style="display:grid;grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));gap:12px;">
 
-      <a class="flip-card" href="mailto:cleverai001@gmail.com" style="text-decoration:none;">
-        <div class="flip-inner">
-          <div class="flip-front">
-            <span style="font-size:18px;">✉️</span>
-            <div>
-              <div style="font-size:12px;font-weight:700;">Gmail</div>
-              <div style="font-size:10px;color:rgba(255,255,255,0.4);margin-top:2px;">cleverai001@gmail.com</div>
-            </div>
-          </div>
-          <div class="flip-back"><span>cleverai001@gmail.com</span><span>↗</span></div>
-        </div>
-      </a>
-
-      <a class="flip-card" href="https://discord.com/users/versatileayann" target="_blank" style="text-decoration:none;">
+      <a class="flip-card" href="https://discord.com/users/954250474763198494" target="_blank" style="text-decoration:none;">
         <div class="flip-inner">
           <div class="flip-front">
             <img src="https://cdn.simpleicons.org/discord/5865F2" style="width:20px;height:20px;" alt="">
@@ -1610,7 +1619,7 @@
               <div style="font-size:10px;color:rgba(255,255,255,0.4);margin-top:2px;">@versatileayann</div>
             </div>
           </div>
-          <div class="flip-back"><span>@versatileayann</span><span>↗</span></div>
+          <div class="flip-back"><span>Add on Discord</span><span>↗</span></div>
         </div>
       </a>
 
@@ -1627,19 +1636,66 @@
         </div>
       </a>
 
-      <a class="flip-card" href="https://www.linkedin.com/in/mohammed-ibrahim-486782416/" target="_blank" style="text-decoration:none;grid-column: 1 / -1;">
+      <a class="flip-card" href="https://www.linkedin.com/in/mohammed-ibrahim-486782416/" target="_blank" style="text-decoration:none;">
         <div class="flip-inner">
           <div class="flip-front">
-            <img src="https://cdn.simpleicons.org/linkedin" style="width:20px;height:20px;" alt="">
+            <img src="https://img.icons8.com/ios-filled/50/ffffff/linkedin.png" style="width:20px;height:20px;" alt="">
             <div>
               <div style="font-size:12px;font-weight:700;">LinkedIn</div>
               <div style="font-size:10px;color:rgba(255,255,255,0.4);margin-top:2px;">Mohammed Ibrahim</div>
             </div>
           </div>
-          <div class="flip-back"><span>linkedin.com/in/mohammed-ibrahim-486782416/</span><span>↗</span></div>
+          <div class="flip-back"><span>linkedin.com</span><span>↗</span></div>
         </div>
       </a>
 
+      <a class="flip-card" href="https://x.com/carb0nthecoder" target="_blank" style="text-decoration:none;">
+        <div class="flip-inner">
+          <div class="flip-front">
+            <img src="https://cdn.simpleicons.org/x/ffffff" style="width:20px;height:20px;" alt="">
+            <div>
+              <div style="font-size:12px;font-weight:700;">X (Twitter)</div>
+              <div style="font-size:10px;color:rgba(255,255,255,0.4);margin-top:2px;">@carb0nthecoder</div>
+            </div>
+          </div>
+          <div class="flip-back"><span>x.com/carb0nthecoder</span><span>↗</span></div>
+        </div>
+      </a>
+
+      <a class="flip-card" href="https://stackoverflow.com/users/32973183/carbonthecoder" target="_blank" style="text-decoration:none;">
+        <div class="flip-inner">
+          <div class="flip-front">
+            <img src="https://cdn.simpleicons.org/stackoverflow/f58025" style="width:20px;height:20px;" alt="">
+            <div>
+              <div style="font-size:12px;font-weight:700;">Stack Overflow</div>
+              <div style="font-size:10px;color:rgba(255,255,255,0.4);margin-top:2px;">carbonthecoder</div>
+            </div>
+          </div>
+          <div class="flip-back"><span>stackoverflow.com</span><span>↗</span></div>
+        </div>
+      </a>
+
+      <a class="flip-card" href="https://leetcode.com/u/carbonthecoder/" target="_blank" style="text-decoration:none;">
+        <div class="flip-inner">
+          <div class="flip-front">
+            <img src="https://cdn.simpleicons.org/leetcode/ffa116" style="width:20px;height:20px;" alt="">
+            <div>
+              <div style="font-size:12px;font-weight:700;">LeetCode</div>
+              <div style="font-size:10px;color:rgba(255,255,255,0.4);margin-top:2px;">carbonthecoder</div>
+            </div>
+          </div>
+          <div class="flip-back"><span>leetcode.com</span><span>↗</span></div>
+        </div>
+      </a>
+
+    </div>
+
+    <!-- Coding Playlist (Separate side) -->
+    <div style="margin-top:24px; display:flex; justify-content:flex-start;">
+      <a href="https://open.spotify.com/playlist/7w7u4uTg9ZLsnjScZHsi2c?si=fed3cf6f24e64eb2" target="_blank" class="brutal-border btn-slide-fill" style="text-decoration:none; padding:12px 20px; background:rgba(255,255,255,0.02); color:var(--accent-color); font-size:11px; font-weight:700; letter-spacing:2px; display:inline-flex; align-items:center; gap:8px;">
+        <img src="https://cdn.simpleicons.org/spotify/1DB954" style="width:16px; height:16px;">
+        VIBES: MY CODING PLAYLIST ↗
+      </a>
     </div>
 
     <!-- Gen Z Contact Form -->
@@ -2568,12 +2624,15 @@ async function fetchDiscordStatus() {
         mainText += ` <span style="color:var(--accent-color); font-weight:bold;">(+${additionalCount} more)</span>`;
       }
       
+      const username = data.data.discord_user ? data.data.discord_user.username : 'versatileayann';
+      const finalDisplay = `<span style="color:#fff; font-weight:bold; letter-spacing:1px;">@${username}</span> <span style="margin:0 4px; color:rgba(255,255,255,0.3);">|</span> ${mainText}`;
+      
       const heroBanner = document.getElementById('heroDiscordBanner');
       if (heroBanner) {
         heroBanner.style.display = 'inline-flex';
         document.getElementById('heroDiscordIndicator').style.background = color;
         document.getElementById('heroDiscordIndicator').style.boxShadow = `0 0 10px ${color}`;
-        document.getElementById('heroDiscordText').innerHTML = mainText;
+        document.getElementById('heroDiscordText').innerHTML = finalDisplay;
         
         // Primary timer logic for the floating widget
         const pTimer = document.getElementById('heroDiscordTimer');
@@ -2832,76 +2891,80 @@ document.querySelectorAll('.blur-reveal, .letter-anime').forEach(el => {
 </script>
 
 
+
 <!-- Floating Skill Icons -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  const skillSpans = document.querySelectorAll('#skills span.brutal-border');
+  // Target Arsenal, Lingo, and Toolkit
+  const skillSpans = document.querySelectorAll('#skills span.brutal-border, #langBars > div, #mainToolsGrid > div.draw-card');
   
   // Create a floating element
   const floater = document.createElement('div');
   floater.style.position = 'fixed';
   floater.style.pointerEvents = 'none';
   floater.style.opacity = '0';
-  floater.style.fontSize = '36px';
-  floater.style.filter = 'drop-shadow(0 0 10px var(--accent-color))';
   floater.style.transition = 'opacity 0.2s ease, transform 0.1s linear';
   floater.style.zIndex = '999999';
   floater.style.transform = 'translate(-50%, -100%)';
+  floater.style.filter = 'drop-shadow(0 0 15px var(--accent-color))';
   document.body.appendChild(floater);
   
-  const skillIcons = {
-    'python': '🐍',
-    'c ': '⚙️',
-    'sql': '🗄️',
-    'java': '☕',
-    'server': '🖥️',
-    'database': '📊',
-    'api': '🔌',
-    'backend': '⚙️',
-    'linux': '🐧',
-    'security': '🔒',
-    'web': '🌐',
-    'english': '🇬🇧',
-    'urdu': '🇵🇰',
-    'telugu': '🇮🇳',
-    'japanese': '🇯🇵'
+  // Map words to SVGs from simpleicons for the "Arsenal" section that doesn't have imgs
+  const arsenalToSvg = {
+    'server': 'https://cdn.simpleicons.org/linux/ffffff',
+    'database': 'https://cdn.simpleicons.org/postgresql/ffffff',
+    'api': 'https://cdn.simpleicons.org/postman/ffffff',
+    'security': 'https://cdn.simpleicons.org/kalilinux/ffffff',
+    'web': 'https://cdn.simpleicons.org/w3c/ffffff',
+    'linux': 'https://cdn.simpleicons.org/gnubash/ffffff'
   };
 
-  skillSpans.forEach(span => {
-    span.style.cursor = 'pointer'; // add a pointer to let them know it's interactive
+  skillSpans.forEach(el => {
+    el.style.cursor = 'pointer'; 
     
-    const text = span.innerText.toLowerCase();
-    let matchedIcon = '✨'; // default
-    for (let key in skillIcons) {
-      if (text.includes(key)) {
-        matchedIcon = skillIcons[key];
-        break;
+    el.addEventListener('mouseenter', () => {
+      // Check if it has an image inside (Lingo and Toolkit)
+      const img = el.querySelector('img');
+      let src = '';
+      
+      if (img) {
+        src = img.src;
+      } else {
+        // Fallback for Arsenal items
+        const text = el.innerText.toLowerCase();
+        for (let key in arsenalToSvg) {
+          if (text.includes(key)) {
+            src = arsenalToSvg[key];
+            break;
+          }
+        }
       }
-    }
-    
-    span.addEventListener('mouseenter', () => {
-      floater.innerText = matchedIcon;
+      
+      if (src) {
+        floater.innerHTML = `<img src="${src}" style="width: 48px; height: 48px; object-fit: contain;">`;
+      } else {
+        // Ultimate fallback to an emoji if no image is found
+        floater.innerHTML = '<span style="font-size:48px;">✨</span>';
+      }
+      
       floater.style.opacity = '1';
-      span.style.color = 'var(--accent-color)';
-      span.style.borderColor = 'var(--accent-color)';
     });
     
-    span.addEventListener('mousemove', (e) => {
+    el.addEventListener('mousemove', (e) => {
       floater.style.left = e.clientX + 'px';
       floater.style.top = (e.clientY - 20) + 'px';
       // Add a slight wobble effect
-      floater.style.transform = `translate(-50%, -100%) rotate(${(e.clientX % 10) - 5}deg) scale(1.2)`;
+      floater.style.transform = `translate(-50%, -100%) rotate(${(e.clientX % 10) - 5}deg) scale(1.5)`;
     });
     
-    span.addEventListener('mouseleave', () => {
+    el.addEventListener('mouseleave', () => {
       floater.style.opacity = '0';
       floater.style.transform = 'translate(-50%, -100%) rotate(0deg) scale(1)';
-      span.style.color = 'rgba(255,255,255,0.6)';
-      span.style.borderColor = 'var(--border-color)';
     });
   });
 });
 </script>
+
 
 </body>
 
