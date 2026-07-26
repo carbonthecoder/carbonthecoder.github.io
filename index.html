@@ -789,6 +789,7 @@
       height: 10px;
       margin-left: 6px;
     }
+
     .vbar {
       width: 2px;
       background: var(--accent-color);
@@ -798,7 +799,58 @@
       0% { height: 2px; }
       100% { height: 10px; }
     }
-  </style>
+    
+    /* Music Volume Slider */
+    #musicVolSlider {
+      -webkit-appearance: none;
+      background: rgba(255,255,255,0.2);
+      height: 2px;
+      outline: none;
+      border-radius: 2px;
+      width: 50px;
+      transition: opacity 0.3s;
+    }
+    #musicVolSlider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 8px;
+      height: 8px;
+      background: var(--accent-color);
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+  
+    /* New Scroll Text Animations (Blur & Letter & Directional) */
+    .blur-reveal {
+      filter: blur(10px);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: filter 0.8s ease, opacity 0.8s ease, transform 0.8s ease;
+    }
+    .blur-reveal.slide-right { transform: translateX(-40px) translateY(0); }
+    .blur-reveal.slide-down { transform: translateY(-40px); }
+    
+    .blur-reveal.visible {
+      filter: blur(0px);
+      opacity: 1;
+      transform: translate(0, 0);
+    }
+
+    .letter-anime { display: inline-block; }
+    .letter-anime span {
+      display: inline-block;
+      filter: blur(8px);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: filter 0.5s ease, opacity 0.5s ease, transform 0.5s ease;
+    }
+    .letter-anime.visible span {
+      filter: blur(0px);
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+</style>
 </head>
 <body class="text-white">
 
@@ -973,15 +1025,18 @@
     <a href="#projects" onclick="scrollToSection('projects')" style="font-size:9px;letter-spacing:2px;color:rgba(255,255,255,0.45);text-decoration:none;text-transform:uppercase;transition:color 0.1s;" onmouseover="this.style.color='var(--accent-color)'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">PROJECTS</a>
     <a href="#contact" onclick="scrollToSection('contact')" style="font-size:9px;letter-spacing:2px;color:rgba(255,255,255,0.45);text-decoration:none;text-transform:uppercase;transition:color 0.1s;" onmouseover="this.style.color='var(--accent-color)'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">CONTACT</a>
     
-    <!-- MUSIC TOGGLE BUTTON -->
-    <button id="musicToggleBtn" onclick="mbToggle()" class="brutal-border btn-slide-fill" style="background:transparent; padding: 4px 8px; font-size: 9px; letter-spacing: 1px; color: rgba(255,255,255,0.5); cursor:pointer; display:inline-flex; align-items:center;">
-      <span>🔈 MUSIC: OFF</span>
-      <span class="visualizer-bars">
-        <span class="vbar" style="animation: vbounce 0.5s ease-in-out infinite alternate;"></span>
-        <span class="vbar" style="animation: vbounce 0.7s ease-in-out infinite alternate 0.15s;"></span>
-        <span class="vbar" style="animation: vbounce 0.6s ease-in-out infinite alternate 0.3s;"></span>
-      </span>
-    </button>
+    <!-- MUSIC TOGGLE BUTTON & VOLUME -->
+    <div style="display:flex; align-items:center; gap:8px;">
+      <button id="musicToggleBtn" onclick="mbToggle()" class="brutal-border btn-slide-fill" style="background:transparent; padding: 4px 8px; font-size: 9px; letter-spacing: 1px; color: rgba(255,255,255,0.5); cursor:pointer; display:inline-flex; align-items:center;">
+        <span>🔈 MUSIC: OFF</span>
+        <span class="visualizer-bars">
+          <span class="vbar" style="animation: vbounce 0.5s ease-in-out infinite alternate;"></span>
+          <span class="vbar" style="animation: vbounce 0.7s ease-in-out infinite alternate 0.15s;"></span>
+          <span class="vbar" style="animation: vbounce 0.6s ease-in-out infinite alternate 0.3s;"></span>
+        </span>
+      </button>
+      <input type="range" id="musicVolSlider" min="0" max="1" step="0.01" value="0.5" style="opacity:0.3; pointer-events:none;" onchange="bgMusic.volume = this.value" oninput="bgMusic.volume = this.value" title="Volume">
+    </div>
 
     <!-- PALETTE TOOL BUTTON -->
     <div style="position: relative;">
@@ -1150,7 +1205,7 @@
         </div>
       </div>
  
-      <p class="snap-in snap-delay-2" style="font-size:14px;color:rgba(255,255,255,0.5);line-height:1.9;max-width:540px;margin-bottom:32px;">
+      <p class="blur-reveal" style="font-size:14px;color:rgba(255,255,255,0.5);line-height:1.9;max-width:540px;margin-bottom:32px;">
         Y'all, I'm a 17 y/o backend aspirant (aka Ayan/Ibu) 🚀<br>
         I build things, break things, and figure out exactly how they work.
       </p>
@@ -1181,7 +1236,7 @@
 <section id="about" style="min-height:100vh;padding:80px 28px;border-top:1px solid rgba(255,255,255,0.06);">
   <div style="max-width:900px;margin:0 auto;">
     <div style="font-size:clamp(12px, 3vw, 22px);font-weight:bold;letter-spacing:2px;color:var(--accent-color);margin-bottom:16px;text-transform:uppercase;">//About</div>
-    <h2 class="reveal" style="font-size:clamp(30px,4.5vw,58px);font-weight:800;letter-spacing:-2px;line-height:1;text-transform:uppercase;margin-bottom:28px;" data-text="THE LORE DROP." data-decode>
+    <h2 class="blur-reveal slide-down" style="font-size:clamp(30px,4.5vw,58px);font-weight:800;letter-spacing:-2px;line-height:1;text-transform:uppercase;margin-bottom:28px;" data-text="THE LORE DROP." data-decode>
       THE LORE<br>DROP.
     </h2>
 
@@ -1308,7 +1363,7 @@
 <section id="skills" style="min-height:100vh;padding:80px 28px;border-top:1px solid rgba(255,255,255,0.06);">
   <div style="max-width:900px;margin:0 auto;">
     <div style="font-size:clamp(12px, 3vw, 22px);font-weight:bold;letter-spacing:2px;color:var(--accent-color);margin-bottom:16px;text-transform:uppercase;">// SKILLS_&amp;_TOOLS</div>
-    <h2 class="reveal" style="font-size:clamp(32px,4.5vw,58px);font-weight:800;letter-spacing:-2px;text-transform:uppercase;margin-bottom:36px;line-height:1;" data-decode>
+    <h2 class="blur-reveal slide-right" style="font-size:clamp(32px,4.5vw,58px);font-weight:800;letter-spacing:-2px;text-transform:uppercase;margin-bottom:36px;line-height:1;" data-decode>
       MY STACK.
     </h2>
 
@@ -1459,7 +1514,15 @@
 <section id="projects" style="min-height:100vh;padding:80px 28px;border-top:1px solid rgba(255,255,255,0.06);">
   <div style="max-width:960px;margin:0 auto;">
     <div style="font-size:clamp(12px, 3vw, 22px);font-weight:bold;letter-spacing:2px;color:var(--accent-color);margin-bottom:16px;text-transform:uppercase;">// RECEIPTS</div>
-    <h2 class="reveal" style="font-size:clamp(32px,4.5vw,58px);font-weight:800;letter-spacing:-2px;text-transform:uppercase;margin-bottom:24px;line-height:1;" data-decode>
+    
+    <!-- SCROLL TEXT ANIMATION BLOCK -->
+    <div style="margin: 60px 0; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 20vh;">
+      <h2 class="letter-anime" style="font-size: clamp(18px, 3vw, 36px); font-weight: 800; color: var(--accent-color); line-height: 1.4; max-width: 600px;">Let's team up and turn ideas into reality ✨</h2>
+      <p class="blur-reveal slide-right" style="margin-top: 12px; font-size: clamp(12px, 1.5vw, 16px); color: rgba(255,255,255,0.5); max-width: 500px;">Dream big, work hard & achieve greatness.</p>
+    </div>
+
+
+    <h2 class="blur-reveal slide-down" style="font-size:clamp(32px,4.5vw,58px);font-weight:800;letter-spacing:-2px;text-transform:uppercase;margin-bottom:24px;line-height:1;" data-decode>
       MY WORK<br>&amp; CREATIONS.
     </h2>
 
@@ -1475,22 +1538,13 @@
 
     <!-- AI Projects Content -->
     <div id="projContentAI" style="display:block;">
-      <p style="font-size:13px;color:rgba(255,255,255,0.45);margin-bottom:28px;line-height:1.8;max-width:600px;">
-        Curated AI-powered projects and system integrations. Details will be uploaded soon.
-      </p>
-
-      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:16px;">
-        <!-- SLOT 1 -->
-        <div class="project-card brutal-border" style="padding:24px;background:rgba(255,255,255,0.01);min-height:160px;display:flex;align-items:center;justify-content:center;border-style:dashed;">
-          <span style="font-size:11px;color:rgba(255,255,255,0.25);letter-spacing:2px;font-weight:700;">[ SLOT AVAILABLE ]</span>
-        </div>
-        <!-- SLOT 2 -->
-        <div class="project-card brutal-border" style="padding:24px;background:rgba(255,255,255,0.01);min-height:160px;display:flex;align-items:center;justify-content:center;border-style:dashed;">
-          <span style="font-size:11px;color:rgba(255,255,255,0.25);letter-spacing:2px;font-weight:700;">[ SLOT AVAILABLE ]</span>
-        </div>
-        <!-- SLOT 3 -->
-        <div class="project-card brutal-border" style="padding:24px;background:rgba(255,255,255,0.01);min-height:160px;display:flex;align-items:center;justify-content:center;border-style:dashed;">
-          <span style="font-size:11px;color:rgba(255,255,255,0.25);letter-spacing:2px;font-weight:700;">[ SLOT AVAILABLE ]</span>
+      <div class="brutal-border" style="padding:48px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;margin-top:24px;">
+        <span style="font-size:32px;animation:tcblink 1.2s step-start infinite;">⚙️</span>
+        <div>
+          <div style="font-size:14px;font-weight:800;letter-spacing:2px;color:var(--accent-color);text-transform:uppercase;margin-bottom:8px;">COMING SOON</div>
+          <p style="font-size:11px;color:rgba(255,255,255,0.4);max-width:320px;line-height:1.6;margin:0 auto;">
+            AI-powered integrations and models are currently being forged.
+          </p>
         </div>
       </div>
     </div>
@@ -1515,7 +1569,7 @@
 <section id="contact" style="min-height:100vh;padding:80px 28px;border-top:1px solid rgba(255,255,255,0.06);">
   <div style="max-width:700px;margin:0 auto;">
     <div style="font-size:clamp(12px, 3vw, 22px);font-weight:bold;letter-spacing:2px;color:var(--accent-color);margin-bottom:16px;text-transform:uppercase;">// HIT_MY_LINE</div>
-    <h2 class="reveal" style="font-size:clamp(32px,4.5vw,58px);font-weight:800;letter-spacing:-2px;text-transform:uppercase;margin-bottom:16px;" data-decode>LET'S TALK.</h2>
+    <h2 class="blur-reveal slide-down" style="font-size:clamp(32px,4.5vw,58px);font-weight:800;letter-spacing:-2px;text-transform:uppercase;margin-bottom:16px;" data-decode>LET'S TALK.</h2>
     <p style="font-size:13px;color:rgba(255,255,255,0.45);margin-bottom:32px;line-height:1.8;">
       Projects, collabs, or just a nerdy conversation — I'm around.
     </p>
@@ -1723,6 +1777,7 @@ function switchProjTab(type) {
 /* ── MUSIC ENGINE ── */
 const bgMusic = new Audio('After dark.mp3');
 bgMusic.loop = true;
+bgMusic.volume = 0.5;
 let isPlaying = false;
 
 function mbToggle() {
@@ -1751,6 +1806,12 @@ function mbToggle() {
         if (sp) sp.innerHTML = '🔊 MUSIC: ON';
         btn.style.color = 'var(--accent-color)';
         btn.style.borderColor = 'var(--accent-color)';
+      }
+      const slider = document.getElementById('musicVolSlider');
+      if (slider) {
+        slider.style.opacity = '1';
+        slider.style.pointerEvents = 'auto';
+        bgMusic.volume = slider.value;
       }
       if (iconMob) {
         iconMob.className = 'fa-solid fa-volume-high';
@@ -1806,6 +1867,7 @@ function confirmLaunch(enableMusic) {
 
 // Preload the punch sound so it syncs perfectly
 window.punchSfx = new Audio('https://www.myinstants.com/media/sounds/strongpunch_1.mp3');
+window.punchSfx.volume = 0.2;
 window.punchSfx.preload = 'auto';
 window.punchSfx.load();
 
@@ -2667,6 +2729,180 @@ setInterval(fetchDiscordStatus, 30000);
     }, 100);
   });
 </script>
+
+<!-- Minecraft Redstone Particle Trail -->
+<canvas id="canvas" style="position:fixed; top:0; left:0; width:100vw; height:100vh; pointer-events:none; z-index:999999; image-rendering: pixelated;"></canvas>
+<script>
+  (function () {
+    const canvas = document.getElementById('canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d', { alpha: true });
+    ctx.imageSmoothingEnabled = false;
+
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+
+    let mouse = { x: width/2, y: height/2, active: false };
+    const colors = ['#FF0000', '#CC0000', '#990000', '#FF3333'];
+    const particles = [];
+
+    window.addEventListener('resize', () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+      ctx.imageSmoothingEnabled = false;
+    });
+
+    function updateCoordinates(e) {
+      if (e.touches) {
+        mouse.x = e.touches[0].clientX;
+        mouse.y = e.touches[0].clientY;
+      } else {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+      }
+      mouse.active = true;
+      if (Math.random() > 0.3) {
+        particles.push({
+          x: mouse.x + (Math.random() * 10 - 5),
+          y: mouse.y + (Math.random() * 10 - 5),
+          vx: (Math.random() - 0.5) * 2,
+          vy: (Math.random() - 0.5) * 2 - 1,
+          size: Math.random() > 0.5 ? 4 : 8,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          life: 1.0,
+          decay: Math.random() * 0.02 + 0.015
+        });
+      }
+    }
+
+    window.addEventListener('mousemove', updateCoordinates);
+    window.addEventListener('touchmove', updateCoordinates, {passive:true});
+    window.addEventListener('mouseout', () => mouse.active = false);
+    window.addEventListener('touchend', () => mouse.active = false);
+
+    function render() {
+      ctx.clearRect(0, 0, width, height);
+      let themeColor = window.getComputedStyle(document.body).getPropertyValue('--accent-color').trim();
+      for (let i = particles.length - 1; i >= 0; i--) {
+        let p = particles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+        p.life -= p.decay;
+        if (p.life <= 0) {
+          particles.splice(i, 1);
+          continue;
+        }
+        ctx.globalAlpha = p.life;
+        ctx.fillStyle = themeColor && themeColor !== '' ? themeColor : p.color;
+        if (Math.random() > 0.5) ctx.fillStyle = p.color; 
+        ctx.fillRect(Math.floor(p.x), Math.floor(p.y), p.size, p.size);
+      }
+      ctx.globalAlpha = 1.0;
+      requestAnimationFrame(render);
+    }
+    render();
+  })();
+</script>
+
+<!-- Text Animation JS -->
+<script>
+document.querySelectorAll('.letter-anime').forEach(el => {
+  const text = el.innerText;
+  el.innerHTML = '';
+  text.split('').forEach((char, i) => {
+    const span = document.createElement('span');
+    span.innerText = char === ' ' ? '\u00A0' : char;
+    span.style.transitionDelay = (i * 25) + 'ms';
+    el.appendChild(span);
+  });
+});
+
+const textAnimObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      textAnimObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+
+document.querySelectorAll('.blur-reveal, .letter-anime').forEach(el => {
+  textAnimObserver.observe(el);
+});
+</script>
+
+
+<!-- Floating Skill Icons -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const skillSpans = document.querySelectorAll('#skills span.brutal-border');
+  
+  // Create a floating element
+  const floater = document.createElement('div');
+  floater.style.position = 'fixed';
+  floater.style.pointerEvents = 'none';
+  floater.style.opacity = '0';
+  floater.style.fontSize = '36px';
+  floater.style.filter = 'drop-shadow(0 0 10px var(--accent-color))';
+  floater.style.transition = 'opacity 0.2s ease, transform 0.1s linear';
+  floater.style.zIndex = '999999';
+  floater.style.transform = 'translate(-50%, -100%)';
+  document.body.appendChild(floater);
+  
+  const skillIcons = {
+    'python': '🐍',
+    'c ': '⚙️',
+    'sql': '🗄️',
+    'java': '☕',
+    'server': '🖥️',
+    'database': '📊',
+    'api': '🔌',
+    'backend': '⚙️',
+    'linux': '🐧',
+    'security': '🔒',
+    'web': '🌐',
+    'english': '🇬🇧',
+    'urdu': '🇵🇰',
+    'telugu': '🇮🇳',
+    'japanese': '🇯🇵'
+  };
+
+  skillSpans.forEach(span => {
+    span.style.cursor = 'pointer'; // add a pointer to let them know it's interactive
+    
+    const text = span.innerText.toLowerCase();
+    let matchedIcon = '✨'; // default
+    for (let key in skillIcons) {
+      if (text.includes(key)) {
+        matchedIcon = skillIcons[key];
+        break;
+      }
+    }
+    
+    span.addEventListener('mouseenter', () => {
+      floater.innerText = matchedIcon;
+      floater.style.opacity = '1';
+      span.style.color = 'var(--accent-color)';
+      span.style.borderColor = 'var(--accent-color)';
+    });
+    
+    span.addEventListener('mousemove', (e) => {
+      floater.style.left = e.clientX + 'px';
+      floater.style.top = (e.clientY - 20) + 'px';
+      // Add a slight wobble effect
+      floater.style.transform = `translate(-50%, -100%) rotate(${(e.clientX % 10) - 5}deg) scale(1.2)`;
+    });
+    
+    span.addEventListener('mouseleave', () => {
+      floater.style.opacity = '0';
+      floater.style.transform = 'translate(-50%, -100%) rotate(0deg) scale(1)';
+      span.style.color = 'rgba(255,255,255,0.6)';
+      span.style.borderColor = 'var(--border-color)';
+    });
+  });
+});
+</script>
+
 </body>
 
 </html>
