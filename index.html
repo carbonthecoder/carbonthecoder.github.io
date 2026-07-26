@@ -434,10 +434,9 @@
       #playgroundLayout {
         grid-template-columns: 1fr !important;
       }
-      .glitch { font-size: 26px !important; }
+      .glitch { font-size: clamp(38px, 10vw, 56px) !important; }
       .term-line { font-size: 9px !important; white-space: pre-wrap !important; }
-      .brutal-border { padding: 14px !important; }
-      h2 { font-size: 18px !important; text-align: left !important; }
+      h2 { font-size: 22px !important; text-align: left !important; }
       p, .timeline-text, .quote-box { font-size: 11px !important; }
       .snap-section { padding: 50px 6% !important; }
       p, .timeline-text, .quote-box { text-align: left !important; }
@@ -447,6 +446,7 @@
         bottom: 16px !important;
         right: 16px !important;
         left: 16px !important;
+        padding: 10px 16px !important;
         justify-content: center !important;
         max-width: none !important;
         width: auto !important;
@@ -473,7 +473,8 @@
       .nav-links-desktop { display: none !important; }
       .mobile-nav-controls { display: flex !important; }
       .nav-clock-desktop { display: none !important; }
-      #heroTitle { font-size: 20px !important; white-space: nowrap !important; }
+      #heroTitle { font-size: clamp(38px, 10vw, 56px) !important; white-space: normal !important; line-height: 1 !important; }
+      #skills .brutal-border { padding: 4px 8px !important; font-size: 9px !important; }
       #statsGrid { grid-template-columns: 1fr !important; max-width: 100% !important; }
       #statsGrid div { padding: 14px !important; }
       #statsGrid div div:first-child { font-size: 20px !important; }
@@ -675,7 +676,7 @@
       white-space: nowrap;
       overflow: hidden;
       width: 0;
-      animation: hero-type-anim 5s steps(28) infinite alternate, demo-blink 0.75s step-end infinite;
+      animation: hero-type-anim 5s steps(21) infinite alternate, demo-blink 0.75s step-end infinite;
     }
     @keyframes hero-type-anim {
       from { width: 0; }
@@ -805,15 +806,40 @@
 <canvas id="bgCanvas"></canvas>
 
 <!-- BOOT LOADING SCREEN -->
-<div id="bootScreen" onclick="launchPortfolio()" style="
+<div id="bootScreen" style="
   position: fixed; inset: 0; background: #000000; z-index: 100000;
   display: flex; justify-content: center; align-items: center;
   font-family: 'JetBrains Mono', monospace;
-  cursor: pointer;
+  cursor: wait;
   transition: opacity 0.8s ease, visibility 0.8s ease;
 ">
-  <div style="font-size: 11px; color: var(--accent-color); letter-spacing: 2px; text-transform: uppercase; animation: tcblink 1.5s infinite; text-align: center;">
-    [ click to enter ]
+  <!-- LOADING SEQUENCE -->
+  <div id="bootLoader" style="display:flex; flex-direction:column; align-items:center; gap:clamp(12px, 3vh, 20px); width:100%; padding:20px; box-sizing:border-box;">
+    <div style="font-size:clamp(10px, 3vw, 14px); color:rgba(255,255,255,0.5); letter-spacing:clamp(2px, 1vw, 4px); font-weight:800; text-align:center;">
+      REGENERATING...
+    </div>
+    <div id="mcHearts" style="display:flex; justify-content:center; flex-wrap:wrap; gap:clamp(2px, 1vw, 4px); max-width:100%;">
+      <!-- Hearts injected by JS -->
+    </div>
+    <div id="bootPct" style="font-size:clamp(10px, 3vw, 12px); color:var(--accent-color); letter-spacing:3px; margin-top:4px; font-weight:800;">0%</div>
+  </div>
+
+  <!-- PUNCH SCREEN (Hidden initially) -->
+  <div id="bootPunch" style="display:none; font-size: clamp(14px, 4vw, 24px); font-weight:800; color: var(--accent-color); letter-spacing: clamp(1px, 1vw, 3px); text-transform: uppercase; animation: tcblink 1.5s infinite; text-align: center; cursor: pointer; width:100%; height:100%; display:flex; justify-content:center; align-items:center; padding: 20px; box-sizing:border-box;">
+    <span style="display:none;" id="punchTextInner">[ PUNCH ANYWHERE TO ENTER 🥊 ]</span>
+  </div>
+</div>
+
+<!-- MUSIC PROMPT OVERLAY -->
+<div id="musicPromptOverlay" style="display: none; position: fixed; inset: 0; z-index: 999999; background: rgba(0,0,0,0.5); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); justify-content: center; align-items: center; transition: opacity 0.4s ease;">
+  <div style="background: rgba(10,10,10,0.7); border: 1px solid rgba(255,255,255,0.08); padding: 40px; border-radius: 16px; text-align: center; max-width: 420px; box-shadow: 0 0 50px rgba(0,0,0,0.9); margin: 0 20px;">
+    <div style="font-size:32px; margin-bottom:12px;">🎧</div>
+    <h3 style="font-family:'JetBrains Mono', monospace; font-size:18px; font-weight:800; margin-bottom:12px; color:var(--accent-color);">ENABLE AUDIO VIBES?</h3>
+    <p style="font-size:12px; color:rgba(255,255,255,0.6); margin-bottom:32px; line-height: 1.6;">Wanna turn on the background music for a better experience? (Recommended)</p>
+    <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+      <button onclick="confirmLaunch(true)" class="magnetic-btn brutal-solid btn-glow" style="padding:14px 24px; font-family:'JetBrains Mono', monospace; font-weight:800; font-size:11px; background:var(--accent-color); color:#000; border:none; cursor:pointer;">YES, VIBE ON 🎵</button>
+      <button onclick="confirmLaunch(false)" class="magnetic-btn brutal-border" style="padding:14px 24px; font-family:'JetBrains Mono', monospace; font-weight:800; font-size:11px; background:transparent; border:1px solid rgba(255,255,255,0.2); color:#fff; cursor:pointer;">NAH, I'M GOOD 🔇</button>
+    </div>
   </div>
 </div>
 
@@ -1092,19 +1118,24 @@
 <section id="home" class="animated-hero-bg" style="min-height:100vh;padding:112px 28px 80px;display:flex;flex-direction:column;justify-content:center;">
   <div id="heroGrid" style="display:grid;grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));gap:48px;max-width:1100px;margin:0 auto;width:100%;align-items:center;">
     <div>
-      <div class="snap-in" style="font-size:10px;letter-spacing:4px;color:var(--accent-color);margin-bottom:16px;text-transform:uppercase;">
-        [ PORTFOLIO ] &nbsp;·&nbsp; Hyderabad, IN
+      <div class="snap-in" style="font-size:clamp(12px, 3vw, 22px);font-weight:bold;letter-spacing:2px;color:rgba(255,255,255,0.5);margin-bottom:16px;text-transform:uppercase;">
+        [ PORTFOLIO ]
       </div>
  
+      <div class="snap-in snap-delay-1" style="font-family:'JetBrains Mono',monospace; font-size:clamp(18px,3vw,28px); font-weight:800; letter-spacing:4px; color:var(--accent-color); text-transform:uppercase; margin-bottom:8px;">
+        Y'ALL, I'M
+      </div>
       <h1 class="glitch snap-in snap-delay-1"
         id="heroTitle"
-        data-text="BACKEND ENGINEER"
-        style="font-size:clamp(48px,6vw,80px);font-weight:800;letter-spacing:-2px;line-height:0.95;text-transform:uppercase;margin-bottom:12px;">
-        BACKEND ENGINEER
+        data-text="MOHAMMED IBRAHIM"
+        onmouseover="let c = ['#00f5ff', '#ff0055', '#39FF14', '#FFea00', '#D000FF', '#FF1493'][Math.floor(Math.random()*6)]; this.style.color = c; this.style.setProperty('--accent-color', c); this.style.textShadow='0 0 30px ' + c;"
+        onmouseout="this.style.color=''; this.style.removeProperty('--accent-color'); this.style.textShadow='none';"
+        style="font-size:clamp(48px,6vw,80px);font-weight:800;letter-spacing:-2px;line-height:0.95;text-transform:uppercase;margin-bottom:12px; cursor:crosshair; transition: color 0.1s;">
+        MOHAMMED IBRAHIM
       </h1>
       
-      <div class="snap-in snap-delay-2" style="margin-bottom:24px;display:flex;align-items:center;">
-        <span class="hero-typing" style="font-size:12px;letter-spacing:2px;color:var(--accent-color);text-transform:uppercase;font-weight:700;padding-right:4px;">[BACKEND_TRAJECTORY_ACTIVE]</span>
+      <div class="snap-in snap-delay-2" style="margin-bottom:24px;display:flex;align-items:center;width:fit-content;">
+        <span class="hero-typing" style="font-size:12px;letter-spacing:2px;color:var(--accent-color);text-transform:uppercase;font-weight:700;padding-right:4px;">[CURRENTLY_LOCKED_IN]</span>
       </div>
 
       <!-- Floating Discord Live Widget -->
@@ -1112,13 +1143,16 @@
         <div id="heroDiscordIndicator" style="width:10px; height:10px; border-radius:50%; background:#747f8d; transition:all 0.3s; flex-shrink:0;"></div>
         <div style="display:flex; flex-direction:column;">
           <span style="font-size:9px; letter-spacing:2px; color:var(--accent-color); text-transform:uppercase; font-weight:700; margin-bottom:2px;">// SYSTEM_PRESENCE</span>
-          <span id="heroDiscordText" style="font-size:11px; color:rgba(255,255,255,0.9); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Connecting to uplink...</span>
+          <div style="display:flex; align-items:center;">
+            <span id="heroDiscordText" style="font-size:11px; color:rgba(255,255,255,0.9); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Connecting to uplink...</span>
+            <span id="heroDiscordTimer" style="font-size:10px; color:var(--accent-color); font-family:monospace; margin-left:8px; white-space:nowrap;"></span>
+          </div>
         </div>
       </div>
  
       <p class="snap-in snap-delay-2" style="font-size:14px;color:rgba(255,255,255,0.5);line-height:1.9;max-width:540px;margin-bottom:32px;">
-        17 y/o tech enthusiast and Backend aspirant · Mohammed Ibrahim      :) Alias Ayan/Ibu<br>
-        I build things, break things, and figure out why and how they broke & work.
+        Y'all, I'm a 17 y/o backend aspirant (aka Ayan/Ibu) 🚀<br>
+        I build things, break things, and figure out exactly how they work.
       </p>
  
       <div class="snap-in snap-delay-3" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:36px;">
@@ -1132,11 +1166,11 @@
       </div>
  
       <div class="snap-in snap-delay-5" style="display:flex;gap:16px;flex-wrap:wrap;">
-        <button onclick="scrollToSection('contact')" class="brutal-solid magnetic-btn btn-glow" style="padding:12px 28px;border:1px solid var(--accent-color);color:var(--accent-color);font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:2px;cursor:pointer;background:transparent;transition:all 0.1s;text-transform:uppercase;">
-          GET IN TOUCH →
+        <button onclick="handleLinkUpClick(event)" class="brutal-solid magnetic-btn btn-glow" style="padding:12px 28px;border:1px solid var(--accent-color);color:var(--accent-color);font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:2px;cursor:pointer;background:transparent;transition:all 0.1s;text-transform:uppercase;">
+          LINK UP →
         </button>
         <button onclick="scrollToSection('about')" class="brutal-border magnetic-btn btn-slide-fill" style="padding:12px 28px;border:1px solid var(--border-color);color:rgba(255,255,255,0.5);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:2px;cursor:pointer;background:transparent;transition:all 0.1s;text-transform:uppercase;">
-          About ts guy
+          LORE DROP
         </button>
       </div>
     </div>
@@ -1146,9 +1180,9 @@
 <!-- ===== ABOUT ===== -->
 <section id="about" style="min-height:100vh;padding:80px 28px;border-top:1px solid rgba(255,255,255,0.06);">
   <div style="max-width:900px;margin:0 auto;">
-    <div style="font-size:10px;letter-spacing:4px;color:var(--accent-color);margin-bottom:16px;text-transform:uppercase;">//About</div>
-    <h2 class="reveal" style="font-size:clamp(30px,4.5vw,58px);font-weight:800;letter-spacing:-2px;line-height:1;text-transform:uppercase;margin-bottom:28px;" data-decode>
-      JUST A CURIOUS<br>MIND ONLINE.
+    <div style="font-size:clamp(12px, 3vw, 22px);font-weight:bold;letter-spacing:2px;color:var(--accent-color);margin-bottom:16px;text-transform:uppercase;">//About</div>
+    <h2 class="reveal" style="font-size:clamp(30px,4.5vw,58px);font-weight:800;letter-spacing:-2px;line-height:1;text-transform:uppercase;margin-bottom:28px;" data-text="THE LORE DROP." data-decode>
+      THE LORE<br>DROP.
     </h2>
 
     <!-- Badge -->
@@ -1170,17 +1204,17 @@
     <!-- AI Typing Bio -->
 <div class="reveal" style="font-size:14px;color:rgba(255,255,255,0.6);line-height:2;max-width:640px;margin-bottom:36px;min-height:100px;">
   <span id="aiBioTarget">
-    I'm a 17 y/o tech enthusiast who enjoys making things that actually work — whether it's code, or learning something new I always try to upskill myself.
+    I'm a 17 y/o tech enthusiast who enjoys making things that actually work — whether it's code or learning something new, I always try to upskill myself. 
     <br><br>
-    When I'm not at the screen I'm watching movies, listening to music, binging anime, or being a nerd gamer.
+    When I'm not locked in on VS Code, I'm probably touching grass, binge-watching anime, or raging in competitive games.
   </span>
   <span class="tcursor" id="bioCursor"></span>
 </div>
     <!-- Quote Rotator -->
     <div class="reveal" style="margin-bottom:36px;max-width:540px;">
       <div class="quote-box" id="quoteBox">
-        <div id="quoteText">"The best way to predict the future is to invent it."</div>
-        <div class="quote-author" id="quoteAuthor">— Alan Kay</div>
+        <div id="quoteText">"If it compiles on the first try, you definitely did something wrong."</div>
+        <div class="quote-author" id="quoteAuthor">— Every Dev Ever</div>
       </div>
     </div>
 
@@ -1188,15 +1222,15 @@
     <div class="reveal" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(110px, 1fr));gap:8px;max-width:440px;margin-bottom:48px;" id="statsGrid">
       <div class="brutal-border draw-card" style="padding:20px 16px;background:rgba(255,255,255,0.01);">
         <div style="font-size:32px;font-weight:800;color:var(--accent-color);line-height:1;margin-bottom:6px;">17</div>
-        <div style="font-size:11px;letter-spacing:2px;color:rgba(255,255,255,0.4);text-transform:uppercase;">Years old</div>
+        <div style="font-size:11px;letter-spacing:2px;color:rgba(255,255,255,0.4);text-transform:uppercase;">Lvl (Years)</div>
       </div>
       <div class="brutal-border draw-card" style="padding:20px 16px;background:rgba(255,255,255,0.01);">
         <div style="font-size:26px;font-weight:800;color:var(--accent-color);line-height:1;margin-bottom:9px;">8.2 CGPA</div>
-        <div style="font-size:11px;letter-spacing:2px;color:rgba(255,255,255,0.4);text-transform:uppercase;">Grade X (CBSE)</div>
+        <div style="font-size:11px;letter-spacing:2px;color:rgba(255,255,255,0.4);text-transform:uppercase;">Academic Validation</div>
       </div>
       <div class="brutal-border draw-card" style="padding:20px 16px;background:rgba(255,255,255,0.01);">
-        <div style="font-size:22px;font-weight:800;color:var(--accent-color);letter-spacing:1.5px;padding-top:3px;margin-bottom:6px;">Aspiring Backend</div>
-        <div style="font-size:12px;letter-spacing:2px;color:rgba(255,255,255,0.4);text-transform:uppercase;">Engineer</div>
+        <div style="font-size:22px;font-weight:800;color:var(--accent-color);letter-spacing:1.5px;padding-top:3px;margin-bottom:6px;">Backend</div>
+        <div style="font-size:12px;letter-spacing:2px;color:rgba(255,255,255,0.4);text-transform:uppercase;">Enthusiast</div>
       </div>
     </div>
 
@@ -1211,7 +1245,7 @@
 
     <!-- Journey Timeline -->
     <div class="reveal" style="margin-bottom:48px;">
-      <div style="font-size:12px;letter-spacing:3px;color:var(--accent-color);text-transform:uppercase;margin-bottom:20px;">// MY_PATH</div>
+      <div style="font-size:12px;letter-spacing:3px;color:var(--accent-color);text-transform:uppercase;margin-bottom:20px;">// MY_JOURNEY</div>
       <div class="timeline" style="max-width:650px;">
         
         <div class="timeline-item">
@@ -1273,14 +1307,14 @@
 <!-- ===== SKILLS ===== -->
 <section id="skills" style="min-height:100vh;padding:80px 28px;border-top:1px solid rgba(255,255,255,0.06);">
   <div style="max-width:900px;margin:0 auto;">
-    <div style="font-size:10px;letter-spacing:4px;color:var(--accent-color);margin-bottom:16px;text-transform:uppercase;">// SKILLS_&amp;_TOOLS</div>
+    <div style="font-size:clamp(12px, 3vw, 22px);font-weight:bold;letter-spacing:2px;color:var(--accent-color);margin-bottom:16px;text-transform:uppercase;">// SKILLS_&amp;_TOOLS</div>
     <h2 class="reveal" style="font-size:clamp(32px,4.5vw,58px);font-weight:800;letter-spacing:-2px;text-transform:uppercase;margin-bottom:36px;line-height:1;" data-decode>
-      WHAT I KNOW<br>&amp; USE.
+      MY STACK.
     </h2>
 
     <!-- Building towards -->
     <div class="reveal" style="margin-bottom:36px;">
-      <div style="font-size:10px;letter-spacing:3px;color:rgba(255,255,255,0.3);text-transform:uppercase;margin-bottom:14px;">BACKEND ENGINEERING FOCUS</div>
+      <div style="font-size:10px;letter-spacing:3px;color:rgba(255,255,255,0.3);text-transform:uppercase;margin-bottom:14px;">THE ARSENAL</div>
       <div style="display:flex;flex-wrap:wrap;gap:8px;">
         <span class="brutal-border" style="padding:8px 14px;font-size:11px;color:rgba(255,255,255,0.6);">🖥️ Server Architecture</span>
         <span class="brutal-border" style="padding:8px 14px;font-size:11px;color:rgba(255,255,255,0.6);">🗄️ Database Design &amp; SQL</span>
@@ -1294,14 +1328,14 @@
 
     <!-- Languages -->
 <div class="reveal" style="margin-bottom:40px;">
-  <div style="font-size:10px;letter-spacing:3px;color:rgba(255,255,255,0.3);text-transform:uppercase;margin-bottom:16px;">PROGRAMMING LANGUAGES</div>
+  <div style="font-size:10px;letter-spacing:3px;color:rgba(255,255,255,0.3);text-transform:uppercase;margin-bottom:16px;">THE LINGO</div>
   <div style="display:flex;flex-direction:column;gap:14px;max-width:480px;" id="langBars">
     
     <!-- 1. Python (Medium - Yellow) -->
     <div>
       <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:6px;">
         <span style="display:flex;align-items:center;gap:6px;color:rgba(255,255,255,0.8);">
-          <img src="https://cdn.simpleicons.org/python/ffcc00" style="width:13px;height:13px;" alt="">Python
+          <img src="https://cdn.simpleicons.org/python/ffcc00" style="width:13px;height:13px;" alt="" title="My bread and butter">Python
         </span>
         <span style="color:#ffcc00;">50%</span>
       </div>
@@ -1314,7 +1348,7 @@
     <div>
       <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:6px;">
         <span style="display:flex;align-items:center;gap:6px;color:rgba(255,255,255,0.8);">
-          <img src="https://cdn.simpleicons.org/c/ff4d4d" style="width:13px;height:13px;" alt="">C 
+          <img src="https://cdn.simpleicons.org/c/ff4d4d" style="width:13px;height:13px;" alt="" title="Pain, but I respect it.">C 
         </span>
         <span style="color:#ff4d4d;">20%</span>
       </div>
@@ -1353,7 +1387,7 @@
 </div>
     <!-- Core Tools -->
     <div class="reveal">
-      <div style="font-size:10px;letter-spacing:3px;color:rgba(255,255,255,0.3);text-transform:uppercase;margin-bottom:14px;">CORE TOOLS &amp; ENVIRONMENT</div>
+      <div style="font-size:10px;letter-spacing:3px;color:rgba(255,255,255,0.3);text-transform:uppercase;margin-bottom:14px;">THE TOOLKIT</div>
 
       <div class="brutal-border" style="display:flex;align-items:center;gap:16px;padding:14px 20px;margin-bottom:16px;border-color:rgba(255,51,0,0.3);background:rgba(255,51,0,0.03);max-width:520px;">
         <span style="font-size:24px;">🧠</span>
@@ -1424,7 +1458,7 @@
 <!-- ===== PROJECTS ===== -->
 <section id="projects" style="min-height:100vh;padding:80px 28px;border-top:1px solid rgba(255,255,255,0.06);">
   <div style="max-width:960px;margin:0 auto;">
-    <div style="font-size:10px;letter-spacing:4px;color:var(--accent-color);margin-bottom:16px;text-transform:uppercase;">// PORTFOLIO_&amp;_PROJECTS</div>
+    <div style="font-size:clamp(12px, 3vw, 22px);font-weight:bold;letter-spacing:2px;color:var(--accent-color);margin-bottom:16px;text-transform:uppercase;">// RECEIPTS</div>
     <h2 class="reveal" style="font-size:clamp(32px,4.5vw,58px);font-weight:800;letter-spacing:-2px;text-transform:uppercase;margin-bottom:24px;line-height:1;" data-decode>
       MY WORK<br>&amp; CREATIONS.
     </h2>
@@ -1480,12 +1514,13 @@
 <!-- ===== CONTACT ===== -->
 <section id="contact" style="min-height:100vh;padding:80px 28px;border-top:1px solid rgba(255,255,255,0.06);">
   <div style="max-width:700px;margin:0 auto;">
-    <div style="font-size:10px;letter-spacing:4px;color:var(--accent-color);margin-bottom:16px;text-transform:uppercase;">// REACH_OUT</div>
+    <div style="font-size:clamp(12px, 3vw, 22px);font-weight:bold;letter-spacing:2px;color:var(--accent-color);margin-bottom:16px;text-transform:uppercase;">// HIT_MY_LINE</div>
     <h2 class="reveal" style="font-size:clamp(32px,4.5vw,58px);font-weight:800;letter-spacing:-2px;text-transform:uppercase;margin-bottom:16px;" data-decode>LET'S TALK.</h2>
     <p style="font-size:13px;color:rgba(255,255,255,0.45);margin-bottom:32px;line-height:1.8;">
       Projects, collabs, or just a nerdy conversation — I'm around.
     </p>
 
+    
     <!-- Slide to email -->
     <div style="margin-bottom:32px;">
       <div style="font-size:9px;letter-spacing:2px;color:rgba(255,255,255,0.3);text-transform:uppercase;margin-bottom:12px;">SLIDE TO UNLOCK EMAIL</div>
@@ -1552,6 +1587,20 @@
       </a>
 
     </div>
+
+    <!-- Gen Z Contact Form -->
+    <div style="margin-top:48px;">
+      <div style="font-size:12px;letter-spacing:3px;color:var(--accent-color);text-transform:uppercase;margin-bottom:20px;">// SLIDE_INTO_DMS</div>
+      <form action="https://api.web3forms.com/submit" method="POST" style="display:flex; flex-direction:column; gap:16px;">
+        <input type="hidden" name="access_key" value="fa7713ab-b1f3-468e-ae71-f591159d23cd">
+        <input type="hidden" name="subject" value="New Message from Portfolio!">
+        <input name="Name" type="text" placeholder="WHO DIS? (Name)" style="padding:16px; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.1); color:#fff; font-family:'JetBrains Mono', monospace; font-size:12px; outline:none; transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--accent-color)'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'" required>
+        <input name="Email" type="email" placeholder="WHERE CAN I PING YOU? (Email)" style="padding:16px; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.1); color:#fff; font-family:'JetBrains Mono', monospace; font-size:12px; outline:none; transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--accent-color)'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'" required>
+        <textarea name="Message" placeholder="WHAT'S GOOD? (Message)" rows="4" style="padding:16px; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.1); color:#fff; font-family:'JetBrains Mono', monospace; font-size:12px; outline:none; resize:vertical; transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--accent-color)'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'" required></textarea>
+        <button type="submit" class="magnetic-btn brutal-border" style="padding:16px; background:transparent; border:1px solid var(--accent-color); color:var(--accent-color); font-family:'JetBrains Mono', monospace; font-weight:800; cursor:pointer; font-size:12px; transition:all 0.2s;" onmouseover="this.style.background='var(--accent-color)'; this.style.color='#000';" onmouseout="this.style.background='transparent'; this.style.color='var(--accent-color)';">SEND IT 🚀</button>
+      </form>
+    </div>
+
   </div>
 </section>
 
@@ -1716,15 +1765,49 @@ function mbToggle() {
 }
 
 function launchPortfolio() {
-  sfx.init();
+  // Play immediately from preloaded audio
+  if (window.punchSfx) {
+    window.punchSfx.currentTime = 0;
+    window.punchSfx.play().catch(e => console.log('Audio blocked'));
+  }
+  
+  // Fade out the black screen
   const boot = document.getElementById('bootScreen');
   if (boot) {
     boot.classList.add('done');
+    // Hide it completely after fade
+    setTimeout(() => { boot.style.display = 'none'; }, 800);
   }
-  if (!isPlaying) {
+  
+  // Show the music prompt
+  const prompt = document.getElementById('musicPromptOverlay');
+  if (prompt) {
+    prompt.style.display = 'flex';
+    // Small delay to allow CSS transition if any
+    setTimeout(() => { prompt.style.opacity = '1'; }, 50);
+  }
+}
+
+function confirmLaunch(enableMusic) {
+  // Hide the music prompt
+  const prompt = document.getElementById('musicPromptOverlay');
+  if (prompt) {
+    prompt.style.opacity = '0';
+    setTimeout(() => { prompt.style.display = 'none'; }, 400);
+  }
+  
+  sfx.init();
+  
+  if (enableMusic && !isPlaying) {
     mbToggle();
   }
 }
+
+
+// Preload the punch sound so it syncs perfectly
+window.punchSfx = new Audio('https://www.myinstants.com/media/sounds/strongpunch_1.mp3');
+window.punchSfx.preload = 'auto';
+window.punchSfx.load();
 
 /* ── THEME PALETTE ENGINE ── */
 const themeConfigs = {
@@ -2066,13 +2149,14 @@ if (window.innerWidth > 700) {
 }
 
 /* ── AI TYPING BIO ── */
-const bioFull = "I'm a 17 y/o tech enthusiast who enjoys making things that actually work — whether it's code or learning something new, I always try to upskill myself.";
+const bioFull = "I'm a 17 y/o tech enthusiast who enjoys making things that actually work — whether it's code or learning something new, I always try to upskill myself.\n\nWhen I'm not locked in on VS Code, I'm probably touching grass, binge-watching anime, or raging in competitive games.";
 let bioTyped = false;
 function startBioTyping() {
   if (bioTyped) return;
   bioTyped = true;
   const tgt = document.getElementById('aiBioTarget');
   if (!tgt) return;
+  tgt.innerHTML = ''; // Prevent duplication by clearing the pre-loaded HTML
   let i = 0;
   function typeChar() {
     if (i >= bioFull.length) {
@@ -2298,6 +2382,32 @@ function bindSFX() {
 bindSFX();
 
 /* ── LANYARD DISCORD STATUS ── */
+window.lanyardTimers = [];
+
+function updateLanyardTimers() {
+  const now = Date.now();
+  window.lanyardTimers.forEach(t => {
+    let text = '';
+    if (t.end) {
+      let diff = t.end - now;
+      if (diff < 0) diff = 0;
+      const m = Math.floor(diff / 60000);
+      const s = Math.floor((diff % 60000) / 1000);
+      text = `${m}:${s.toString().padStart(2, '0')} left`;
+    } else if (t.start) {
+      let diff = now - t.start;
+      if (diff < 0) diff = 0;
+      const h = Math.floor(diff / 3600000);
+      const m = Math.floor((diff % 3600000) / 60000);
+      const s = Math.floor((diff % 60000) / 1000);
+      text = h > 0 ? `${h}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')} elapsed` : `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')} elapsed`;
+    }
+    const el = document.getElementById(t.id);
+    if (el) el.innerText = text;
+  });
+}
+setInterval(updateLanyardTimers, 1000);
+
 async function fetchDiscordStatus() {
   const DISCORD_ID = '954250474763198494'; 
   
@@ -2317,11 +2427,19 @@ async function fetchDiscordStatus() {
       let mainText = '';
       let additionalCount = 0;
       let modalHTML = '';
+      let activeTimers = [];
 
       // 1. Spotify
       if (data.data.spotify) {
         const sp = data.data.spotify;
         mainText = `🎵 Listening to ${sp.song}`;
+        
+        let timeStr = '';
+        if (sp.timestamps) {
+          activeTimers.push({ id: 'spTimer', start: sp.timestamps.start, end: sp.timestamps.end });
+          timeStr = `<div id="spTimer" style="font-size:11px; color:var(--accent-color); font-family:monospace; margin-top:4px;"></div>`;
+        }
+
         modalHTML += `
           <div style="padding:16px; border:1px solid #1DB954; background:rgba(29,185,84,0.05); display:flex; gap:16px; align-items:center; border-radius:8px;">
             <img src="${sp.album_art_url}" style="width:64px;height:64px;border-radius:6px;box-shadow:0 0 10px rgba(29,185,84,0.2);" />
@@ -2329,6 +2447,7 @@ async function fetchDiscordStatus() {
               <div style="font-size:10px; color:#1DB954; margin-bottom:4px; text-transform:uppercase; letter-spacing:1px; font-weight:bold;">Spotify</div>
               <div style="font-size:14px; font-weight:bold; color:#fff; margin-bottom:2px;">${sp.song}</div>
               <div style="font-size:12px; color:rgba(255,255,255,0.7);">${sp.artist}</div>
+              ${timeStr}
             </div>
           </div>
         `;
@@ -2336,19 +2455,27 @@ async function fetchDiscordStatus() {
 
       // 2. Games / Apps
       const otherActivities = activities.filter(a => a.type === 0);
-      otherActivities.forEach(a => {
+      otherActivities.forEach((a, i) => {
         if (!mainText) mainText = `🎮 Playing ${a.name}`;
         else additionalCount++;
 
         let details = a.details ? `<div style="font-size:12px; color:rgba(255,255,255,0.7); margin-top:2px;">${a.details}</div>` : '';
         let state = a.state ? `<div style="font-size:12px; color:rgba(255,255,255,0.7); margin-top:2px;">${a.state}</div>` : '';
         
+        let timeStr = '';
+        if (a.timestamps && a.timestamps.start) {
+          const tid = 'gameTimer' + i;
+          activeTimers.push({ id: tid, start: a.timestamps.start });
+          timeStr = `<div id="${tid}" style="font-size:11px; color:var(--accent-color); font-family:monospace; margin-top:4px;"></div>`;
+        }
+
         modalHTML += `
           <div style="padding:16px; border:1px solid rgba(255,255,255,0.1); background:rgba(255,255,255,0.02); border-radius:8px;">
             <div style="font-size:10px; color:var(--accent-color); margin-bottom:4px; text-transform:uppercase; letter-spacing:1px; font-weight:bold;">Activity</div>
             <div style="font-size:14px; font-weight:bold; color:#fff;">${a.name}</div>
             ${details}
             ${state}
+            ${timeStr}
           </div>
         `;
       });
@@ -2374,7 +2501,7 @@ async function fetchDiscordStatus() {
         modalHTML = `<div style="color:rgba(255,255,255,0.5); font-size:14px; padding:20px; text-align:center; border:1px dashed rgba(255,255,255,0.2); border-radius:8px;">Systems resting. Currently offline or no active presence detected.</div>`;
       }
 
-      // Update Banner UI
+      // Banner UI & Primary Timer
       if (additionalCount > 0) {
         mainText += ` <span style="color:var(--accent-color); font-weight:bold;">(+${additionalCount} more)</span>`;
       }
@@ -2385,10 +2512,26 @@ async function fetchDiscordStatus() {
         document.getElementById('heroDiscordIndicator').style.background = color;
         document.getElementById('heroDiscordIndicator').style.boxShadow = `0 0 10px ${color}`;
         document.getElementById('heroDiscordText').innerHTML = mainText;
+        
+        // Primary timer logic for the floating widget
+        const pTimer = document.getElementById('heroDiscordTimer');
+        if (pTimer) {
+          if (data.data.spotify && data.data.spotify.timestamps) {
+            activeTimers.push({ id: 'heroDiscordTimer', start: data.data.spotify.timestamps.start, end: data.data.spotify.timestamps.end });
+          } else if (otherActivities.length > 0 && otherActivities[0].timestamps && otherActivities[0].timestamps.start) {
+            activeTimers.push({ id: 'heroDiscordTimer', start: otherActivities[0].timestamps.start });
+          } else {
+            pTimer.innerText = '';
+          }
+        }
       }
       
       const modalContent = document.getElementById('discordModalContent');
       if (modalContent) modalContent.innerHTML = modalHTML;
+      
+      // Update global timers array and tick instantly
+      window.lanyardTimers = activeTimers;
+      updateLanyardTimers();
     }
   } catch(e) {
     console.log("Failed to fetch Discord status", e);
@@ -2416,5 +2559,114 @@ setInterval(fetchDiscordStatus, 30000);
     </div>
   </div>
 </div>
+
+<script>
+  let bruhPlayed = false;
+  function handleLinkUpClick(e) {
+    // If they haven't scrolled down much and haven't triggered this yet
+    if (window.scrollY < 300 && !bruhPlayed) {
+      e.preventDefault();
+      bruhPlayed = true; // Only do it once so they aren't trapped forever
+      
+      // Play the sound
+      const audio = new Audio('https://www.myinstants.com/media/sounds/movie_1.mp3');
+      audio.play().catch(e => console.log('Audio autoplay blocked by browser'));
+      
+      // Show the flash message
+      const flashMsg = document.createElement('div');
+      flashMsg.innerHTML = 'Bruh, check out the website first vro 💀';
+      flashMsg.style.position = 'fixed';
+      flashMsg.style.top = '20px';
+      flashMsg.style.left = '50%';
+      flashMsg.style.transform = 'translateX(-50%)';
+      flashMsg.style.background = 'var(--accent-color)';
+      flashMsg.style.color = '#000';
+      flashMsg.style.padding = '16px 24px';
+      flashMsg.style.fontWeight = '800';
+      flashMsg.style.fontFamily = '"JetBrains Mono", monospace';
+      flashMsg.style.zIndex = '999999';
+      flashMsg.style.boxShadow = '0 10px 30px rgba(0,0,0,0.5)';
+      flashMsg.style.border = '2px solid #fff';
+      flashMsg.style.opacity = '0';
+      flashMsg.style.transition = 'opacity 0.3s, top 0.3s';
+      
+      document.body.appendChild(flashMsg);
+      
+      // Animate in
+      setTimeout(() => {
+        flashMsg.style.opacity = '1';
+        flashMsg.style.top = '40px';
+      }, 50);
+      
+      // Remove after 2.5 seconds and scroll them down
+      setTimeout(() => {
+        flashMsg.style.opacity = '0';
+        flashMsg.style.top = '20px';
+        setTimeout(() => {
+          flashMsg.remove();
+          scrollToSection('contact');
+        }, 300);
+      }, 2500);
+      
+    } else {
+      // Normal behavior
+      scrollToSection('contact');
+    }
+  }
+</script>
+
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    let p = 0;
+    const pct = document.getElementById('bootPct');
+    const loader = document.getElementById('bootLoader');
+    const punch = document.getElementById('bootPunch');
+    const punchText = document.getElementById('punchTextInner');
+    const screen = document.getElementById('bootScreen');
+    const mcHearts = document.getElementById('mcHearts');
+    
+    const emptyHeartSvg = '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 9 9" shape-rendering="crispEdges"><rect x="1" y="1" width="2" height="1" fill="#333"/><rect x="6" y="1" width="2" height="1" fill="#333"/><rect x="0" y="2" width="1" height="2" fill="#333"/><rect x="3" y="2" width="1" height="1" fill="#333"/><rect x="5" y="2" width="1" height="1" fill="#333"/><rect x="8" y="2" width="1" height="2" fill="#333"/><rect x="0" y="4" width="1" height="1" fill="#333"/><rect x="8" y="4" width="1" height="1" fill="#333"/><rect x="1" y="5" width="1" height="1" fill="#333"/><rect x="7" y="5" width="1" height="1" fill="#333"/><rect x="2" y="6" width="1" height="1" fill="#333"/><rect x="6" y="6" width="1" height="1" fill="#333"/><rect x="3" y="7" width="1" height="1" fill="#333"/><rect x="5" y="7" width="1" height="1" fill="#333"/><rect x="4" y="8" width="1" height="1" fill="#333"/><rect x="1" y="2" width="2" height="1" fill="#111"/><rect x="6" y="2" width="2" height="1" fill="#111"/><rect x="1" y="3" width="7" height="2" fill="#111"/><rect x="2" y="5" width="5" height="1" fill="#111"/><rect x="3" y="6" width="3" height="1" fill="#111"/><rect x="4" y="7" width="1" height="1" fill="#111"/><rect x="4" y="2" width="1" height="1" fill="#111"/></svg>';
+    const fullHeartSvg = emptyHeartSvg.replace(/#111/g, '#FF3300').replace(/#333/g, '#ffffff');
+    
+    const emptyHeart = 'data:image/svg+xml;utf8,' + encodeURIComponent(emptyHeartSvg);
+    const fullHeart = 'data:image/svg+xml;utf8,' + encodeURIComponent(fullHeartSvg);
+    
+    if (mcHearts) {
+      for(let i=0; i<10; i++){
+        mcHearts.innerHTML += `<img src="${emptyHeart}" style="width:20px; height:20px; image-rendering:pixelated; margin:0 1px; opacity:0.8;">`;
+      }
+    }
+
+    const interval = setInterval(() => {
+      p += Math.floor(Math.random() * 5) + 2;
+      if (p >= 100) {
+        p = 100;
+        clearInterval(interval);
+        setTimeout(() => {
+          loader.style.display = 'none';
+          punchText.style.display = 'inline-block';
+          screen.style.cursor = 'pointer';
+          screen.setAttribute('onclick', 'launchPortfolio()');
+        }, 500);
+      }
+      
+      const heartsToFill = Math.floor(p / 10);
+      if (mcHearts) {
+        const imgs = mcHearts.getElementsByTagName('img');
+        for(let i=0; i<10; i++) {
+          if (i < heartsToFill) {
+            imgs[i].src = fullHeart;
+            imgs[i].style.opacity = '1';
+            imgs[i].style.transform = 'scale(1.1)';
+          } else {
+            imgs[i].style.transform = 'scale(1)';
+          }
+        }
+      }
+      if(pct) pct.innerText = p + '%';
+    }, 100);
+  });
+</script>
 </body>
+
 </html>
