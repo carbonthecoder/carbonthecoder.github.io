@@ -850,6 +850,119 @@
       transform: translateY(0);
     }
 
+    /* Mini Player */
+    /* Mini Player */
+    .music-mini-player-container {
+      position: relative;
+      display: inline-flex;
+    }
+    
+    .music-trigger {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.5);
+      border-radius: 4px;
+      padding: 4px 8px;
+      font-size: 11px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+      height: 28px;
+    }
+    
+    .music-mini-player-container:hover .music-trigger {
+      border-color: var(--accent-color);
+      color: var(--text-color);
+    }
+    
+    .music-dropdown {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      margin-top: 12px;
+      background: rgba(15, 15, 15, 0.7);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      padding: 12px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-width: 160px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-8px);
+      transition: all 0.3s cubic-bezier(0.22,1,0.36,1);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+      z-index: 1000;
+    }
+    
+    .music-mini-player-container:hover .music-dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    
+    .music-dropdown .track-name {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: var(--accent-color);
+      text-transform: uppercase;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    
+    .music-dropdown .track-time {
+      font-size: 8px;
+      color: rgba(255,255,255,0.5);
+      font-family: 'JetBrains Mono', monospace;
+    }
+    
+    .music-dropdown .player-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 4px;
+      border-top: 1px dashed rgba(255,255,255,0.1);
+    }
+    
+    .music-dropdown .player-controls button {
+      background: transparent;
+      border: none;
+      color: rgba(255,255,255,0.7);
+      cursor: pointer;
+      font-size: 14px;
+      transition: transform 0.1s, color 0.2s;
+    }
+    
+    .music-dropdown .player-controls button:hover {
+      color: var(--accent-color);
+      transform: scale(1.15);
+    }
+
+    /* Mobile overrides */
+    @media (max-width: 768px) {
+      .music-dropdown {
+        display: none !important; /* Hide dropdown entirely on mobile */
+      }
+      .music-mobile-controls {
+        display: flex;
+        gap: 16px;
+        align-items: center;
+      }
+      .music-mobile-controls button {
+        background: transparent;
+        border: none;
+        color: var(--text-color);
+        font-size: 16px;
+        cursor: pointer;
+      }
+    }
 </style>
 </head>
 <body class="text-white">
@@ -1025,17 +1138,22 @@
     <a href="#projects" onclick="scrollToSection('projects')" style="font-size:9px;letter-spacing:2px;color:rgba(255,255,255,0.45);text-decoration:none;text-transform:uppercase;transition:color 0.1s;" onmouseover="this.style.color='var(--accent-color)'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">PROJECTS</a>
     <a href="#contact" onclick="scrollToSection('contact')" style="font-size:9px;letter-spacing:2px;color:rgba(255,255,255,0.45);text-decoration:none;text-transform:uppercase;transition:color 0.1s;" onmouseover="this.style.color='var(--accent-color)'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">CONTACT</a>
     
-    <!-- MUSIC TOGGLE BUTTON & VOLUME -->
-    <div style="display:flex; align-items:center; gap:8px;">
-      <button id="musicToggleBtn" onclick="mbToggle()" class="brutal-border btn-slide-fill" style="background:transparent; padding: 4px 8px; font-size: 9px; letter-spacing: 1px; color: rgba(255,255,255,0.5); cursor:pointer; display:inline-flex; align-items:center;">
-        <span>🔈 MUSIC: OFF</span>
-        <span class="visualizer-bars">
-          <span class="vbar" style="animation: vbounce 0.5s ease-in-out infinite alternate;"></span>
-          <span class="vbar" style="animation: vbounce 0.7s ease-in-out infinite alternate 0.15s;"></span>
-          <span class="vbar" style="animation: vbounce 0.6s ease-in-out infinite alternate 0.3s;"></span>
-        </span>
+    <!-- MUSIC MINI PLAYER CONTAINER -->
+    <div class="music-mini-player-container">
+      <button class="music-trigger brutal-border btn-slide-fill" onclick="mbToggle()">
+        <i class="fa-solid fa-music"></i> <span class="play-icon-status" style="font-size:9px; letter-spacing:1px;">OFF</span>
       </button>
-      <input type="range" id="musicVolSlider" min="0" max="1" step="0.01" value="0.5" style="opacity:0.3; pointer-events:none;" onchange="bgMusic.volume = this.value" oninput="bgMusic.volume = this.value" title="Volume">
+      <div class="music-dropdown glass-ios">
+        <div class="track-info">
+          <div class="track-name">After Dark</div>
+          <div class="track-time">0:00 / 0:00</div>
+        </div>
+        <div class="player-controls">
+          <button onclick="prevTrack()" title="Previous Track"><i class="fa-solid fa-backward-step"></i></button>
+          <button onclick="mbToggle()" title="Play / Pause"><i class="fa-solid fa-play play-icon"></i></button>
+          <button onclick="nextTrack()" title="Next Track"><i class="fa-solid fa-forward-step"></i></button>
+        </div>
+      </div>
     </div>
 
     <!-- PALETTE TOOL BUTTON -->
@@ -1116,10 +1234,12 @@
   </div>
 
   <div class="mobile-nav-controls" style="margin-left:auto; display:none; align-items:center; gap:16px;">
-    <!-- MOBILE MUSIC BUTTON ON NAV -->
-    <button id="mobileMusicBtnNav" onclick="mbToggle()" style="background:transparent; border:none; color:var(--text-color); cursor:pointer; font-size:16px; display:flex; align-items:center; justify-content:center;">
-      <i id="mobileMusicIcon" class="fa-solid fa-volume-xmark"></i>
-    </button>
+    <!-- MOBILE MUSIC PLAYER -->
+    <div class="music-mobile-controls">
+      <button onclick="prevTrack()"><i class="fa-solid fa-backward-step"></i></button>
+      <button onclick="mbToggle()"><i class="fa-solid fa-play play-icon"></i></button>
+      <button onclick="nextTrack()"><i class="fa-solid fa-forward-step"></i></button>
+    </div>
     <!-- MOBILE HAMBURGER BUTTON -->
     <button id="mobileMenuBtn" style="background:transparent; border:none; color:var(--text-color); cursor:pointer; font-size:16px; display:flex; align-items:center; justify-content:center;">
       <i class="fa-solid fa-bars"></i>
@@ -1831,51 +1951,76 @@ function switchProjTab(type) {
   }
 }
 /* ── MUSIC ENGINE ── */
-const bgMusic = new Audio('After dark.mp3');
-bgMusic.loop = true;
+const tracklist = [
+  { title: "After Dark", src: "After dark.mp3" },
+  { title: "Elevate", src: "Elevate.mp3" }
+];
+let currentTrackIndex = 0;
+const bgMusic = new Audio(tracklist[currentTrackIndex].src);
 bgMusic.volume = 0.5;
 let isPlaying = false;
 
+function formatTime(secs) {
+  if (isNaN(secs)) return "0:00";
+  const m = Math.floor(secs / 60);
+  const s = Math.floor(secs % 60).toString().padStart(2, '0');
+  return `${m}:${s}`;
+}
+
+bgMusic.addEventListener('timeupdate', () => {
+  document.querySelectorAll('.track-time').forEach(el => {
+    el.innerText = `${formatTime(bgMusic.currentTime)} / ${formatTime(bgMusic.duration)}`;
+  });
+});
+
+bgMusic.addEventListener('ended', () => {
+  nextTrack();
+});
+
+function loadTrack(index) {
+  currentTrackIndex = index;
+  bgMusic.src = tracklist[currentTrackIndex].src;
+  document.querySelectorAll('.track-name').forEach(el => {
+    el.innerText = tracklist[currentTrackIndex].title;
+  });
+  if (isPlaying) {
+    bgMusic.play();
+  }
+}
+
+function nextTrack() {
+  let idx = currentTrackIndex + 1;
+  if (idx >= tracklist.length) idx = 0;
+  loadTrack(idx);
+}
+
+function prevTrack() {
+  let idx = currentTrackIndex - 1;
+  if (idx < 0) idx = tracklist.length - 1;
+  loadTrack(idx);
+}
+
 function mbToggle() {
-  const btn = document.getElementById('musicToggleBtn');
-  const iconMob = document.getElementById('mobileMusicIcon');
-  const visBars = document.querySelectorAll('.visualizer-bars');
+  const playIcons = document.querySelectorAll('.play-icon');
+  const statusTexts = document.querySelectorAll('.play-icon-status');
+  
   if (isPlaying) {
     bgMusic.pause();
     isPlaying = false;
-    if (btn) {
-      const sp = btn.querySelector('span');
-      if (sp) sp.innerHTML = '🔈 MUSIC: OFF';
-      btn.style.color = 'rgba(255, 255, 255, 0.5)';
-      btn.style.borderColor = 'var(--border-color)';
-    }
-    if (iconMob) {
-      iconMob.className = 'fa-solid fa-volume-xmark';
-      iconMob.style.color = 'var(--text-color)';
-    }
-    visBars.forEach(vb => vb.style.display = 'none');
+    playIcons.forEach(icon => {
+      icon.className = 'fa-solid fa-play play-icon';
+      icon.style.color = '';
+    });
+    statusTexts.forEach(txt => txt.innerText = 'OFF');
   } else {
     bgMusic.play().then(() => {
       isPlaying = true;
-      if (btn) {
-        const sp = btn.querySelector('span');
-        if (sp) sp.innerHTML = '🔊 MUSIC: ON';
-        btn.style.color = 'var(--accent-color)';
-        btn.style.borderColor = 'var(--accent-color)';
-      }
-      const slider = document.getElementById('musicVolSlider');
-      if (slider) {
-        slider.style.opacity = '1';
-        slider.style.pointerEvents = 'auto';
-        bgMusic.volume = slider.value;
-      }
-      if (iconMob) {
-        iconMob.className = 'fa-solid fa-volume-high';
-        iconMob.style.color = 'var(--accent-color)';
-      }
-      visBars.forEach(vb => vb.style.display = 'inline-flex');
-    }).catch(err => {
-      console.log("Audio play blocked by browser.", err);
+      playIcons.forEach(icon => {
+        icon.className = 'fa-solid fa-pause play-icon';
+        icon.style.color = 'var(--accent-color)';
+      });
+      statusTexts.forEach(txt => txt.innerText = 'ON');
+    }).catch(e => {
       alert("Click anywhere on the page first, then toggle music!");
     });
   }
