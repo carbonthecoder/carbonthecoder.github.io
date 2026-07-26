@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Y'ALL I AM MOHAMMED_IBRAHIM </title>
+    <title>MOHAMMED_IBRAHIM // BACKEND_ENGINEER</title>
     <meta
       name="description"
-      content="Mohammed Ibrahim — 17 y/o backend engineer aspirant. Hyderabad, IN."
+      content="Mohammed Ibrahim — 17 y/o backend engineer aspirant. Python, C, SQL, Linux, Git/GitHub. Hyderabad, IN."
     />
 
     <link
@@ -1665,7 +1665,6 @@
         transition: opacity 1s ease;
       "
     ></canvas>
-    <!-- CURSOR FLASHLIGHT -->
     <div
       id="cursorFlashlight"
       style="
@@ -1673,8 +1672,6 @@
         inset: 0;
         pointer-events: none;
         z-index: 999998;
-        mix-blend-mode: screen;
-        transition: background 0.1s ease-out;
       "
     ></div>
 
@@ -6416,28 +6413,88 @@
       }
       setInterval(updateLanyardTimers, 1000);
 
+      const LASTFM_USER = "carbonthecoder";
+      const LASTFM_API_KEY = "f1b087aee5ac025e4c5343fc67cd02e7";
+
+      async function getLastFmData() {
+        try {
+          const res = await fetch(`https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${LASTFM_USER}&api_key=${LASTFM_API_KEY}&format=json&limit=1`);
+          if (!res.ok) return null;
+          const data = await res.json();
+          
+          if (data.recenttracks && data.recenttracks.track && data.recenttracks.track.length > 0) {
+            const track = data.recenttracks.track[0];
+            if (track["@attr"] && track["@attr"].nowplaying === "true") {
+              
+              let cachedTrack = localStorage.getItem("lastFmCurrentTrack");
+              let cachedStart = localStorage.getItem("lastFmStartTime");
+              
+              if (cachedTrack !== track.name || !cachedStart) {
+                cachedTrack = track.name;
+                cachedStart = Date.now();
+                localStorage.setItem("lastFmCurrentTrack", cachedTrack);
+                localStorage.setItem("lastFmStartTime", cachedStart.toString());
+              }
+
+              let albumArt = "https://upload.wikimedia.org/wikipedia/commons/2/26/Spotify_logo_with_text.svg";
+              if (track.image && track.image.length > 0) {
+                const lgImage = track.image[track.image.length - 1]["#text"];
+                if (lgImage) albumArt = lgImage;
+              }
+              
+              return {
+                song: track.name,
+                artist: track.artist["#text"],
+                album_art_url: albumArt,
+                track_id: track.mbid || track.name,
+                timestamps: {
+                  start: parseInt(cachedStart)
+                }
+              };
+            }
+          }
+        } catch (e) {
+          console.error("Last.fm Fetch Error", e);
+        }
+        return null;
+      }
+
       async function fetchDiscordStatus() {
         const DISCORD_ID = "954250474763198494";
 
         try {
-          const res = await fetch(
-            "https://api.lanyard.rest/v1/users/" + DISCORD_ID,
-          );
-          const data = await res.json();
+          // Fetch Last.fm independently
+          const rawSpotify = await getLastFmData();
+          
+          let data = { success: false, data: { activities: [], discord_status: "offline" } };
+          try {
+            const lanyardRes = await fetch("https://api.lanyard.rest/v1/users/" + DISCORD_ID);
+            if (lanyardRes.ok) {
+              data = await lanyardRes.json();
+            }
+          } catch(e) { console.warn("Lanyard API rate limited or offline."); }
 
-          if (data.success) {
-            const status = data.data.discord_status;
-            const activities = data.data.activities;
+          if (!data.data) {
+            data.data = { activities: [], discord_status: "offline" };
+          }
 
-            let color = "#747f8d"; // offline
-            if (status === "online") color = "#43b581";
-            else if (status === "idle") color = "#faa61a";
-            else if (status === "dnd") color = "#f04747";
+          // INJECT RAW SPOTIFY OVERRIDE (works even if Discord is offline or rate limited!)
+          if (rawSpotify) {
+            data.data.spotify = rawSpotify;
+          }
 
-            let mainText = "";
-            let additionalCount = 0;
-            let modalHTML = "";
-            let activeTimers = [];
+          const status = data.data.discord_status;
+          const activities = data.data.activities || [];
+
+          let color = "#747f8d"; // offline
+          if (status === "online") color = "#43b581";
+          else if (status === "idle") color = "#faa61a";
+          else if (status === "dnd") color = "#f04747";
+
+          let mainText = "";
+          let additionalCount = 0;
+          let modalHTML = "";
+          let activeTimers = [];
 
             // 1. Spotify
             if (data.data.spotify) {
@@ -6568,9 +6625,8 @@
             // Update global timers array and tick instantly
             window.lanyardTimers = activeTimers;
             updateLanyardTimers();
-          }
-        } catch (e) {
-          console.log("Failed to fetch Discord status", e);
+        } catch (error) {
+          console.error("Presence fetch error:", error);
         }
       }
 
@@ -6582,7 +6638,7 @@
       }
 
       fetchDiscordStatus();
-      setInterval(fetchDiscordStatus, 30000);
+      setInterval(fetchDiscordStatus, 5000);
     </script>
 
     <!-- Discord Activity Modal -->
