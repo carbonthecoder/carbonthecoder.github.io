@@ -44,6 +44,8 @@
         word-wrap: break-word;
         overflow-wrap: break-word;
         max-width: 100vw;
+        user-select: none;
+        -webkit-user-select: none;
       }
       html {
         scroll-behavior: smooth;
@@ -1519,18 +1521,18 @@
         }
       }
 
-      /* Ko-fi Shock Button */
-      .kofi-shock-btn {
+      /* Crypto/Solana Shock Button */
+      .crypto-shock-btn {
         position: relative;
         overflow: hidden;
-        background: linear-gradient(45deg, #FF5E5B, #ff8a00, #e52e71, #FF5E5B);
+        background: linear-gradient(45deg, #111, #333, #111);
         background-size: 300% 300%;
-        animation: kofiGradientBG 2s ease infinite;
-        border: none !important;
-        box-shadow: 0 0 20px rgba(255, 94, 91, 0.4);
+        animation: cryptoGradientBG 2s ease infinite;
+        border: 1px solid rgba(255,255,255,0.2) !important;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
         transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s;
       }
-      .kofi-shock-btn::after {
+      .crypto-shock-btn::after {
         content: '';
         position: absolute;
         top: -50%;
@@ -1539,21 +1541,25 @@
         height: 200%;
         background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent);
         transform: rotate(45deg) translateY(-100%);
-        animation: kofiShine 3s infinite;
+        animation: cryptoShine 3s infinite;
         pointer-events: none;
       }
-      .kofi-shock-btn:hover {
+      .crypto-shock-btn:hover {
         transform: scale(1.05) translateY(-2px);
-        box-shadow: 0 10px 30px rgba(255, 94, 91, 0.8);
+        box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
       }
-      @keyframes kofiGradientBG {
+      @keyframes cryptoGradientBG {
         0% { background-position: 0% 50%; }
         50% { background-position: 100% 50%; }
         100% { background-position: 0% 50%; }
       }
-      @keyframes kofiShine {
+      @keyframes cryptoShine {
         0% { transform: rotate(45deg) translateX(-200%); }
         50%, 100% { transform: rotate(45deg) translateX(200%); }
+      }
+      @keyframes popupProgress {
+        from { width: 100%; }
+        to { width: 0%; }
       }
 
       /* Spotify Shock Button */
@@ -3258,6 +3264,28 @@
             class="glitch snap-in snap-delay-1"
             id="heroTitle"
             data-text="MOHAMMED IBRAHIM"
+            onclick="
+              event.stopPropagation();
+              let c = [
+                '#00f5ff',
+                '#ff0055',
+                '#39FF14',
+                '#FFea00',
+                '#D000FF',
+                '#FF1493',
+              ][Math.floor(Math.random() * 6)];
+              this.style.color = c;
+              this.style.setProperty('--accent-color', c);
+              this.style.textShadow = '0 0 30px ' + c;
+
+              window.titleClicks = (window.titleClicks || 0) + 1;
+              if (window.titleClickTimer) clearTimeout(window.titleClickTimer);
+              window.titleClickTimer = setTimeout(() => window.titleClicks = 0, 800);
+              if (window.titleClicks >= 3) {
+                window.titleClicks = 0;
+                if(window.playExtra) window.playExtra('nani');
+              }
+            "
             onmouseover="
               let c = [
                 '#00f5ff',
@@ -4757,7 +4785,7 @@
         <div style="display: flex; gap: 12px; margin-bottom: 32px">
           <button
             id="tabAI"
-            onclick="switchProjTab('ai')"
+            onclick="if(window.playExtra) window.playExtra('dio'); switchProjTab('ai')"
             class="brutal-solid"
             style="
               padding: 10px 20px;
@@ -4777,7 +4805,7 @@
           </button>
           <button
             id="tabSelf"
-            onclick="switchProjTab('self')"
+            onclick="if(window.wowSfx){window.wowSfx.currentTime=0; window.wowSfx.play().catch(e=>console.log(e));} switchProjTab('self')"
             class="brutal-border"
             style="
               padding: 10px 20px;
@@ -5177,9 +5205,9 @@
           style="margin-top: 24px; display: flex; flex-wrap: wrap; gap: 16px; justify-content: flex-start; align-items: center;"
         >
           <a
-            href="https://ko-fi.com/carbonthecoder"
-            target="_blank"
-            class="kofi-shock-btn"
+            href="javascript:void(0)"
+            onclick="openCryptoModal()"
+            class="crypto-shock-btn"
             style="
               text-decoration: none;
               padding: 12px 20px;
@@ -5195,7 +5223,7 @@
               border-radius: 8px;
             "
           >
-            <img src="https://cdn.simpleicons.org/kofi/ffffff" style="width: 18px; height: 18px;" alt="" />
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="z-index: 2"><rect x="2" y="6" width="20" height="12" rx="2" ry="2"></rect><circle cx="12" cy="12" r="2"></circle><path d="M6 12h.01M18 12h.01"></path></svg>
             <span style="z-index: 2; white-space: nowrap;">FUND MAINFRAME</span>
           </a>
           <a
@@ -5877,7 +5905,7 @@
           
           mobilePlayerTimeout = setTimeout(() => {
             mp.classList.remove("show-mobile");
-          }, 4000);
+          }, 10000);
           
           // Auto close if clicked outside
           setTimeout(() => {
@@ -5898,10 +5926,12 @@
           window.bruhTimerActive = false;
         }, 8000);
 
-        // Play immediately from preloaded audio
-        if (window.punchSfx) {
-          window.punchSfx.currentTime = 0;
-          window.punchSfx.play().catch((e) => console.log("Audio blocked"));
+        // Play randomly selected preloaded boot sound
+        if (window.bootSounds && window.bootSounds.length > 0) {
+          const randomIndex = Math.floor(Math.random() * window.bootSounds.length);
+          const sfx = window.bootSounds[randomIndex];
+          sfx.currentTime = 0;
+          sfx.play().catch((e) => console.log("Audio blocked"));
         }
 
         // Fade out the black screen
@@ -5956,7 +5986,7 @@
           tooltip.style.opacity = "1";
           setTimeout(() => {
             tooltip.style.opacity = "0";
-          }, 2500);
+          }, 10000);
         }
         if (mobTooltip && mobTooltipText) {
           mobTooltipText.innerText = msg;
@@ -5965,18 +5995,89 @@
             mobTooltip.style.opacity = "1";
             setTimeout(() => {
               mobTooltip.style.opacity = "0";
-            }, 2500);
+            }, 10000);
           }
         }
       }
 
-      // Preload the punch sound so it syncs perfectly
-      window.punchSfx = new Audio(
-        "https://www.myinstants.com/media/sounds/strongpunch_1.mp3",
-      );
-      window.punchSfx.volume = 0.05;
+      // Preload the punch sound so it syncs perfectly for all normal punches
+      window.punchSfx = new Audio("https://www.myinstants.com/media/sounds/strongpunch_1.mp3");
+      window.punchSfx.volume = 0.03;
       window.punchSfx.preload = "auto";
       window.punchSfx.load();
+
+      // Preload array of epic boot sounds for random selection on the start screen
+      window.bootSounds = [
+        "https://www.myinstants.com/media/sounds/strongpunch_1.mp3",
+        "https://www.myinstants.com/media/sounds/anime-shine-sound-effect_QP4mAaX.mp3",
+        "https://www.myinstants.com/media/sounds/goku-teleport-sound.mp3",
+        "https://www.myinstants.com/media/sounds/tuturu_1.mp3",
+        "https://www.myinstants.com/media/sounds/minecraft-explosion-green-screen.mp3"
+      ].map(url => {
+        let audio = new Audio(url);
+        audio.volume = 0.3;
+        audio.preload = "auto";
+        audio.load();
+        return audio;
+      });
+
+      // Preload the among us sound
+      window.amongUsSfx = new Audio("https://www.myinstants.com/media/sounds/among-us-roundstart.mp3");
+      window.amongUsSfx.volume = 0.3;
+      window.amongUsSfx.preload = "auto";
+      window.amongUsSfx.load();
+
+      // Preload the Hehe Boi sound
+      window.heheBoiSfx = new Audio("https://www.myinstants.com/media/sounds/ainsley_harriott_and_his_spicy_meatconverttoaudio.mp3");
+      window.heheBoiSfx.volume = 0.48;
+      window.heheBoiSfx.preload = "auto";
+      window.heheBoiSfx.load();
+
+      // Preload the Anime WOW sound
+      window.wowSfx = new Audio("https://www.myinstants.com/media/sounds/wow-1e00daf5-468a-4381-b636-e7fd3f595187.mp3");
+      window.wowSfx.volume = 0.42;
+      window.wowSfx.preload = "auto";
+      window.wowSfx.load();
+
+      // Preload the aww darn it ended sound
+      window.endSfx = new Audio("https://www.myinstants.com/media/sounds/it-ended.mp3");
+      window.endSfx.volume = 0.3;
+      window.endSfx.preload = "auto";
+      window.endSfx.load();
+
+      // Preload extra easter egg sounds
+      const extraSfx = {
+        zaWarudo: "https://www.myinstants.com/media/sounds/hd-stardust-crusaders-za-warudo_1.mp3",
+        mario1Up: "https://www.myinstants.com/media/sounds/smb_1-up.mp3",
+        shadowClone: "https://www.myinstants.com/media/sounds/naruto-shadow-clone-jutsu-sound-effect.mp3",
+        dio: "https://www.myinstants.com/media/sounds/it-was-me-dio_1.mp3",
+        ahShit: "https://www.myinstants.com/media/sounds/gta-san-andreas-ah-shit-here-we-go-again.mp3",
+        bloodSlash: "https://www.myinstants.com/media/sounds/sword_slash-ab22fe02-3826-345a-80ad-dc22261a9127.mp3",
+        glitch: "https://www.myinstants.com/media/sounds/error-glitch.mp3",
+        creeper: "https://www.myinstants.com/media/sounds/creeper-explosion.mp3",
+        chaChing: "https://www.myinstants.com/media/sounds/audiojoiner120623175716.mp3",
+        pipe: "https://www.myinstants.com/media/sounds/super-mario-bros.mp3",
+        ultraInstinct: "https://www.myinstants.com/media/sounds/ultra-instinct-theme-official-version.mp3",
+        djAirhorn: "https://www.myinstants.com/media/sounds/dj-airhorn-sound-effect-kingbeatz_1.mp3",
+        nani: "https://www.myinstants.com/media/sounds/nani_Pmxf5n3.mp3",
+        fundAww: "https://www.myinstants.com/media/sounds/aww-sound-effect_OII2eTh.mp3",
+        animeAhh: "https://www.myinstants.com/media/sounds/anime-ahh.mp3",
+        chicken: "https://www.myinstants.com/media/sounds/chicken-on-tree-screaming.mp3"
+      };
+      window.extraAudio = {};
+      Object.keys(extraSfx).forEach(key => {
+        let audio = new Audio(extraSfx[key]);
+        audio.volume = 0.4;
+        audio.preload = "auto";
+        audio.load();
+        window.extraAudio[key] = audio;
+      });
+      window.playExtra = function(key) {
+        if(window.extraAudio[key]){
+          window.extraAudio[key].currentTime=0;
+          window.extraAudio[key].play().catch(()=>{});
+        }
+      }
 
       /* ── THEME PALETTE ENGINE ── */
       const themeConfigs = {
@@ -6037,6 +6138,12 @@
       };
 
       function setTheme(themeKey) {
+        if (window.playExtra) {
+          if (themeKey === 'blood') window.playExtra('bloodSlash');
+          else if (themeKey === 'matrix' || themeKey === 'cyber') window.playExtra('glitch');
+          else if (themeKey === 'toxic') window.playExtra('creeper');
+        }
+        
         const config = themeConfigs[themeKey] || themeConfigs.default;
         const root = document.documentElement;
 
@@ -6336,6 +6443,10 @@
       /* ── MODAL ── */
       function openArchive() {
         document.getElementById("archiveModal").classList.add("on");
+        if (window.heheBoiSfx) {
+          window.heheBoiSfx.currentTime = 0;
+          window.heheBoiSfx.play().catch(e => console.log(e));
+        }
       }
       function closeArchive() {
         document.getElementById("archiveModal").classList.remove("on");
@@ -7025,6 +7136,226 @@
       </div>
     </div>
 
+    <!-- Crypto Modal -->
+    <div
+      id="cryptoModal"
+      style="
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 999999;
+        align-items: center;
+        justify-content: center;
+        backdrop-filter: blur(10px);
+      "
+    >
+      <div
+        style="
+          background: rgba(25, 25, 25, 0.4);
+          backdrop-filter: blur(24px) saturate(180%);
+          max-width: 400px;
+          width: 90%;
+          padding: 32px;
+          position: relative;
+          border: 1px solid rgba(255, 255, 255, 0.15);
+          border-radius: 16px;
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        "
+      >
+        <button
+          onclick="closeCryptoModal()"
+          style="
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: transparent;
+            border: none;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 24px;
+            cursor: pointer;
+            transition: color 0.2s;
+          "
+          onmouseover="this.style.color = '#fff'"
+          onmouseout="this.style.color = 'rgba(255,255,255,0.5)'"
+        >
+          &times;
+        </button>
+        <div
+          style="
+            font-size: 11px;
+            letter-spacing: 4px;
+            color: var(--accent-color);
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            font-weight: bold;
+          "
+        >
+          // FUND_MAINFRAME
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 12px">
+          <div style="font-size: 10px; color: rgba(255,255,255,0.4); text-align: center; margin-top: -12px; margin-bottom: 4px;">Tap any QR code to expand it!</div>
+          <!-- Solana -->
+          <div style="display: flex; align-items: center; justify-content: space-between; background: rgba(255,255,255,0.05); padding: 12px 16px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);">
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <img src="https://cdn.simpleicons.org/solana/ffffff" style="width: 20px; height: 20px;" alt=""/>
+              <div style="font-size: 14px; font-weight: bold; color: #fff;">Solana</div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px; position: relative;">
+              <img src="assets/solana-qr.png" style="width: 24px; height: 24px; border-radius: 4px; cursor: crosshair; transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-origin: right center;" onclick="if(window.playExtra) window.playExtra('shadowClone'); if(this.style.transform.includes('scale(6)')){this.style.transform='scale(1) translateX(0)'; this.style.zIndex='1';}else{this.style.transform='scale(6) translateX(-4px)'; this.style.zIndex='9999'; this.style.position='relative';}" alt="Solana QR" />
+              <button onclick="navigator.clipboard.writeText('BiaCN5ukpUQoNx2pP3T8tVL2W4pDbu429K9dow8r2Mam'); showCryptoCopyToast(this);" style="background: var(--accent-color); color: #000; border: none; padding: 6px 12px; border-radius: 4px; font-size: 10px; font-weight: bold; cursor: pointer;">COPY</button>
+            </div>
+          </div>
+          <!-- Ethereum / EVM -->
+          <div style="display: flex; align-items: center; justify-content: space-between; background: rgba(255,255,255,0.05); padding: 12px 16px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);">
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <img src="https://cdn.simpleicons.org/ethereum/ffffff" style="width: 20px; height: 20px;" alt=""/>
+              <div style="font-size: 14px; font-weight: bold; color: #fff;">Ethereum / EVM</div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px; position: relative;">
+              <img src="assets/ethereum-qr.png" style="width: 24px; height: 24px; border-radius: 4px; cursor: crosshair; transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-origin: right center;" onclick="if(window.playExtra) window.playExtra('shadowClone'); if(this.style.transform.includes('scale(6)')){this.style.transform='scale(1) translateX(0)'; this.style.zIndex='1';}else{this.style.transform='scale(6) translateX(-4px)'; this.style.zIndex='9999'; this.style.position='relative';}" alt="Ethereum QR" />
+              <button onclick="navigator.clipboard.writeText('0x0b38a27a3aba8e735363dfde2499cc5e06316c90'); showCryptoCopyToast(this);" style="background: var(--accent-color); color: #000; border: none; padding: 6px 12px; border-radius: 4px; font-size: 10px; font-weight: bold; cursor: pointer;">COPY</button>
+            </div>
+          </div>
+          <!-- Bitcoin -->
+          <div style="display: flex; align-items: center; justify-content: space-between; background: rgba(255,255,255,0.05); padding: 12px 16px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);">
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <img src="https://cdn.simpleicons.org/bitcoin/ffffff" style="width: 20px; height: 20px;" alt=""/>
+              <div style="font-size: 14px; font-weight: bold; color: #fff;">Bitcoin</div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px; position: relative;">
+              <img src="assets/bitcoin-qr.png" style="width: 24px; height: 24px; border-radius: 4px; cursor: crosshair; transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-origin: right center;" onclick="if(window.playExtra) window.playExtra('shadowClone'); if(this.style.transform.includes('scale(6)')){this.style.transform='scale(1) translateX(0)'; this.style.zIndex='1';}else{this.style.transform='scale(6) translateX(-4px)'; this.style.zIndex='9999'; this.style.position='relative';}" alt="Bitcoin QR" />
+              <button onclick="navigator.clipboard.writeText('bc1qhfy8llyztulndhcyfkcdh3aswmmqu52sh8ml7r'); showCryptoCopyToast(this);" style="background: var(--accent-color); color: #000; border: none; padding: 6px 12px; border-radius: 4px; font-size: 10px; font-weight: bold; cursor: pointer;">COPY</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toastNotification" style="position: fixed; top: -100px; left: 50%; transform: translateX(-50%); background: var(--accent-color); color: #000; padding: 12px 24px; border-radius: 30px; font-weight: bold; font-size: 13px; z-index: 9999999; transition: top 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 4px 15px rgba(0,0,0,0.5); white-space: nowrap;">
+      Select a network below to copy the address!
+    </div>
+
+    <!-- Auto Donation Popup -->
+    <div id="donationPopup" style="
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90%;
+      max-width: 320px;
+      background: rgba(25, 25, 25, 0.85);
+      backdrop-filter: blur(16px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      z-index: 99998;
+      display: none;
+      overflow: hidden;
+      border-radius: 12px;
+      padding: 16px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    ">
+      <button onclick="closeDonationPopup()" style="position: absolute; top: 8px; right: 8px; background: transparent; border: none; color: rgba(255,255,255,0.5); cursor: pointer; font-size: 18px; transition: color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">&times;</button>
+      <div style="font-weight: 900; font-size: 14px; margin-bottom: 8px; color: #fff;">Support the Mainframe</div>
+      <div style="font-size: 12px; color: rgba(255,255,255,0.7); margin-bottom: 16px; line-height: 1.4;">
+        If you're enjoying the experience, consider dropping a small tip to keep the servers running!
+      </div>
+      <button onclick="openCryptoModal(); closeDonationPopup();" style="width: 100%; padding: 10px; background: var(--accent-color); color: #000; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 12px; letter-spacing: 1px;">FUND MAINFRAME</button>
+      <div style="position: absolute; bottom: 0; left: 0; height: 3px; background: var(--accent-color); width: 100%; animation: popupProgress 5s linear forwards;"></div>
+    </div>
+
+    <script>
+      function openCryptoModal() {
+        document.getElementById('cryptoModal').style.display = 'flex';
+        
+        // Play cute Aww SFX after exactly 1 second delay
+        setTimeout(() => {
+          if(window.playExtra) window.playExtra('fundAww');
+        }, 1000);
+
+        // Show toast notification
+        const toast = document.getElementById('toastNotification');
+        if(toast) {
+          toast.style.top = '24px';
+          setTimeout(() => { toast.style.top = '-100px'; }, 4000);
+        }
+      }
+      function closeCryptoModal() {
+        document.getElementById('cryptoModal').style.display = 'none';
+      }
+
+      // Crypto Toast Logic
+      function showCryptoCopyToast(btn) {
+        if(window.playExtra) window.playExtra('chaChing');
+        const tip = document.createElement('div');
+        tip.innerText = 'Copied!';
+        tip.style.position = 'absolute';
+        tip.style.bottom = '140%';
+        tip.style.left = '50%';
+        tip.style.transform = 'translateX(-50%) translateY(10px)';
+        tip.style.background = 'var(--accent-color)';
+        tip.style.color = '#000';
+        tip.style.padding = '4px 8px';
+        tip.style.borderRadius = '6px';
+        tip.style.fontSize = '10px';
+        tip.style.fontWeight = 'bold';
+        tip.style.opacity = '0';
+        tip.style.pointerEvents = 'none';
+        tip.style.transition = 'all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+        tip.style.whiteSpace = 'nowrap';
+        tip.style.boxShadow = '0 4px 10px rgba(0,0,0,0.3)';
+        
+        btn.parentElement.appendChild(tip);
+        
+        setTimeout(() => {
+          tip.style.opacity = '1';
+          tip.style.transform = 'translateX(-50%) translateY(0)';
+        }, 10);
+        
+        setTimeout(() => {
+          tip.style.opacity = '0';
+          tip.style.transform = 'translateX(-50%) translateY(-10px)';
+          setTimeout(() => tip.remove(), 300);
+        }, 2000);
+      }
+
+      // Auto Donation Popup logic
+      let donationPopupShown = false;
+      function closeDonationPopup() {
+        const popup = document.getElementById('donationPopup');
+        if(popup) {
+          popup.style.opacity = '0';
+          setTimeout(() => { popup.style.display = 'none'; }, 300);
+        }
+      }
+      
+      function showPopup(durationSecs) {
+        const popup = document.getElementById('donationPopup');
+        if(popup) {
+          // Re-trigger animation
+          const bar = popup.querySelector('div[style*="popupProgress"]');
+          if(bar) {
+            bar.style.animation = 'none';
+            bar.offsetHeight; /* trigger reflow */
+            bar.style.animation = `popupProgress ${durationSecs}s linear forwards`;
+          }
+          popup.style.display = 'block';
+          setTimeout(() => { popup.style.opacity = '1'; }, 10);
+          setTimeout(() => { closeDonationPopup(); }, durationSecs * 1000);
+        }
+      }
+
+      // 60s (1 min) popup for 10s
+      setTimeout(() => {
+        showPopup(10);
+        // After another 120s (2 mins), show again for 10s
+        setTimeout(() => {
+          showPopup(10);
+        }, 120000);
+      }, 60000);
+    </script>
     <script>
       let bruhPlayed = false;
       function handleLinkUpClick(e) {
@@ -7416,7 +7747,9 @@
               matrixCanvas.style.opacity = "0.5"; // Keeping it semi-transparent so you can still read the site
               matrixInterval = setInterval(drawMatrix, 33);
 
-              if (window.punchSfx) {
+              if (window.playExtra) {
+                window.playExtra('zaWarudo');
+              } else if (window.punchSfx) {
                 window.punchSfx.currentTime = 0;
                 window.punchSfx.play().catch(() => {});
               }
@@ -7442,6 +7775,102 @@
             while (drops.length < columns) drops.push(1);
           });
         }
+
+        // Add Mario 1-UP sound to all skill bars
+        document.querySelectorAll('.skill-bar-inner').forEach(bar => {
+          bar.parentElement.style.cursor = 'pointer';
+          bar.parentElement.addEventListener('click', () => { 
+            if(window.playExtra) window.playExtra('mario1Up'); 
+          });
+        });
+
+        // Scroll listener for the bottom of the page
+        let endSoundPlayed = false;
+        let topSoundPlayed = true; // start true so it doesn't play immediately on load
+        window.addEventListener("scroll", () => {
+          // Check if user is near the bottom (within 20px)
+          if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 20) {
+            if (!endSoundPlayed && window.endSfx) {
+              endSoundPlayed = true;
+              window.endSfx.currentTime = 0;
+              window.endSfx.play().catch(e => console.log(e));
+            }
+          } else if ((window.innerHeight + window.scrollY) < document.body.offsetHeight - 200) {
+            // Reset if they scroll back up a bit so it can trigger again later
+            endSoundPlayed = false;
+          }
+
+          // Check if user rapidly scrolls back to the VERY top
+          if (window.scrollY <= 10) {
+            if (!topSoundPlayed && window.playExtra) {
+              topSoundPlayed = true;
+              window.playExtra('pipe');
+            }
+          } else if (window.scrollY > 200) {
+            topSoundPlayed = false;
+          }
+        });
+
+        // 5-Second Stare (NANI?!)
+        const mainTitle = document.querySelector('.hero-title');
+        let naniTimer = null;
+        if(mainTitle) {
+          mainTitle.addEventListener('mouseenter', () => {
+            naniTimer = setTimeout(() => {
+              if(window.playExtra) window.playExtra('nani');
+            }, 5000);
+          });
+          mainTitle.addEventListener('mouseleave', () => {
+            clearTimeout(naniTimer);
+          });
+        }
+
+        // Spotify DJ Airhorn
+        const spotifyBtn = document.querySelector('.spotify-shock-btn');
+        if(spotifyBtn) {
+          spotifyBtn.addEventListener('click', () => {
+            if(window.playExtra) window.playExtra('djAirhorn');
+          });
+        }
+
+        // Hidden Keyboard Code (Konami Code style) for "luffy" or "nagi"
+        let keyBuffer = '';
+        window.addEventListener('keydown', (e) => {
+          if(!e.key) return;
+          keyBuffer += e.key.toLowerCase();
+          if(keyBuffer.length > 20) keyBuffer = keyBuffer.slice(-20);
+          
+          if(keyBuffer.includes('luffy') || keyBuffer.includes('nagi')) {
+            keyBuffer = ''; // reset to prevent infinite looping
+            if(window.playExtra) window.playExtra('ultraInstinct');
+            
+            // Violent screen shake
+            let shakes = 0;
+            const originalTransform = document.body.style.transform;
+            let shakeInt = setInterval(() => {
+              document.body.style.transform = `translate(${Math.random()*40-20}px, ${Math.random()*40-20}px) rotate(${Math.random()*2-1}deg)`;
+              shakes++;
+              if(shakes > 60) { // 3 seconds of shaking
+                clearInterval(shakeInt);
+                document.body.style.transform = originalTransform;
+              }
+            }, 50);
+          }
+        });
+
+        // Global Spam Click Tracker (Website Soul)
+        let globalClickCount = 0;
+        let globalClickTimer = null;
+        window.addEventListener('click', () => {
+          globalClickCount++;
+          if(globalClickTimer) clearTimeout(globalClickTimer);
+          globalClickTimer = setTimeout(() => { globalClickCount = 0; }, 300); // 300ms reset for REAL spam
+          
+          if(globalClickCount >= 5) { // 5 rapid clicks triggers it
+            globalClickCount = 0;
+            if(window.playExtra) window.playExtra('chicken'); // Screaming Chicken sound
+          }
+        });
       });
     </script>
   </body>
