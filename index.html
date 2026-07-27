@@ -815,7 +815,6 @@
           white-space: pre-wrap !important;
         }
         h2 {
-          font-size: 22px !important;
           text-align: left !important;
         }
         p,
@@ -860,6 +859,51 @@
         #discordModalContent img {
           width: 48px !important;
           height: 48px !important;
+        }
+        #miniPlayer {
+          top: 60px !important;
+          right: 20px !important;
+          bottom: auto !important;
+          left: auto !important;
+          padding: 12px !important;
+          border-radius: 12px !important;
+          gap: 12px !important;
+          opacity: 0;
+          pointer-events: none;
+          transition: opacity 0.3s, transform 0.3s;
+          transform: translateY(-10px);
+          flex-direction: column !important;
+          width: 120px !important;
+          align-items: center !important;
+        }
+        #miniPlayer.show-mobile {
+          opacity: 1;
+          pointer-events: auto;
+          transform: translateY(0);
+        }
+        #mpTrackInfo {
+          display: flex !important;
+          text-align: center;
+          align-items: center;
+          width: 100%;
+        }
+        #mpVolume {
+          display: none !important;
+        }
+        #heroDiscordBanner {
+          padding: 8px 12px !important;
+          gap: 8px !important;
+          bottom: 16px !important;
+          right: 16px !important;
+          border-radius: 8px !important;
+          max-width: 250px !important;
+          white-space: nowrap !important;
+        }
+        #heroDiscordBanner span {
+          font-size: 8px !important;
+        }
+        #heroDiscordText {
+          font-size: 9px !important;
         }
         .nav-links-desktop {
           display: none !important;
@@ -1460,6 +1504,12 @@
         background: var(--accent-color);
         border-radius: 1px;
       }
+      @keyframes floatAnim {
+        0% { transform: translateY(0); }
+        50% { transform: translateY(-5px); }
+        100% { transform: translateY(0); }
+      }
+
       @keyframes vbounce {
         0% {
           height: 2px;
@@ -1467,6 +1517,80 @@
         100% {
           height: 10px;
         }
+      }
+
+      /* Ko-fi Shock Button */
+      .kofi-shock-btn {
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(45deg, #FF5E5B, #ff8a00, #e52e71, #FF5E5B);
+        background-size: 300% 300%;
+        animation: kofiGradientBG 2s ease infinite;
+        border: none !important;
+        box-shadow: 0 0 20px rgba(255, 94, 91, 0.4);
+        transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s;
+      }
+      .kofi-shock-btn::after {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent);
+        transform: rotate(45deg) translateY(-100%);
+        animation: kofiShine 3s infinite;
+        pointer-events: none;
+      }
+      .kofi-shock-btn:hover {
+        transform: scale(1.05) translateY(-2px);
+        box-shadow: 0 10px 30px rgba(255, 94, 91, 0.8);
+      }
+      @keyframes kofiGradientBG {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+      @keyframes kofiShine {
+        0% { transform: rotate(45deg) translateX(-200%); }
+        50%, 100% { transform: rotate(45deg) translateX(200%); }
+      }
+
+      /* Spotify Shock Button */
+      .spotify-shock-btn {
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(45deg, #1DB954, #127533, #1DB954);
+        background-size: 300% 300%;
+        animation: spotifyGradientBG 2s ease infinite;
+        border: none !important;
+        box-shadow: 0 0 20px rgba(29, 185, 84, 0.4);
+        transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s;
+      }
+      .spotify-shock-btn::after {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent);
+        transform: rotate(45deg) translateY(-100%);
+        animation: spotifyShine 3s infinite 1s;
+        pointer-events: none;
+      }
+      .spotify-shock-btn:hover {
+        transform: scale(1.05) translateY(-2px);
+        box-shadow: 0 10px 30px rgba(29, 185, 84, 0.8);
+      }
+      @keyframes spotifyGradientBG {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+      @keyframes spotifyShine {
+        0% { transform: rotate(45deg) translateX(-200%); }
+        50%, 100% { transform: rotate(45deg) translateX(200%); }
       }
 
       /* Music Volume Slider */
@@ -1743,7 +1867,7 @@
             text-align: center;
           "
         >
-          REGENERATING...
+          LOADING TERRAIN...
         </div>
         <div
           id="mcHearts"
@@ -1932,6 +2056,62 @@
 
     <!-- SCROLL PROGRESS -->
     <div id="scrollProgress"></div>
+
+    <!-- MINI PLAYER -->
+    <div id="miniPlayer" style="
+      display: none;
+      position: fixed;
+      bottom: 24px;
+      left: 24px;
+      z-index: 999998;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(16px) saturate(180%);
+      padding: 10px 14px;
+      align-items: center;
+      gap: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+      font-family: 'JetBrains Mono', monospace;
+    ">
+      <div id="musicTooltip" style="
+        position: absolute;
+        top: -46px;
+        left: 0;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(12px) saturate(180%);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: #fff;
+        padding: 6px 12px;
+        font-size: 10px;
+        font-weight: 700;
+        white-space: nowrap;
+        opacity: 0;
+        transition: opacity 0.3s;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        animation: floatAnim 3s ease-in-out infinite;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+      ">
+        <span id="musicTooltipText">Check out the music player</span>
+        <i class="fa-solid fa-xmark" style="cursor: pointer; opacity: 0.7; pointer-events: auto;" onclick="document.getElementById('musicTooltip').style.opacity='0'"></i>
+      </div>
+      
+      <div id="mpTrackInfo" style="display: flex; flex-direction: column; width: 80px;">
+        <span style="font-size: 8px; color: var(--accent-color); letter-spacing: 1px;">NOW PLAYING</span>
+        <span id="mpTrackName" style="font-size: 11px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">After Dark</span>
+      </div>
+      
+      <div style="display: flex; gap: 12px; align-items: center;">
+        <i class="fa-solid fa-backward-step" style="cursor: pointer; font-size: 12px; transition: color 0.2s;" onmouseover="this.style.color='var(--accent-color)'" onmouseout="this.style.color=''" onclick="prevTrack()"></i>
+        <i id="mpPlayIcon" class="fa-solid fa-play" style="cursor: pointer; font-size: 14px; transition: color 0.2s;" onmouseover="this.style.color='var(--accent-color)'" onmouseout="this.style.color=''" onclick="mbToggle()"></i>
+        <i class="fa-solid fa-forward-step" style="cursor: pointer; font-size: 12px; transition: color 0.2s;" onmouseover="this.style.color='var(--accent-color)'" onmouseout="this.style.color=''" onclick="nextTrack()"></i>
+      </div>
+      
+      <input type="range" id="mpVolume" min="0" max="1" step="0.01" value="0.5" style="width: 50px; cursor: pointer; accent-color: var(--accent-color);" onchange="updateVolume(this.value)" oninput="updateVolume(this.value)">
+    </div>
 
     <!-- LIVE METRICS -->
     <div class="live-metrics" id="liveMetrics">
@@ -2671,16 +2851,45 @@
         class="mobile-nav-controls"
         style="margin-left: auto; display: none; align-items: center; gap: 16px"
       >
-        <!-- MOBILE MUSIC PLAYER -->
-        <div class="music-mobile-controls">
-          <button onclick="prevTrack()">
-            <i class="fa-solid fa-backward-step"></i>
-          </button>
-          <button onclick="mbToggle()">
-            <i class="fa-solid fa-play play-icon"></i>
-          </button>
-          <button onclick="nextTrack()">
-            <i class="fa-solid fa-forward-step"></i>
+        <!-- MOBILE MUSIC PLAYER TOGGLE -->
+        <div class="music-mobile-controls" style="position: relative;">
+          <div id="mobileMusicTooltip" style="
+            position: absolute;
+            top: 40px;
+            right: -20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            padding: 6px 12px;
+            font-size: 10px;
+            font-weight: 700;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.3s;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            animation: floatAnim 3s ease-in-out infinite;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+            pointer-events: none;
+            z-index: 100000;
+          ">
+            <span id="mobileMusicTooltipText">Check out the music player</span>
+            <i class="fa-solid fa-xmark" style="cursor: pointer; opacity: 0.7; pointer-events: auto;" onclick="document.getElementById('mobileMusicTooltip').style.opacity='0'"></i>
+          </div>
+          <button id="mobileMusicBtn" onclick="toggleMobilePlayer()" style="
+            background: transparent;
+            border: none;
+            color: var(--accent-color);
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          ">
+            <i id="mobileMusicIcon" class="fa-solid fa-wave-square"></i>
           </button>
         </div>
         <!-- MOBILE HAMBURGER BUTTON -->
@@ -3108,7 +3317,7 @@
           <div
             id="heroDiscordBanner"
             onclick="openDiscordModal()"
-            class="snap-in snap-delay-2 brutal-border"
+            class="snap-in snap-delay-2"
             style="
               display: none;
               cursor: pointer;
@@ -3119,20 +3328,21 @@
               align-items: center;
               gap: 12px;
               padding: 12px 20px;
-              background: rgba(10, 10, 10, 0.85);
-              backdrop-filter: blur(8px);
-              border: 1px solid var(--accent-color);
-              box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+              background: rgba(255, 255, 255, 0.05);
+              backdrop-filter: blur(16px) saturate(180%);
+              border: 1px solid rgba(255, 255, 255, 0.15);
+              border-radius: 16px;
+              box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
               width: fit-content;
               max-width: 90vw;
               transition: all 0.2s;
             "
             onmouseover="
-              this.style.background = 'rgba(255,51,0,0.1)';
+              this.style.background = 'rgba(255, 255, 255, 0.1)';
               this.style.transform = 'scale(1.02)';
             "
             onmouseout="
-              this.style.background = 'rgba(10,10,10,0.85)';
+              this.style.background = 'rgba(255, 255, 255, 0.05)';
               this.style.transform = 'scale(1)';
             "
           >
@@ -3286,17 +3496,17 @@
           >
             <button
               onclick="handleLinkUpClick(event)"
-              class="brutal-solid magnetic-btn btn-glow"
+              class="magnetic-btn brutal-solid btn-glow"
               style="
-                padding: 12px 28px;
+                padding: 16px 32px;
+                font-family: 'JetBrains Mono', monospace;
+                font-size: 14px;
+                font-weight: 800;
+                color: #000;
+                background: var(--accent-color);
                 border: 1px solid var(--accent-color);
-                color: var(--accent-color);
-                font-family: &quot;JetBrains Mono&quot;, monospace;
-                font-size: 11px;
-                font-weight: 700;
-                letter-spacing: 2px;
                 cursor: pointer;
-                background: transparent;
+                letter-spacing: 2px;
                 transition: all 0.1s;
                 text-transform: uppercase;
               "
@@ -3351,7 +3561,7 @@
         <h2
           class="blur-reveal slide-down"
           style="
-            font-size: clamp(30px, 4.5vw, 58px);
+            font-size: clamp(48px, 8vw, 64px);
             font-weight: 800;
             letter-spacing: -2px;
             line-height: 1;
@@ -3712,7 +3922,7 @@
         <h2
           class="blur-reveal slide-right"
           style="
-            font-size: clamp(32px, 4.5vw, 58px);
+            font-size: clamp(48px, 8vw, 64px);
             font-weight: 800;
             letter-spacing: -2px;
             text-transform: uppercase;
@@ -4959,34 +5169,59 @@
               </div>
             </div>
           </a>
+
         </div>
 
-        <!-- Coding Playlist (Separate side) -->
+        <!-- Extra Links (Playlist & Ko-fi) -->
         <div
-          style="margin-top: 24px; display: flex; justify-content: flex-start"
+          style="margin-top: 24px; display: flex; flex-wrap: wrap; gap: 16px; justify-content: flex-start; align-items: center;"
         >
           <a
-            href="https://open.spotify.com/playlist/7w7u4uTg9ZLsnjScZHsi2c?si=fed3cf6f24e64eb2"
+            href="https://ko-fi.com/carbonthecoder"
             target="_blank"
-            class="brutal-border btn-slide-fill"
+            class="kofi-shock-btn"
             style="
               text-decoration: none;
               padding: 12px 20px;
-              background: rgba(255, 255, 255, 0.02);
-              color: var(--accent-color);
-              font-size: 11px;
-              font-weight: 700;
-              letter-spacing: 2px;
+              color: #fff;
+              font-size: clamp(10px, 3vw, 13px);
+              font-weight: 900;
+              letter-spacing: 1px;
               display: inline-flex;
               align-items: center;
+              justify-content: center;
+              flex: 1 1 auto;
               gap: 8px;
+              border-radius: 8px;
+            "
+          >
+            <img src="https://cdn.simpleicons.org/kofi/ffffff" style="width: 18px; height: 18px;" alt="" />
+            <span style="z-index: 2; white-space: nowrap;">FUND MAINFRAME</span>
+          </a>
+          <a
+            href="https://open.spotify.com/playlist/7w7u4uTg9ZLsnjScZHsi2c?si=fed3cf6f24e64eb2"
+            target="_blank"
+            class="spotify-shock-btn"
+            style="
+              text-decoration: none;
+              padding: 12px 20px;
+              color: #fff;
+              font-size: clamp(10px, 3vw, 13px);
+              font-weight: 900;
+              letter-spacing: 1px;
+              display: inline-flex;
+              align-items: center;
+              justify-content: center;
+              flex: 1 1 auto;
+              gap: 8px;
+              border-radius: 8px;
             "
           >
             <img
-              src="https://cdn.simpleicons.org/spotify/1DB954"
-              style="width: 16px; height: 16px"
+              src="https://cdn.simpleicons.org/spotify/ffffff"
+              style="width: 18px; height: 18px"
             />
-            VIBES: THE MASTERPIECE PLAYLIST ↗
+            <span style="z-index: 2; white-space: nowrap;">VIBES PLAYLIST</span>
           </a>
         </div>
 
@@ -5564,6 +5799,8 @@
         document.querySelectorAll(".track-name").forEach((el) => {
           el.innerText = tracklist[currentTrackIndex].title;
         });
+        const mpTrack = document.getElementById("mpTrackName");
+        if (mpTrack) mpTrack.innerText = tracklist[currentTrackIndex].title;
         if (isPlaying) {
           bgMusic.play();
         }
@@ -5581,9 +5818,14 @@
         loadTrack(idx);
       }
 
+      function updateVolume(val) {
+        bgMusic.volume = parseFloat(val);
+      }
+
       function mbToggle() {
         const playIcons = document.querySelectorAll(".play-icon");
         const statusTexts = document.querySelectorAll(".play-icon-status");
+        const mpPlayIcon = document.getElementById("mpPlayIcon");
 
         if (isPlaying) {
           bgMusic.pause();
@@ -5592,6 +5834,14 @@
             icon.className = "fa-solid fa-play play-icon";
             icon.style.color = "";
           });
+          if (mpPlayIcon) {
+            mpPlayIcon.className = "fa-solid fa-play";
+            mpPlayIcon.style.color = "";
+          }
+          const mobIcon = document.getElementById("mobileMusicIcon");
+          if (mobIcon) {
+            mobIcon.className = "fa-solid fa-wave-square";
+          }
           statusTexts.forEach((txt) => (txt.innerText = "OFF"));
         } else {
           bgMusic
@@ -5602,6 +5852,14 @@
                 icon.className = "fa-solid fa-pause play-icon";
                 icon.style.color = "var(--accent-color)";
               });
+              if (mpPlayIcon) {
+                mpPlayIcon.className = "fa-solid fa-pause";
+                mpPlayIcon.style.color = "var(--accent-color)";
+              }
+              const mobIcon = document.getElementById("mobileMusicIcon");
+              if (mobIcon) {
+                mobIcon.className = "fa-solid fa-wave-square fa-beat-fade";
+              }
               statusTexts.forEach((txt) => (txt.innerText = "ON"));
             })
             .catch((e) => {
@@ -5610,7 +5868,36 @@
         }
       }
 
+      let mobilePlayerTimeout;
+      function toggleMobilePlayer() {
+        const mp = document.getElementById("miniPlayer");
+        if (mp) {
+          mp.classList.add("show-mobile");
+          clearTimeout(mobilePlayerTimeout);
+          
+          mobilePlayerTimeout = setTimeout(() => {
+            mp.classList.remove("show-mobile");
+          }, 4000);
+          
+          // Auto close if clicked outside
+          setTimeout(() => {
+            document.addEventListener('click', function closeMenu(e) {
+              if (!mp.contains(e.target)) {
+                mp.classList.remove("show-mobile");
+                document.removeEventListener('click', closeMenu);
+              }
+            });
+          }, 10);
+        }
+      }
+
       function launchPortfolio() {
+        // Start the 8-second bruh timer
+        window.bruhTimerActive = true;
+        setTimeout(() => {
+          window.bruhTimerActive = false;
+        }, 8000);
+
         // Play immediately from preloaded audio
         if (window.punchSfx) {
           window.punchSfx.currentTime = 0;
@@ -5624,6 +5911,8 @@
           // Hide it completely after fade
           setTimeout(() => {
             boot.style.display = "none";
+            const mp = document.getElementById("miniPlayer");
+            if (mp) mp.style.display = "flex";
           }, 800);
         }
 
@@ -5653,13 +5942,39 @@
         if (enableMusic && !isPlaying) {
           mbToggle();
         }
+
+        // Show Mini Player tooltip based on their choice
+        const tooltip = document.getElementById("musicTooltip");
+        const tooltipText = document.getElementById("musicTooltipText");
+        const mobTooltip = document.getElementById("mobileMusicTooltip");
+        const mobTooltipText = document.getElementById("mobileMusicTooltipText");
+        
+        let msg = enableMusic ? "Check out another song!" : "Check out the mini player and turn on music!";
+        
+        if (tooltip && tooltipText) {
+          tooltipText.innerText = msg;
+          tooltip.style.opacity = "1";
+          setTimeout(() => {
+            tooltip.style.opacity = "0";
+          }, 2500);
+        }
+        if (mobTooltip && mobTooltipText) {
+          mobTooltipText.innerText = msg;
+          // Only pop up mobile tooltip if on a narrow screen
+          if (window.innerWidth <= 768) {
+            mobTooltip.style.opacity = "1";
+            setTimeout(() => {
+              mobTooltip.style.opacity = "0";
+            }, 2500);
+          }
+        }
       }
 
       // Preload the punch sound so it syncs perfectly
       window.punchSfx = new Audio(
         "https://www.myinstants.com/media/sounds/strongpunch_1.mp3",
       );
-      window.punchSfx.volume = 0.2;
+      window.punchSfx.volume = 0.05;
       window.punchSfx.preload = "auto";
       window.punchSfx.load();
 
@@ -6651,23 +6966,24 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(0, 0, 0, 0.8);
+        background: rgba(0, 0, 0, 0.4);
         z-index: 999999;
         align-items: center;
         justify-content: center;
-        backdrop-filter: blur(5px);
+        backdrop-filter: blur(10px);
       "
     >
       <div
-        class="brutal-border"
         style="
-          background: #0a0a0a;
+          background: rgba(25, 25, 25, 0.4);
+          backdrop-filter: blur(24px) saturate(180%);
           max-width: 400px;
           width: 90%;
           padding: 32px;
           position: relative;
-          border: 1px solid var(--accent-color);
-          box-shadow: 0 0 40px rgba(255, 51, 0, 0.1);
+          border: 1px solid rgba(255, 255, 255, 0.15);
+          border-radius: 16px;
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
         "
       >
         <button
@@ -6712,8 +7028,8 @@
     <script>
       let bruhPlayed = false;
       function handleLinkUpClick(e) {
-        // If they haven't scrolled down much and haven't triggered this yet
-        if (window.scrollY < 300 && !bruhPlayed) {
+        // If they click within the first 8 seconds of loading AND haven't triggered this yet
+        if (window.bruhTimerActive && !bruhPlayed) {
           e.preventDefault();
           bruhPlayed = true; // Only do it once so they aren't trapped forever
 
@@ -6727,7 +7043,7 @@
 
           // Show the flash message
           const flashMsg = document.createElement("div");
-          flashMsg.innerHTML = "Bruh, check out the website first vro 💀";
+          flashMsg.innerHTML = "Bruh, check out the website & explore it first";
           flashMsg.style.position = "fixed";
           flashMsg.style.top = "20px";
           flashMsg.style.left = "50%";
@@ -6751,13 +7067,12 @@
             flashMsg.style.top = "40px";
           }, 50);
 
-          // Remove after 2.5 seconds and scroll them down
+          // Remove after 2.5 seconds (do NOT scroll them down)
           setTimeout(() => {
             flashMsg.style.opacity = "0";
             flashMsg.style.top = "20px";
             setTimeout(() => {
               flashMsg.remove();
-              scrollToSection("contact");
             }, 300);
           }, 2500);
         } else {
@@ -6789,6 +7104,7 @@
           "data:image/svg+xml;utf8," + encodeURIComponent(fullHeartSvg);
 
         if (mcHearts) {
+          mcHearts.innerHTML = "";
           for (let i = 0; i < 10; i++) {
             mcHearts.innerHTML += `<img src="${emptyHeart}" style="width:20px; height:20px; image-rendering:pixelated; margin:0 1px; opacity:0.8;">`;
           }
@@ -6868,16 +7184,18 @@
             mouse.y = e.clientY;
           }
           mouse.active = true;
-          if (Math.random() > 0.1) {
+          // Spawn more particles for denser trail, slightly more on PC
+          const spawnCount = window.innerWidth < 768 ? 2 : 4;
+          for (let i = 0; i < spawnCount; i++) {
             particles.push({
-              x: mouse.x + (Math.random() * 10 - 5),
-              y: mouse.y + (Math.random() * 10 - 5),
-              vx: (Math.random() - 0.5) * 2,
-              vy: (Math.random() - 0.5) * 2 - 1,
+              x: mouse.x + (Math.random() * 14 - 7),
+              y: mouse.y + (Math.random() * 14 - 7),
+              vx: (Math.random() - 0.5) * 2.5,
+              vy: (Math.random() - 0.5) * 2.5 - 1,
               size: Math.random() > 0.5 ? 4 : 8,
               color: colors[Math.floor(Math.random() * colors.length)],
               life: 1.0,
-              decay: Math.random() * 0.01 + 0.008,
+              decay: Math.random() * 0.02 + 0.015, // Faster decay for ember look
             });
           }
         }
