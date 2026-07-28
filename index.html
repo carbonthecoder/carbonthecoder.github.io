@@ -139,6 +139,40 @@
         box-shadow: 0 0 10px rgba(255, 51, 0, 0.5);
       }
 
+      /* Audio Visualizer */
+      .visualizer { display: none; align-items: flex-end; gap: 2px; height: 12px; margin-left: 6px; }
+      .visualizer.active { display: flex; }
+      .visualizer span { display: block; width: 3px; background: var(--accent-color); border-radius: 2px; animation: eqPulse 0.5s infinite ease-in-out alternate; }
+      .visualizer span:nth-child(1) { animation-delay: 0.1s; }
+      .visualizer span:nth-child(2) { animation-delay: 0.3s; }
+      .visualizer span:nth-child(3) { animation-delay: 0.0s; }
+      .visualizer span:nth-child(4) { animation-delay: 0.4s; }
+      .visualizer span:nth-child(5) { animation-delay: 0.2s; }
+      @keyframes eqPulse { 0% { height: 2px; } 100% { height: 12px; } }
+
+      /* Cyberpunk Glitch Transition */
+      .page-transition-glitch { animation: pageGlitch 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both; }
+      @keyframes pageGlitch {
+        0% { filter: contrast(1); transform: translate(0) scale(1); }
+        20% { filter: contrast(2) hue-rotate(90deg); transform: translate(-5px, 5px) scale(1.02); }
+        40% { filter: contrast(3) invert(1); transform: translate(5px, -5px) skewX(10deg); }
+        60% { filter: contrast(2) drop-shadow(5px 5px red) drop-shadow(-5px -5px blue); transform: translate(-5px, 0) skewX(-10deg); }
+        80% { filter: contrast(1.5) hue-rotate(-90deg); transform: translate(5px, 5px); }
+        100% { filter: contrast(1); transform: translate(0) scale(1); }
+      }
+
+      /* Bug Invaders CSS */
+      #gameOverlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.95); z-index: 10000000; display: none; flex-direction: column; align-items: center; justify-content: center; font-family: monospace; backdrop-filter: blur(10px); }
+      #gameOverlay.active { display: flex; }
+      #gameCanvas { background: #050505; border: 2px solid var(--accent-color); box-shadow: 0 0 20px rgba(0, 255, 0, 0.2); max-width: 100vw; max-height: 100vh; cursor: crosshair; }
+      .game-ui { position: absolute; top: 20px; width: 100%; display: flex; justify-content: space-between; padding: 0 40px; color: var(--accent-color); font-size: 20px; text-shadow: 0 0 5px var(--accent-color); pointer-events: none; }
+      .game-controls { position: absolute; bottom: 20px; color: rgba(255,255,255,0.5); font-size: 12px; pointer-events: none; text-align: center; }
+      .game-close { position: absolute; top: 20px; right: 20px; color: #ff3333; font-size: 30px; cursor: pointer; pointer-events: auto; }
+      #mobileGamePads { display: none; position: absolute; bottom: 5vh; width: 100%; justify-content: space-between; padding: 0 20px; pointer-events: auto; }
+      .pad-btn { width: 60px; height: 60px; background: rgba(255,255,255,0.05); border: 1px solid var(--accent-color); border-radius: 50%; color: var(--accent-color); font-size: 24px; display: flex; align-items: center; justify-content: center; user-select: none; -webkit-user-select: none; }
+      .pad-btn:active { background: var(--accent-color); color: #000; }
+      @media (max-width: 768px) { #mobileGamePads { display: flex; } .game-controls { display: none; } .game-ui { padding: 0 20px; font-size: 16px; top: 10px; } .game-close { top: 10px; right: 10px; font-size: 24px; } }
+
       /* Boot Screen */
       #bootScreen {
         position: fixed;
@@ -2105,9 +2139,12 @@
         <i class="fa-solid fa-xmark" style="cursor: pointer; opacity: 0.7; pointer-events: auto;" onclick="document.getElementById('musicTooltip').style.opacity='0'"></i>
       </div>
       
-      <div id="mpTrackInfo" style="display: flex; flex-direction: column; width: 80px;">
+      <div id="mpTrackInfo" style="display: flex; flex-direction: column; width: 100px;">
         <span style="font-size: 8px; color: var(--accent-color); letter-spacing: 1px;">NOW PLAYING</span>
-        <span id="mpTrackName" style="font-size: 11px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">After Dark</span>
+        <div style="display: flex; align-items: center;">
+          <span id="mpTrackName" style="font-size: 11px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">After Dark</span>
+          <div id="desktopVisualizer" class="visualizer"><span></span><span></span><span></span><span></span><span></span></div>
+        </div>
       </div>
       
       <div style="display: flex; gap: 12px; align-items: center;">
@@ -2265,32 +2302,14 @@
           >
         </div>
 
-        <div
-          class="cmd-item"
-          data-action="projects"
-          style="
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 6px 8px;
-            border-radius: 6px;
-            font-size: 12px;
-            color: rgba(255, 255, 255, 0.8);
-            cursor: pointer;
-          "
-        >
+        <div class="cmd-item" data-action="projects" style="display: flex; align-items: center; justify-content: space-between; padding: 6px 8px; border-radius: 6px; font-size: 12px; color: rgba(255, 255, 255, 0.8); cursor: pointer;">
           <span>🚀 Go to Projects</span>
-          <span
-            class="cmd-key"
-            style="
-              background: rgba(255, 255, 255, 0.08);
-              padding: 2px 6px;
-              border-radius: 4px;
-              font-size: 10px;
-              color: rgba(255, 255, 255, 0.4);
-            "
-            >P</span
-          >
+          <span class="cmd-key" style="background: rgba(255, 255, 255, 0.08); padding: 2px 6px; border-radius: 4px; font-size: 10px; color: rgba(255, 255, 255, 0.4);">P</span>
+        </div>
+
+        <div class="cmd-item" data-action="playgame" style="display: flex; align-items: center; justify-content: space-between; padding: 6px 8px; border-radius: 6px; font-size: 12px; color: rgba(255, 255, 255, 0.8); cursor: pointer;">
+          <span style="color: #39ff14; font-weight: bold;">👾 Play Bug Invaders</span>
+          <span class="cmd-key" style="background: rgba(255, 255, 255, 0.08); padding: 2px 6px; border-radius: 4px; font-size: 10px; color: rgba(255, 255, 255, 0.4);">G</span>
         </div>
 
         <div
@@ -2368,6 +2387,21 @@
             class="cmd-key"
             style="
               background: rgba(255, 255, 255, 0.08);
+              padding: 2px 6px;
+              border-radius: 4px;
+              font-size: 10px;
+              color: rgba(255, 255, 255, 0.4);
+            "
+            >AYAN</span
+          >
+        </div>
+
+
+
+        <div
+          class="cmd-item"
+          data-action="konami"
+          style="
               padding: 2px 6px;
               border-radius: 4px;
               font-size: 10px;
@@ -2895,7 +2929,8 @@
             align-items: center;
             justify-content: center;
           ">
-            <i id="mobileMusicIcon" class="fa-solid fa-wave-square"></i>
+            <i id="mobileMusicIcon" class="fa-solid fa-compact-disc"></i>
+            <div id="mobileVisualizer" class="visualizer" style="height: 16px; margin-left: 2px;"><span></span><span></span><span></span><span></span><span></span></div>
           </button>
         </div>
         <!-- MOBILE HAMBURGER BUTTON -->
@@ -5855,9 +5890,14 @@
         const statusTexts = document.querySelectorAll(".play-icon-status");
         const mpPlayIcon = document.getElementById("mpPlayIcon");
 
+        const dVis = document.getElementById("desktopVisualizer");
+        const mVis = document.getElementById("mobileVisualizer");
+
         if (isPlaying) {
           bgMusic.pause();
           isPlaying = false;
+          if (dVis) dVis.classList.remove("active");
+          if (mVis) mVis.classList.remove("active");
           playIcons.forEach((icon) => {
             icon.className = "fa-solid fa-play play-icon";
             icon.style.color = "";
@@ -5868,7 +5908,7 @@
           }
           const mobIcon = document.getElementById("mobileMusicIcon");
           if (mobIcon) {
-            mobIcon.className = "fa-solid fa-wave-square";
+            mobIcon.className = "fa-solid fa-compact-disc";
           }
           statusTexts.forEach((txt) => (txt.innerText = "OFF"));
         } else {
@@ -5876,6 +5916,8 @@
             .play()
             .then(() => {
               isPlaying = true;
+              if (dVis) dVis.classList.add("active");
+              if (mVis) mVis.classList.add("active");
               playIcons.forEach((icon) => {
                 icon.className = "fa-solid fa-pause play-icon";
                 icon.style.color = "var(--accent-color)";
@@ -5886,7 +5928,7 @@
               }
               const mobIcon = document.getElementById("mobileMusicIcon");
               if (mobIcon) {
-                mobIcon.className = "fa-solid fa-wave-square fa-beat-fade";
+                mobIcon.className = "fa-solid fa-compact-disc fa-spin";
               }
               statusTexts.forEach((txt) => (txt.innerText = "ON"));
             })
@@ -6005,6 +6047,7 @@
       window.punchSfx.volume = 0.03;
       window.punchSfx.preload = "auto";
       window.punchSfx.load();
+      window.punchSfx.preload = "none";
 
       // Preload array of epic boot sounds for random selection on the start screen
       window.bootSounds = [
@@ -6016,8 +6059,7 @@
       ].map(url => {
         let audio = new Audio(url);
         audio.volume = 0.3;
-        audio.preload = "auto";
-        audio.load();
+        audio.preload = "none";
         return audio;
       });
 
@@ -6042,8 +6084,7 @@
       // Preload the aww darn it ended sound
       window.endSfx = new Audio("https://www.myinstants.com/media/sounds/it-ended.mp3");
       window.endSfx.volume = 0.3;
-      window.endSfx.preload = "auto";
-      window.endSfx.load();
+      window.endSfx.preload = "none";
 
       // Preload extra easter egg sounds
       const extraSfx = {
@@ -6068,8 +6109,7 @@
       Object.keys(extraSfx).forEach(key => {
         let audio = new Audio(extraSfx[key]);
         audio.volume = 0.4;
-        audio.preload = "auto";
-        audio.load();
+        audio.preload = "none";
         window.extraAudio[key] = audio;
       });
       window.playExtra = function(key) {
@@ -6297,6 +6337,10 @@
           case "secret":
             document.body.classList.toggle("secret-ayan");
             break;
+          case "playgame":
+            window.startBugInvaders();
+            break;
+
           case "konami":
             document.body.style.filter = "invert(1)";
             setTimeout(() => (document.body.style.filter = ""), 800);
@@ -6320,8 +6364,17 @@
 
       /* ── SCROLL NAV ── */
       function scrollToSection(id) {
-        const el = document.getElementById(id);
-        if (el) el.scrollIntoView({ behavior: "smooth" });
+        document.body.classList.add('page-transition-glitch');
+        if(window.playExtra) window.playExtra('glitch');
+        
+        setTimeout(() => {
+          const el = document.getElementById(id);
+          if (el) el.scrollIntoView({ behavior: "smooth" });
+          
+          setTimeout(() => {
+            document.body.classList.remove('page-transition-glitch');
+          }, 300);
+        }, 150);
       }
 
       /* ── CANVAS PARTICLES ── */
@@ -7064,7 +7117,7 @@
       }
 
       fetchDiscordStatus();
-      setInterval(fetchDiscordStatus, 5000);
+      setInterval(fetchDiscordStatus, 10000);
     </script>
 
     <!-- Discord Activity Modal -->
@@ -7833,30 +7886,6 @@
           });
         }
 
-        // Hidden Keyboard Code (Konami Code style) for "luffy" or "nagi"
-        let keyBuffer = '';
-        window.addEventListener('keydown', (e) => {
-          if(!e.key) return;
-          keyBuffer += e.key.toLowerCase();
-          if(keyBuffer.length > 20) keyBuffer = keyBuffer.slice(-20);
-          
-          if(keyBuffer.includes('luffy') || keyBuffer.includes('nagi')) {
-            keyBuffer = ''; // reset to prevent infinite looping
-            if(window.playExtra) window.playExtra('ultraInstinct');
-            
-            // Violent screen shake
-            let shakes = 0;
-            const originalTransform = document.body.style.transform;
-            let shakeInt = setInterval(() => {
-              document.body.style.transform = `translate(${Math.random()*40-20}px, ${Math.random()*40-20}px) rotate(${Math.random()*2-1}deg)`;
-              shakes++;
-              if(shakes > 60) { // 3 seconds of shaking
-                clearInterval(shakeInt);
-                document.body.style.transform = originalTransform;
-              }
-            }, 50);
-          }
-        });
 
         // Global Spam Click Tracker (Website Soul)
         let globalClickCount = 0;
@@ -7871,7 +7900,185 @@
             if(window.playExtra) window.playExtra('chicken'); // Screaming Chicken sound
           }
         });
+
+        // Keyboard Listener for 'play'
+        let playBuffer = '';
+        window.addEventListener('keydown', (e) => {
+          if(!e.key) return;
+          playBuffer += e.key.toLowerCase();
+          if(playBuffer.length > 10) playBuffer = playBuffer.slice(-10);
+          if(playBuffer.includes('play')) {
+            playBuffer = '';
+            window.startBugInvaders();
+          }
+        });
+
+        // Bug Invaders Engine
+        window.startBugInvaders = function() {
+          const overlay = document.getElementById('gameOverlay');
+          const canvas = document.getElementById('gameCanvas');
+          const ctx = canvas.getContext('2d');
+          const scoreEl = document.getElementById('gameScore');
+          overlay.classList.add('active');
+
+          canvas.width = Math.min(window.innerWidth * 0.9, 800);
+          canvas.height = Math.min(window.innerHeight * 0.8, 600);
+          
+          let score = 0;
+          let player = { x: canvas.width / 2, y: canvas.height - 40, width: 40, height: 20, speed: 6 };
+          let bullets = [];
+          let bugs = [];
+          let keys = {};
+          let gameLoop;
+          let isGameOver = false;
+
+          const bugTypes = ['🐛', '🐞', '👾'];
+
+          const handleKey = (e, state) => { if(e.code) keys[e.code] = state; }
+          window.addEventListener('keydown', e => handleKey(e, true));
+          window.addEventListener('keyup', e => handleKey(e, false));
+
+          window.gameMove = 0; // -1 left, 1 right
+          window.gameShoot = false;
+
+          let frameCount = 0;
+
+          function spawnBug() {
+            if(Math.random() < 0.04 + (score/5000)) { // Gets harder over time
+              bugs.push({
+                x: Math.random() * (canvas.width - 30),
+                y: -30,
+                width: 30, height: 30,
+                type: bugTypes[Math.floor(Math.random() * bugTypes.length)],
+                speed: 1 + Math.random() * 2 + (score/200)
+              });
+            }
+          }
+
+          function update() {
+            if(isGameOver) return;
+            frameCount++;
+            
+            // Move Player
+            if((keys['ArrowLeft'] || keys['KeyA'] || window.gameMove === -1) && player.x > 0) player.x -= player.speed;
+            if((keys['ArrowRight'] || keys['KeyD'] || window.gameMove === 1) && player.x < canvas.width - 50) player.x += player.speed;
+
+            // Shoot (Throttle shooting speed)
+            if((keys['Space'] || keys['ArrowUp'] || window.gameShoot) && frameCount % 8 === 0) {
+              bullets.push({ x: player.x + 20, y: player.y, width: 4, height: 10, speed: 8 });
+              if(window.playExtra) window.playExtra('glitch'); // pew sound
+            }
+
+            // Move Bullets
+            for (let i = bullets.length - 1; i >= 0; i--) {
+              bullets[i].y -= bullets[i].speed;
+              if(bullets[i].y < 0) bullets.splice(i, 1);
+            }
+
+            // Move Bugs
+            spawnBug();
+            for (let i = bugs.length - 1; i >= 0; i--) {
+              bugs[i].y += bugs[i].speed;
+              if(bugs[i].y > canvas.height) {
+                isGameOver = true; // Bug reached bottom
+              }
+            }
+
+            // Collisions
+            for (let bi = bullets.length - 1; bi >= 0; bi--) {
+              let b = bullets[bi];
+              let hit = false;
+              for (let bu = bugs.length - 1; bu >= 0; bu--) {
+                let bug = bugs[bu];
+                // basic AABB collision, adjusting for font sizing
+                if(b.x > bug.x && b.x < bug.x + 30 && b.y > bug.y - 20 && b.y < bug.y + 10) {
+                  bugs.splice(bu, 1);
+                  score += 10;
+                  scoreEl.innerText = score;
+                  hit = true;
+                  break;
+                }
+              }
+              if(hit) bullets.splice(bi, 1);
+            }
+          }
+
+          function draw() {
+            ctx.fillStyle = '#050505';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Draw Terminal Player
+            ctx.fillStyle = '#39ff14';
+            ctx.font = '24px monospace';
+            ctx.fillText('[>_]', player.x, player.y + 20);
+
+            // Draw Bullets (Code pipelines)
+            ctx.fillStyle = '#39ff14';
+            ctx.font = '16px monospace';
+            bullets.forEach(b => ctx.fillText('|', b.x, b.y));
+
+            // Draw Bugs
+            ctx.font = '28px Arial';
+            bugs.forEach(bug => ctx.fillText(bug.type, bug.x, bug.y));
+
+            if(isGameOver) {
+              ctx.fillStyle = 'rgba(255, 0, 0, 0.2)';
+              ctx.fillRect(0, 0, canvas.width, canvas.height);
+              ctx.fillStyle = '#ff3333';
+              ctx.font = '40px monospace';
+              ctx.textAlign = 'center';
+              ctx.fillText('FATAL EXCEPTION', canvas.width/2, canvas.height/2);
+              ctx.fillStyle = 'white';
+              ctx.font = '16px monospace';
+              ctx.fillText('Click to Reboot', canvas.width/2, canvas.height/2 + 40);
+              ctx.textAlign = 'left'; // reset
+            }
+          }
+
+          function loop() {
+            update();
+            draw();
+            if(overlay.classList.contains('active')) {
+              gameLoop = requestAnimationFrame(loop);
+            }
+          }
+
+          canvas.onclick = () => {
+            if(isGameOver) {
+              isGameOver = false;
+              score = 0;
+              scoreEl.innerText = '0';
+              bugs = [];
+              bullets = [];
+              player.x = canvas.width / 2;
+            }
+          };
+
+          loop();
+        }
+
+        window.closeBugInvaders = function() {
+          document.getElementById('gameOverlay').classList.remove('active');
+        }
       });
     </script>
+
+    <!-- Game Overlay HTML -->
+    <div id="gameOverlay">
+      <div class="game-ui">
+        <span>BUG_INVADERS.exe</span>
+        <span>SCORE: <span id="gameScore">0</span></span>
+      </div>
+      <i class="fa-solid fa-xmark game-close" onclick="closeBugInvaders()"></i>
+      <canvas id="gameCanvas"></canvas>
+      <div class="game-controls">Controls: A/D or Left/Right to Move | Space to Shoot Laser Code</div>
+      <div id="mobileGamePads">
+        <div style="display:flex; gap:10px;">
+          <div class="pad-btn" ontouchstart="window.gameMove=-1" ontouchend="window.gameMove=0"><i class="fa-solid fa-arrow-left"></i></div>
+          <div class="pad-btn" ontouchstart="window.gameMove=1" ontouchend="window.gameMove=0"><i class="fa-solid fa-arrow-right"></i></div>
+        </div>
+        <div class="pad-btn" ontouchstart="window.gameShoot=true" ontouchend="window.gameShoot=false" style="background: rgba(255,0,0,0.1); border-color: red; color: red;"><i class="fa-solid fa-crosshairs"></i></div>
+      </div>
+    </div>
   </body>
 </html>
