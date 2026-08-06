@@ -4953,126 +4953,46 @@
 
         <!-- AI Projects Content -->
         <div id="projContentAI" style="display: block">
-          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; margin-top: 8px;">
-            <!-- Prometheus Core Compact Card -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; margin-top: 10px;">
+            <!-- Prometheus Core Ultra-Compact Minimal Card -->
             <div
               class="project-card brutal-border"
               style="
-                padding: 20px;
-                background: rgba(14, 17, 23, 0.7);
-                backdrop-filter: blur(8px);
+                padding: 12px 14px;
+                background: rgba(255, 255, 255, 0.02);
                 border: 1px solid var(--border-color);
+                border-radius: 4px;
                 display: flex;
                 flex-direction: column;
                 justify-content: space-between;
-                min-height: 240px;
-                transition: transform 0.2s ease, border-color 0.2s ease;
+                gap: 8px;
+                transition: transform 0.15s ease;
               "
             >
               <div>
-                <!-- Card Header -->
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                  <div style="display: flex; align-items: center; gap: 6px;">
-                    <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 8px #22c55e;"></span>
-                    <span style="font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 700; color: #22c55e; letter-spacing: 1px;">
-                      LIVE // PUBLIC
-                    </span>
-                  </div>
-                  <span style="font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 700; padding: 2px 6px; background: rgba(88, 101, 242, 0.15); border: 1px solid rgba(88, 101, 242, 0.4); color: #7289da; border-radius: 3px;">
-                    ⚡ BOT &amp; SAAS
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                  <span style="font-size: 13px; font-weight: 800; color: #fff; text-transform: uppercase;">
+                    ⚡ PROMETHEUS CORE
                   </span>
+                  <span style="font-size: 8px; color: #22c55e; font-family: 'JetBrains Mono', monospace; font-weight: 700;">● LIVE</span>
                 </div>
-
-                <!-- Card Title -->
-                <h3 style="font-size: 17px; font-weight: 800; color: #fff; margin: 0 0 6px 0; text-transform: uppercase; letter-spacing: -0.5px;">
-                  Prometheus Core
-                </h3>
-
-                <!-- Card Description -->
-                <p style="font-size: 11px; color: rgba(255, 255, 255, 0.6); line-height: 1.55; margin: 0 0 14px 0;">
-                  Full-stack Discord ecosystem &amp; Next.js web dashboard with Gemini 2.5 AI, 96+ slash commands, real-time server telemetry, and per-server cloud configs.
+                <p style="font-size: 10.5px; color: rgba(255, 255, 255, 0.55); line-height: 1.4; margin: 0;">
+                  Full-stack AI Discord Bot &amp; Next.js SaaS Web Dashboard with Gemini 2.5.
                 </p>
-
-                <!-- Tech Tags -->
-                <div style="display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 16px;">
-                  <span style="font-family: 'JetBrains Mono', monospace; font-size: 9px; padding: 2px 6px; border: 1px solid rgba(255, 255, 255, 0.08); color: rgba(255, 255, 255, 0.5); border-radius: 2px;">Next.js 16</span>
-                  <span style="font-family: 'JetBrains Mono', monospace; font-size: 9px; padding: 2px 6px; border: 1px solid rgba(255, 255, 255, 0.08); color: rgba(255, 255, 255, 0.5); border-radius: 2px;">Discord.js</span>
-                  <span style="font-family: 'JetBrains Mono', monospace; font-size: 9px; padding: 2px 6px; border: 1px solid rgba(255, 255, 255, 0.08); color: rgba(255, 255, 255, 0.5); border-radius: 2px;">Gemini AI</span>
-                  <span style="font-family: 'JetBrains Mono', monospace; font-size: 9px; padding: 2px 6px; border: 1px solid rgba(255, 255, 255, 0.08); color: rgba(255, 255, 255, 0.5); border-radius: 2px;">TypeScript</span>
-                </div>
               </div>
 
-              <!-- Card Action Buttons -->
-              <div style="display: flex; gap: 8px; align-items: center; border-top: 1px solid rgba(255, 255, 255, 0.06); padding-top: 12px;">
-                <a
-                  href="https://github.com/carbonthecoder/prometheus-core"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style="
-                    flex: 1;
-                    padding: 7px 10px;
-                    background: var(--accent-color);
-                    color: #000;
-                    font-family: 'JetBrains Mono', monospace;
-                    font-size: 10px;
-                    font-weight: 800;
-                    text-align: center;
-                    text-decoration: none;
-                    text-transform: uppercase;
-                    border-radius: 3px;
-                    display: inline-flex;
-                    align-items: center;
-                    justify-content: center;
-                    gap: 5px;
-                  "
-                >
-                  <svg style="width: 12px; height: 12px; fill: currentColor;" viewBox="0 0 24 24">
-                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
-                  </svg>
-                  <span>GITHUB</span>
-                </a>
-
-                <a
-                  href="https://prometheus-core.vercel.app/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style="
-                    flex: 1;
-                    padding: 7px 10px;
-                    background: rgba(255, 255, 255, 0.04);
-                    border: 1px solid rgba(255, 255, 255, 0.15);
-                    color: #fff;
-                    font-family: 'JetBrains Mono', monospace;
-                    font-size: 10px;
-                    font-weight: 700;
-                    text-align: center;
-                    text-decoration: none;
-                    text-transform: uppercase;
-                    border-radius: 3px;
-                  "
-                >
-                  LIVE DEMO ↗
-                </a>
-
-                <a
-                  href="https://discord.com/oauth2/authorize?client_id=1532437892318892144&permissions=8&integration_type=0&scope=bot+applications.commands"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  title="Invite Bot to Discord"
-                  style="
-                    padding: 7px 9px;
-                    background: rgba(88, 101, 242, 0.1);
-                    border: 1px solid rgba(88, 101, 242, 0.3);
-                    color: #7289da;
-                    font-family: 'JetBrains Mono', monospace;
-                    font-size: 10px;
-                    font-weight: 700;
-                    text-decoration: none;
-                    border-radius: 3px;
-                  "
-                >
-                  ⚡
-                </a>
+              <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255, 255, 255, 0.06); padding-top: 8px;">
+                <div style="display: flex; gap: 4px;">
+                  <span style="font-family: 'JetBrains Mono', monospace; font-size: 8px; color: rgba(255, 255, 255, 0.4);">Next.js</span>
+                  <span style="font-family: 'JetBrains Mono', monospace; font-size: 8px; color: rgba(255, 255, 255, 0.4);">•</span>
+                  <span style="font-family: 'JetBrains Mono', monospace; font-size: 8px; color: rgba(255, 255, 255, 0.4);">Discord.js</span>
+                  <span style="font-family: 'JetBrains Mono', monospace; font-size: 8px; color: rgba(255, 255, 255, 0.4);">•</span>
+                  <span style="font-family: 'JetBrains Mono', monospace; font-size: 8px; color: rgba(255, 255, 255, 0.4);">Gemini</span>
+                </div>
+                <div style="display: flex; gap: 8px;">
+                  <a href="https://github.com/carbonthecoder/prometheus-core" target="_blank" rel="noopener noreferrer" style="font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 700; color: var(--accent-color); text-decoration: none;">CODE ↗</a>
+                  <a href="https://prometheus-core.vercel.app/" target="_blank" rel="noopener noreferrer" style="font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 700; color: #fff; text-decoration: none;">DEMO ↗</a>
+                </div>
               </div>
             </div>
           </div>
