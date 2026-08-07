@@ -5111,84 +5111,48 @@
 
         <!-- Self Projects Content -->
         <div id="projContentSelf" style="display: none">
-          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; margin-top: 10px;">
-            <!-- Self Project 1: System Automation -->
-            <div
-              class="project-card brutal-border"
-              style="
-                padding: 12px 14px;
-                background: rgba(255, 255, 255, 0.02);
-                border: 1px solid var(--border-color);
-                border-radius: 4px;
-                display: flex;
-                flex-direction: column;
-                justify-content: space-between;
-                gap: 8px;
-                transition: transform 0.15s ease;
-              "
-            >
-              <div>
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
-                  <span style="font-size: 13px; font-weight: 800; color: #fff; text-transform: uppercase;">
-                    ⚡ SYSTEM AUTOMATION &amp; CLI
-                  </span>
-                  <span style="font-size: 8px; color: #22c55e; font-family: 'JetBrains Mono', monospace; font-weight: 700;">● DEV</span>
-                </div>
-                <p style="font-size: 10.5px; color: rgba(255, 255, 255, 0.55); line-height: 1.4; margin: 0;">
-                  Custom Node &amp; PowerShell daemon scripts for automated git sync, asset optimization &amp; runtime builds.
-                </p>
-              </div>
-
-              <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255, 255, 255, 0.06); padding-top: 8px;">
-                <div style="display: flex; gap: 4px;">
-                  <span style="font-family: 'JetBrains Mono', monospace; font-size: 8px; color: rgba(255, 255, 255, 0.4);">Node.js</span>
-                  <span style="font-family: 'JetBrains Mono', monospace; font-size: 8px; color: rgba(255, 255, 255, 0.4);">•</span>
-                  <span style="font-family: 'JetBrains Mono', monospace; font-size: 8px; color: rgba(255, 255, 255, 0.4);">Shell</span>
-                  <span style="font-family: 'JetBrains Mono', monospace; font-size: 8px; color: rgba(255, 255, 255, 0.4);">•</span>
-                  <span style="font-family: 'JetBrains Mono', monospace; font-size: 8px; color: rgba(255, 255, 255, 0.4);">Automation</span>
-                </div>
-                <a href="https://github.com/carbonthecoder" target="_blank" rel="noopener noreferrer" style="font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 700; color: var(--accent-color); text-decoration: none;">GITHUB ↗</a>
-              </div>
+          <div
+            class="project-card brutal-border"
+            style="
+              padding: 24px 20px;
+              background: rgba(255, 255, 255, 0.02);
+              border: 1px dashed rgba(255, 204, 0, 0.3);
+              border-radius: 4px;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              justify-content: center;
+              text-align: center;
+              gap: 10px;
+              max-width: 480px;
+              margin-top: 10px;
+            "
+          >
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span style="font-size: 13px; font-weight: 800; color: #ffcc00; font-family: 'JetBrains Mono', monospace; letter-spacing: 2px;">
+                🚧 COOKING SOON
+              </span>
             </div>
-
-            <!-- Self Project 2: Reactive WebAudio Engine -->
+            <p style="font-size: 11px; color: rgba(255, 255, 255, 0.5); line-height: 1.6; margin: 0; max-width: 360px;">
+              Standalone projects and personal backend experiments currently in active development.
+            </p>
             <div
-              class="project-card brutal-border"
               style="
-                padding: 12px 14px;
-                background: rgba(255, 255, 255, 0.02);
-                border: 1px solid var(--border-color);
-                border-radius: 4px;
-                display: flex;
-                flex-direction: column;
-                justify-content: space-between;
-                gap: 8px;
-                transition: transform 0.15s ease;
+                height: 4px;
+                width: 100%;
+                max-width: 220px;
+                background: repeating-linear-gradient(
+                  45deg,
+                  #ffcc00,
+                  #ffcc00 8px,
+                  #111111 8px,
+                  #111111 16px
+                );
+                border-radius: 2px;
+                opacity: 0.85;
+                margin-top: 4px;
               "
-            >
-              <div>
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
-                  <span style="font-size: 13px; font-weight: 800; color: #fff; text-transform: uppercase;">
-                    🎵 REACTIVE SOUND ENGINE
-                  </span>
-                  <span style="font-size: 8px; color: #00e5ff; font-family: 'JetBrains Mono', monospace; font-weight: 700;">● LIVE</span>
-                </div>
-                <p style="font-size: 10.5px; color: rgba(255, 255, 255, 0.55); line-height: 1.4; margin: 0;">
-                  Real-time HTML5 WebAudio frequency analyzer and audio visualizer canvas pipeline integrated directly into the mainframe.
-                </p>
-              </div>
-
-              <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255, 255, 255, 0.06); padding-top: 8px;">
-                <div style="display: flex; gap: 4px;">
-                  <span style="font-family: 'JetBrains Mono', monospace; font-size: 8px; color: rgba(255, 255, 255, 0.4);">WebAudio</span>
-                  <span style="font-family: 'JetBrains Mono', monospace; font-size: 8px; color: rgba(255, 255, 255, 0.4);">•</span>
-                  <span style="font-family: 'JetBrains Mono', monospace; font-size: 8px; color: rgba(255, 255, 255, 0.4);">Canvas</span>
-                  <span style="font-family: 'JetBrains Mono', monospace; font-size: 8px; color: rgba(255, 255, 255, 0.4);">•</span>
-                  <span style="font-family: 'JetBrains Mono', monospace; font-size: 8px; color: rgba(255, 255, 255, 0.4);">DSP</span>
-                </div>
-                <a href="https://github.com/carbonthecoder" target="_blank" rel="noopener noreferrer" style="font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 700; color: var(--accent-color); text-decoration: none;">GITHUB ↗</a>
-              </div>
-            </div>
+            ></div>
           </div>
         </div>
       </div>
