@@ -3105,7 +3105,7 @@
         href="#home"
         onclick="
           toggleMobileMenu();
-          scrollToSection('home');
+          scrollToSection('home', 350);
         "
         style="
           font-size: 11px;
@@ -3122,7 +3122,7 @@
         href="#about"
         onclick="
           toggleMobileMenu();
-          scrollToSection('about');
+          scrollToSection('about', 350);
         "
         style="
           font-size: 11px;
@@ -3139,7 +3139,7 @@
         href="#skills"
         onclick="
           toggleMobileMenu();
-          scrollToSection('skills');
+          scrollToSection('skills', 350);
         "
         style="
           font-size: 11px;
@@ -3156,7 +3156,7 @@
         href="#projects"
         onclick="
           toggleMobileMenu();
-          scrollToSection('projects');
+          scrollToSection('projects', 350);
         "
         style="
           font-size: 11px;
@@ -3173,7 +3173,7 @@
         href="#contact"
         onclick="
           toggleMobileMenu();
-          scrollToSection('contact');
+          scrollToSection('contact', 350);
         "
         style="
           font-size: 11px;
@@ -6088,24 +6088,39 @@
       }
 
       let mobilePlayerTimeout;
+      let _mobilePlayerListenerAttached = false;
       function toggleMobilePlayer() {
         const mp = document.getElementById("miniPlayer");
-        if (mp) {
-          mp.classList.add("show-mobile");
-          clearTimeout(mobilePlayerTimeout);
-          
-          mobilePlayerTimeout = setTimeout(() => {
-            mp.classList.remove("show-mobile");
-          }, 10000);
-          
-          // Auto close if clicked outside
+        if (!mp) return;
+
+        const isOpen = mp.classList.contains("show-mobile");
+        if (isOpen) {
+          mp.classList.remove("show-mobile");
+          return;
+        }
+
+        // Hide tooltip notification when disc is clicked
+        const tooltip = document.getElementById('mobileMusicTooltip');
+        if (tooltip) tooltip.style.opacity = '0';
+
+        mp.classList.add("show-mobile");
+        clearTimeout(mobilePlayerTimeout);
+        mobilePlayerTimeout = setTimeout(() => {
+          mp.classList.remove("show-mobile");
+        }, 10000);
+
+        // Only attach ONE close-on-outside-click listener at a time
+        if (!_mobilePlayerListenerAttached) {
+          _mobilePlayerListenerAttached = true;
           setTimeout(() => {
-            document.addEventListener('click', function closeMenu(e) {
-              if (!mp.contains(e.target)) {
+            function closeMenu(e) {
+              if (!mp.contains(e.target) && e.target.id !== 'mobileMusicBtn' && !e.target.closest('#mobileMusicBtn')) {
                 mp.classList.remove("show-mobile");
                 document.removeEventListener('click', closeMenu);
+                _mobilePlayerListenerAttached = false;
               }
-            });
+            }
+            document.addEventListener('click', closeMenu);
           }, 10);
         }
       }
@@ -6542,18 +6557,25 @@
       setInterval(tick, 1000);
 
       /* ── SCROLL NAV ── */
-      function scrollToSection(id) {
+      function scrollToSection(id, delay) {
         document.body.classList.add('page-transition-glitch');
         if(window.playExtra) window.playExtra('glitch');
-        
+
+        // Use a delay so mobile menu can close before scrolling
         setTimeout(() => {
           const el = document.getElementById(id);
-          if (el) el.scrollIntoView({ behavior: "smooth" });
-          
+          if (el) {
+            // Get navbar height to offset correctly
+            const navbar = document.querySelector('nav') || document.querySelector('[id*="nav"]');
+            const navbarH = navbar ? navbar.getBoundingClientRect().height : 60;
+            const top = el.getBoundingClientRect().top + window.scrollY - navbarH;
+            window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+          }
+
           setTimeout(() => {
             document.body.classList.remove('page-transition-glitch');
           }, 300);
-        }, 150);
+        }, delay || 150);
       }
 
       /* ── CANVAS PARTICLES ── */
