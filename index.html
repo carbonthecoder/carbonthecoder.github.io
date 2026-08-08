@@ -4070,8 +4070,8 @@
                 -webkit-overflow-scrolling: touch;
               "
             >
-              <div id="githubCalendarContainer" style="min-width: 300px; display: flex; justify-content: center; align-items: center; min-height: 90px;">
-                <div id="ghLoadingState" style="color: rgba(255,255,255,0.3); font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 1px;">LOADING_CONTRIBUTIONS...</div>
+              <div id="githubCalendarContainer" style="min-width: 300px; text-align: center; min-height: 90px; white-space: nowrap;">
+                <div id="ghLoadingState" style="color: rgba(255,255,255,0.3); font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 1px; line-height: 90px;">LOADING_CONTRIBUTIONS...</div>
               </div>
             </div>
 
@@ -8264,7 +8264,7 @@
         const svgW = weeks.length * step + 40;
         const svgH = 7 * step + 30;
 
-        let svg = `<svg width="${svgW}" height="${svgH}" viewBox="-28 -18 ${svgW + 32} ${svgH + 4}" style="font-family:'JetBrains Mono',monospace;font-size:9px;fill:rgba(255,255,255,0.4);">`;
+        let svg = `<svg width="${svgW}" height="${svgH}" viewBox="-28 -18 ${svgW + 32} ${svgH + 4}" style="font-family:'JetBrains Mono',monospace;font-size:9px;fill:rgba(255,255,255,0.4); margin: 0 auto; display: inline-block;">`;
 
         // Day labels
         svg += `<text x="-4" y="${1 * step + 9}" text-anchor="end">Mon</text>`;
