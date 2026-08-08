@@ -4008,13 +4008,6 @@
             >
               <button
                 class="gh-year-btn active"
-                data-year="last"
-                onclick="changeGithubYear('last', this)"
-              >
-                Last Year
-              </button>
-              <button
-                class="gh-year-btn"
                 data-year="2026"
                 onclick="changeGithubYear('2026', this)"
               >
@@ -8120,7 +8113,7 @@
       const GITHUB_USERNAME = "carbonthecoder";
       let githubRawData = null;
       // Expose globally so setTheme can call it
-      window.currentGithubYear = "last";
+      window.currentGithubYear = "2026";
       
       const bundledGithubData = {
         total: { "2025": 10, "2026": 3, "lastYear": 13 },
