@@ -5154,7 +5154,49 @@
           MY WORK<br />&amp; CREATIONS.
         </h2>
 
-
+        <!-- Tabs/Selectors for AI vs Self Projects -->
+        <div style="display: flex; gap: 12px; margin-bottom: 28px">
+          <button
+            id="tabAI"
+            onclick="if(window.playExtra) window.playExtra('dio'); switchProjTab('ai')"
+            class="brutal-solid"
+            style="
+              padding: 10px 20px;
+              border: 1px solid var(--accent-color);
+              color: #000;
+              background: var(--accent-color);
+              font-family: 'JetBrains Mono', monospace;
+              font-size: 10px;
+              font-weight: 700;
+              letter-spacing: 2px;
+              cursor: pointer;
+              text-transform: uppercase;
+              transition: all 0.15s;
+            "
+          >
+            AI PROJECTS
+          </button>
+          <button
+            id="tabSelf"
+            onclick="if(window.wowSfx){window.wowSfx.currentTime=0; window.wowSfx.play().catch(e=>console.log(e));} switchProjTab('self')"
+            class="brutal-border"
+            style="
+              padding: 10px 20px;
+              border: 1px solid var(--border-color);
+              color: rgba(255, 255, 255, 0.5);
+              background: transparent;
+              font-family: 'JetBrains Mono', monospace;
+              font-size: 10px;
+              font-weight: 700;
+              letter-spacing: 2px;
+              cursor: pointer;
+              text-transform: uppercase;
+              transition: all 0.15s;
+            "
+          >
+            SELF MADE
+          </button>
+        </div>
 
         <!-- AI Projects Content -->
         <div id="projContentAI" style="display: block">
