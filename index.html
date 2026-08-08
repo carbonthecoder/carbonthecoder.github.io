@@ -8159,9 +8159,8 @@
           const now = new Date();
           const oneYearAgo = new Date();
           oneYearAgo.setFullYear(now.getFullYear() - 1);
-          
           dataToRender = githubRawData.contributions.filter(d => {
-            const date = new Date(d.date);
+            const date = new Date(d.date + "T00:00:00");
             return date >= oneYearAgo && date <= now;
           });
           totalCount = githubRawData.total.lastYear || dataToRender.reduce((a, b) => a + b.count, 0);
@@ -8179,61 +8178,85 @@
 
         dataToRender.sort((a, b) => new Date(a.date) - new Date(b.date));
         if (dataToRender.length === 0) {
-          container.innerHTML = `<div style="padding: 20px; color: rgba(255,255,255,0.4); text-align: center;">No data available</div>`;
+          container.innerHTML = `<div style="padding: 20px; color: rgba(255,255,255,0.4); text-align: center;">No contributions found</div>`;
           return;
         }
 
-        const cellSize = 10;
-        const cellGap = 3;
-        
-        let svg = `<svg width="740" height="110" viewBox="-20 -15 760 110" style="font-family: 'JetBrains Mono', monospace; font-size: 9px; fill: rgba(255,255,255,0.4); overflow: visible;">`;
-        
-        const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-        svg += `<text x="-15" y="${cellSize + 4}">Mon</text>`;
-        svg += `<text x="-15" y="${cellSize * 3 + cellGap * 2 + 6}">Wed</text>`;
-        svg += `<text x="-15" y="${cellSize * 5 + cellGap * 4 + 8}">Fri</text>`;
+        // Read actual accent color (CSS var doesn't work inside SVG fill)
+        const accentHex = window.currentAccentHex ||
+          getComputedStyle(document.documentElement).getPropertyValue("--accent-color").trim() || "#FF3300";
 
-        const xOffset = 10;
-        let colIndex = 0;
-        let lastMonth = -1;
-        
-        svg += `<g transform="translate(${xOffset}, 0)">`;
-        
-        dataToRender.forEach((dayData, i) => {
-          const dateObj = new Date(dayData.date);
-          const dayOfWeek = dateObj.getDay();
-          
-          if (i === 0 || dayOfWeek === 0) {
-            if (i > 0) colIndex++;
-            const month = dateObj.getMonth();
-            if (month !== lastMonth) {
-              svg += `<text x="${colIndex * (cellSize + cellGap)}" y="-5">${months[month]}</text>`;
-              lastMonth = month;
-            }
+        const cellSize = 11;
+        const cellGap = 2;
+        const step = cellSize + cellGap;
+
+        // Build a map: date string → {count, level}
+        const dayMap = {};
+        dataToRender.forEach(d => { dayMap[d.date] = d; });
+
+        // Start from the Sunday on or before the first data date
+        const firstDate = new Date(dataToRender[0].date + "T00:00:00");
+        const startSunday = new Date(firstDate);
+        startSunday.setDate(firstDate.getDate() - firstDate.getDay());
+
+        const lastDate = new Date(dataToRender[dataToRender.length - 1].date + "T00:00:00");
+        const endSaturday = new Date(lastDate);
+        endSaturday.setDate(lastDate.getDate() + (6 - lastDate.getDay()));
+
+        const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
+        // Walk week by week
+        let weeks = [];
+        let cur = new Date(startSunday);
+        while (cur <= endSaturday) {
+          let week = [];
+          for (let dow = 0; dow < 7; dow++) {
+            const dateStr = cur.toISOString().slice(0, 10);
+            week.push({ date: dateStr, dow, ...(dayMap[dateStr] || { count: 0, level: 0 }) });
+            cur.setDate(cur.getDate() + 1);
           }
-          
-          const x = colIndex * (cellSize + cellGap);
-          const y = dayOfWeek * (cellSize + cellGap);
+          weeks.push(week);
+        }
 
-          let fillStyle = `var(--accent-color)`;
-          let opacityStyle = "0.05";
-          if (dayData.level === 0) fillStyle = "#ffffff";
-          else if (dayData.level === 1) opacityStyle = "0.35";
-          else if (dayData.level === 2) opacityStyle = "0.60";
-          else if (dayData.level === 3) opacityStyle = "0.80";
-          else if (dayData.level === 4) opacityStyle = "1";
-          
-          const tooltipText = `${dayData.count} contributions on ${dateObj.toDateString()}`;
-          
-          svg += `<rect class="gh-cell" x="${x}" y="${y}" width="${cellSize}" height="${cellSize}" 
-            fill="${fillStyle}" fill-opacity="${opacityStyle}"
-            data-tooltip="${tooltipText}"
-            onmouseenter="showGhTooltip(event, this)"
-            onmouseleave="hideGhTooltip()"
-          ></rect>`;
+        const svgW = weeks.length * step + 40;
+        const svgH = 7 * step + 30;
+
+        let svg = `<svg width="${svgW}" height="${svgH}" viewBox="-28 -18 ${svgW + 32} ${svgH + 4}" style="font-family:'JetBrains Mono',monospace;font-size:9px;fill:rgba(255,255,255,0.4);">`;
+
+        // Day labels
+        svg += `<text x="-4" y="${1 * step + 9}" text-anchor="end">Mon</text>`;
+        svg += `<text x="-4" y="${3 * step + 9}" text-anchor="end">Wed</text>`;
+        svg += `<text x="-4" y="${5 * step + 9}" text-anchor="end">Fri</text>`;
+
+        // Month labels
+        let lastLabelMonth = -1;
+        weeks.forEach((week, wi) => {
+          const firstDay = week.find(d => d.dow === 0) || week[0];
+          const d = new Date(firstDay.date + "T00:00:00");
+          if (d.getMonth() !== lastLabelMonth) {
+            svg += `<text x="${wi * step}" y="-6">${months[d.getMonth()]}</text>`;
+            lastLabelMonth = d.getMonth();
+          }
         });
 
-        svg += `</g></svg>`;
+        // Cells
+        weeks.forEach((week, wi) => {
+          week.forEach(day => {
+            const x = wi * step;
+            const y = day.dow * step;
+            let fill, opacity;
+            if (day.level === 0) { fill = "#ffffff"; opacity = 0.06; }
+            else if (day.level === 1) { fill = accentHex; opacity = 0.30; }
+            else if (day.level === 2) { fill = accentHex; opacity = 0.55; }
+            else if (day.level === 3) { fill = accentHex; opacity = 0.80; }
+            else { fill = accentHex; opacity = 1; }
+
+            const tip = `${day.count} contribution${day.count !== 1 ? "s" : ""} on ${new Date(day.date + "T00:00:00").toDateString()}`;
+            svg += `<rect class="gh-cell" x="${x}" y="${y}" width="${cellSize}" height="${cellSize}" rx="2" ry="2" fill="${fill}" fill-opacity="${opacity}" data-tooltip="${tip}" onmouseenter="showGhTooltip(event,this)" onmouseleave="hideGhTooltip()"></rect>`;
+          });
+        });
+
+        svg += `</svg>`;
         container.innerHTML = svg;
       }
 
