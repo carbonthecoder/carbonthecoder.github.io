@@ -8239,12 +8239,10 @@
         const startSunday = new Date(firstDate);
         startSunday.setDate(firstDate.getDate() - firstDate.getDay());
 
-        // End at the earlier of: last data date OR today
-        const lastDataDate = new Date(dataToRender[dataToRender.length - 1].date + "T00:00:00");
-        const effectiveEnd = lastDataDate < today ? lastDataDate : today;
-        const endSaturday = new Date(effectiveEnd);
-        endSaturday.setDate(effectiveEnd.getDate() + (6 - effectiveEnd.getDay()));
-        if (endSaturday > today) endSaturday.setTime(today.getTime());
+        // End at the last data date (Dec 31st of the year) to keep the chart full width
+        const lastDate = new Date(dataToRender[dataToRender.length - 1].date + "T00:00:00");
+        const endSaturday = new Date(lastDate);
+        endSaturday.setDate(lastDate.getDate() + (6 - lastDate.getDay()));
 
         const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 
