@@ -2334,6 +2334,34 @@
 
         <div
           class="cmd-item"
+          data-action="hobbies"
+          style="
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 6px 8px;
+            border-radius: 6px;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.8);
+            cursor: pointer;
+          "
+        >
+          <span>🎮 Check Hobbies &amp; Side Quests</span>
+          <span
+            class="cmd-key"
+            style="
+              background: rgba(255, 255, 255, 0.08);
+              padding: 2px 6px;
+              border-radius: 4px;
+              font-size: 10px;
+              color: rgba(255, 255, 255, 0.4);
+            "
+            >H</span
+          >
+        </div>
+
+        <div
+          class="cmd-item"
           data-action="skills"
           style="
             display: flex;
@@ -3922,6 +3950,57 @@
           </div>
         </div>
 
+        <!-- Hobbies & Off-Screen Drawer Trigger -->
+        <div class="reveal" style="margin-bottom: 44px">
+          <div
+            style="
+              font-size: 10px;
+              letter-spacing: 3px;
+              color: rgba(255, 255, 255, 0.3);
+              text-transform: uppercase;
+              margin-bottom: 12px;
+              font-family: 'JetBrains Mono', monospace;
+            "
+          >
+            // OFF-SCREEN ACTIVITIES
+          </div>
+          <button
+            onclick="openHobbiesModal()"
+            class="brutal-border magnetic-btn btn-slide-fill"
+            style="
+              padding: 12px 22px;
+              font-size: 11px;
+              letter-spacing: 2px;
+              cursor: pointer;
+              text-transform: uppercase;
+              font-family: 'JetBrains Mono', monospace;
+              display: inline-flex;
+              align-items: center;
+              gap: 12px;
+              background: rgba(255, 255, 255, 0.02);
+              border: 1px solid rgba(255, 255, 255, 0.15);
+              color: #fff;
+              transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            "
+            onmouseover="this.style.borderColor='var(--accent-color)'; this.style.boxShadow='0 0 20px rgba(255,51,0,0.2)'"
+            onmouseout="this.style.borderColor='rgba(255, 255, 255, 0.15)'; this.style.boxShadow='none'"
+          >
+            <span style="font-size: 14px">🎯</span>
+            <span style="font-weight: 700">CHECK HOBBIES &amp; SIDE QUESTS</span>
+            <span
+              style="
+                font-size: 9px;
+                color: var(--accent-color);
+                border: 1px solid var(--accent-color);
+                padding: 2px 6px;
+                border-radius: 2px;
+                letter-spacing: 1px;
+              "
+              >OFF-SCREEN</span
+            >
+          </button>
+        </div>
+
         <!-- GitHub Graph -->
         <div class="reveal" style="margin-bottom: 48px">
           <div
@@ -4187,48 +4266,6 @@
             "
             id="langBars"
           >
-            <!-- Hero Banner: Advanced AI Architect & Prompter -->
-            <div
-              class="brutal-border"
-              style="
-                padding: 12px 14px;
-                background: rgba(34, 197, 94, 0.04);
-                border: 1px solid rgba(34, 197, 94, 0.25);
-                border-radius: 4px;
-                display: flex;
-                flex-direction: column;
-                gap: 6px;
-                margin-bottom: 4px;
-              "
-            >
-              <div
-                style="
-                  display: flex;
-                  align-items: center;
-                  gap: 6px;
-                  font-size: 11px;
-                  font-weight: 800;
-                  color: #22c55e;
-                  letter-spacing: 1px;
-                  font-family: 'JetBrains Mono', monospace;
-                  text-transform: uppercase;
-                "
-              >
-                <span>⚡ ADVANCED AI ARCHITECT &amp; PROMPTER</span>
-              </div>
-              <p
-                style="
-                  font-size: 10.5px;
-                  color: rgba(255, 255, 255, 0.7);
-                  line-height: 1.6;
-                  margin: 0;
-                  font-family: 'JetBrains Mono', monospace;
-                "
-              >
-                Harnessing Gemini and antigravity, Claude Code, hermes agent &amp; AI Agentic workflows to build production systems.
-              </p>
-            </div>
-
             <!-- 2. Python (30% - Yellow) -->
             <div>
               <div
@@ -4744,7 +4781,7 @@
               "
             >
               <img
-                src="./nousresearch-color.svg"
+                src="./nousresearch.svg"
                 style="width: 24px; height: 24px"
                 alt="Nous Hermes"
               />
@@ -4928,6 +4965,50 @@
             </div>
           </div>
         </div>
+
+          <!-- Hero Banner: Advanced AI Architect & Prompter -->
+          <div
+            id="heroAiBanner"
+            class="brutal-border"
+            style="
+              padding: 14px 16px;
+              background: rgba(34, 197, 94, 0.04);
+              border: 1px solid rgba(34, 197, 94, 0.25);
+              border-radius: 4px;
+              display: flex;
+              flex-direction: column;
+              gap: 6px;
+              margin-top: 20px;
+              max-width: 520px;
+            "
+          >
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                font-size: 11px;
+                font-weight: 800;
+                color: #22c55e;
+                letter-spacing: 1px;
+                font-family: 'JetBrains Mono', monospace;
+                text-transform: uppercase;
+              "
+            >
+              <span>⚡ ADVANCED AI ARCHITECT &amp; PROMPTER</span>
+            </div>
+            <p
+              style="
+                font-size: 10.5px;
+                color: rgba(255, 255, 255, 0.7);
+                line-height: 1.6;
+                margin: 0;
+                font-family: 'JetBrains Mono', monospace;
+              "
+            >
+              Harnessing Gemini and antigravity, Claude Code, hermes agent &amp; AI Agentic workflows to build production systems.
+            </p>
+          </div>
 
           <script>
             function openArchive() {
@@ -5606,6 +5687,498 @@
       </div>
       <div>
         © 2026 MOHAMMED IBRAHIM &nbsp;|&nbsp; BUILT WITH Claude + CAFFEINE
+      </div>
+    </div>
+
+    <!-- HOBBIES & OFF-SCREEN MODAL -->
+    <div class="modal-bg" id="hobbiesModal" onclick="if(event.target === this) closeHobbiesModal()">
+      <div
+        class="modal-box brutal-border"
+        style="
+          max-width: 720px;
+          max-height: 88vh;
+          overflow-y: auto;
+          background: #0d0d0d;
+          border: 1px solid rgba(255, 255, 255, 0.18);
+          box-shadow: 0 20px 60px rgba(0, 0, 0, 0.95), 0 0 30px rgba(255, 51, 0, 0.1);
+          padding: 26px 28px;
+          scrollbar-width: thin;
+          scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+        "
+      >
+        <!-- Modal Header -->
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 18px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+          "
+        >
+          <div>
+            <div
+              style="
+                font-size: 14px;
+                font-weight: 800;
+                letter-spacing: 1px;
+                color: #fff;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                font-family: 'JetBrains Mono', monospace;
+              "
+            >
+              <span>🎮</span>
+              <span>SIDE QUESTS &amp; PASSIONS LOADOUT</span>
+            </div>
+            <div
+              style="
+                font-size: 10px;
+                color: rgba(255, 255, 255, 0.4);
+                letter-spacing: 2px;
+                margin-top: 5px;
+                font-family: 'JetBrains Mono', monospace;
+              "
+            >
+              // WHAT I DO BEYOND THE SCREEN &amp; ON BREAKS
+            </div>
+          </div>
+          <button
+            onclick="closeHobbiesModal()"
+            style="
+              border: 1px solid rgba(255, 255, 255, 0.15);
+              background: rgba(255, 255, 255, 0.03);
+              color: rgba(255, 255, 255, 0.6);
+              width: 30px;
+              height: 30px;
+              cursor: pointer;
+              font-family: 'JetBrains Mono', monospace;
+              font-size: 12px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              transition: all 0.15s;
+            "
+            onmouseover="this.style.borderColor='var(--accent-color)'; this.style.color='var(--accent-color)'"
+            onmouseout="this.style.borderColor='rgba(255, 255, 255, 0.15)'; this.style.color='rgba(255, 255, 255, 0.6)'"
+            aria-label="Close modal"
+          >
+            ✕
+          </button>
+        </div>
+
+        <!-- Filter Tabs -->
+        <div
+          style="
+            display: flex;
+            gap: 6px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+          "
+        >
+          <button
+            class="hobby-tab-btn brutal-border"
+            onclick="filterHobbies('all', this)"
+            style="
+              padding: 6px 12px;
+              font-size: 10px;
+              letter-spacing: 1px;
+              cursor: pointer;
+              font-family: 'JetBrains Mono', monospace;
+              background: rgba(255, 51, 0, 0.12);
+              border: 1px solid var(--accent-color);
+              color: #fff;
+              transition: all 0.15s;
+            "
+          >
+            ALL (10)
+          </button>
+          <button
+            class="hobby-tab-btn brutal-border"
+            onclick="filterHobbies('creative', this)"
+            style="
+              padding: 6px 12px;
+              font-size: 10px;
+              letter-spacing: 1px;
+              cursor: pointer;
+              font-family: 'JetBrains Mono', monospace;
+              background: rgba(255, 255, 255, 0.02);
+              border: 1px solid rgba(255, 255, 255, 0.12);
+              color: rgba(255, 255, 255, 0.6);
+              transition: all 0.15s;
+            "
+          >
+            🎨 CREATIVE &amp; MEDIA
+          </button>
+          <button
+            class="hobby-tab-btn brutal-border"
+            onclick="filterHobbies('tech', this)"
+            style="
+              padding: 6px 12px;
+              font-size: 10px;
+              letter-spacing: 1px;
+              cursor: pointer;
+              font-family: 'JetBrains Mono', monospace;
+              background: rgba(255, 255, 255, 0.02);
+              border: 1px solid rgba(255, 255, 255, 0.12);
+              color: rgba(255, 255, 255, 0.6);
+              transition: all 0.15s;
+            "
+          >
+            ⚡ TECH &amp; AUDIO
+          </button>
+          <button
+            class="hobby-tab-btn brutal-border"
+            onclick="filterHobbies('life', this)"
+            style="
+              padding: 6px 12px;
+              font-size: 10px;
+              letter-spacing: 1px;
+              cursor: pointer;
+              font-family: 'JetBrains Mono', monospace;
+              background: rgba(255, 255, 255, 0.02);
+              border: 1px solid rgba(255, 255, 255, 0.12);
+              color: rgba(255, 255, 255, 0.6);
+              transition: all 0.15s;
+            "
+          >
+            🏃 ACTIVE &amp; LIFE
+          </button>
+        </div>
+
+        <!-- Cards Grid (10 Selected Hobbies) -->
+        <div
+          id="hobbiesGrid"
+          style="
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+            gap: 12px;
+            margin-bottom: 22px;
+          "
+        >
+          <!-- 1. Reading Quran -->
+          <div
+            class="brutal-border hobby-card"
+            data-category="creative"
+            style="
+              padding: 16px;
+              background: rgba(255, 255, 255, 0.02);
+              border: 1px solid rgba(255, 255, 255, 0.08);
+              transition: all 0.2s;
+            "
+            onmouseover="this.style.borderColor='rgba(34, 197, 94, 0.4)'; this.style.background='rgba(34, 197, 94, 0.03)'"
+            onmouseout="this.style.borderColor='rgba(255, 255, 255, 0.08)'; this.style.background='rgba(255, 255, 255, 0.02)'"
+          >
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 18px">📖</span>
+                <span style="font-size: 12px; font-weight: 700; color: #fff; font-family: 'JetBrains Mono', monospace;">Reading Quran</span>
+              </div>
+              <span style="font-size: 8px; color: #22c55e; letter-spacing: 1px; border: 1px solid rgba(34, 197, 94, 0.3); padding: 2px 6px; border-radius: 2px; font-family: 'JetBrains Mono', monospace;">SPIRITUAL</span>
+            </div>
+            <p style="font-size: 11px; color: rgba(255, 255, 255, 0.65); line-height: 1.5; margin: 0 0 10px; font-family: 'JetBrains Mono', monospace;">
+              Daily recitation, Tajweed, and spiritual contemplation. Keeps my mind grounded, centered, and disciplined away from screen fatigue.
+            </p>
+            <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+              <span style="font-size: 9px; color: rgba(255, 255, 255, 0.4); background: rgba(255, 255, 255, 0.04); padding: 2px 6px; border-radius: 2px;">#Reflection</span>
+              <span style="font-size: 9px; color: rgba(255, 255, 255, 0.4); background: rgba(255, 255, 255, 0.04); padding: 2px 6px; border-radius: 2px;">#PeaceOfMind</span>
+              <span style="font-size: 9px; color: rgba(255, 255, 255, 0.4); background: rgba(255, 255, 255, 0.04); padding: 2px 6px; border-radius: 2px;">#Daily</span>
+            </div>
+          </div>
+
+          <!-- 2. Series & Movies -->
+          <div
+            class="brutal-border hobby-card"
+            data-category="creative"
+            style="
+              padding: 16px;
+              background: rgba(255, 255, 255, 0.02);
+              border: 1px solid rgba(255, 255, 255, 0.08);
+              transition: all 0.2s;
+            "
+            onmouseover="this.style.borderColor='rgba(255, 51, 0, 0.4)'; this.style.background='rgba(255, 51, 0, 0.03)'"
+            onmouseout="this.style.borderColor='rgba(255, 255, 255, 0.08)'; this.style.background='rgba(255, 255, 255, 0.02)'"
+          >
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 18px">🎬</span>
+                <span style="font-size: 12px; font-weight: 700; color: #fff; font-family: 'JetBrains Mono', monospace;">Series &amp; Movies</span>
+              </div>
+              <span style="font-size: 8px; color: var(--accent-color); letter-spacing: 1px; border: 1px solid rgba(255, 51, 0, 0.3); padding: 2px 6px; border-radius: 2px; font-family: 'JetBrains Mono', monospace;">CINEMA</span>
+            </div>
+            <p style="font-size: 11px; color: rgba(255, 255, 255, 0.65); line-height: 1.5; margin: 0 0 10px; font-family: 'JetBrains Mono', monospace;">
+              Obsessed with psychological thrillers, sci-fi mind-benders (Interstellar, Dark, Mr. Robot), and high-production cinematography.
+            </p>
+            <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+              <span style="font-size: 9px; color: rgba(255, 255, 255, 0.4); background: rgba(255, 255, 255, 0.04); padding: 2px 6px; border-radius: 2px;">#SciFi</span>
+              <span style="font-size: 9px; color: rgba(255, 255, 255, 0.4); background: rgba(255, 255, 255, 0.04); padding: 2px 6px; border-radius: 2px;">#Thrillers</span>
+              <span style="font-size: 9px; color: rgba(255, 255, 255, 0.4); background: rgba(255, 255, 255, 0.04); padding: 2px 6px; border-radius: 2px;">#PlotTwists</span>
+            </div>
+          </div>
+
+          <!-- 3. Anime & Manga -->
+          <div
+            class="brutal-border hobby-card"
+            data-category="creative"
+            style="
+              padding: 16px;
+              background: rgba(255, 255, 255, 0.02);
+              border: 1px solid rgba(255, 255, 255, 0.08);
+              transition: all 0.2s;
+            "
+            onmouseover="this.style.borderColor='rgba(255, 204, 0, 0.4)'; this.style.background='rgba(255, 204, 0, 0.03)'"
+            onmouseout="this.style.borderColor='rgba(255, 255, 255, 0.08)'; this.style.background='rgba(255, 255, 255, 0.02)'"
+          >
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 18px">⛩️</span>
+                <span style="font-size: 12px; font-weight: 700; color: #fff; font-family: 'JetBrains Mono', monospace;">Anime &amp; Manga</span>
+              </div>
+              <span style="font-size: 8px; color: #ffcc00; letter-spacing: 1px; border: 1px solid rgba(255, 204, 0, 0.3); padding: 2px 6px; border-radius: 2px; font-family: 'JetBrains Mono', monospace;">OTAKU</span>
+            </div>
+            <p style="font-size: 11px; color: rgba(255, 255, 255, 0.65); line-height: 1.5; margin: 0 0 10px; font-family: 'JetBrains Mono', monospace;">
+              Following ongoing Shonen and Seinen masterworks, reading weekly manga chapters, admiring intense animation and deep worldbuilding.
+            </p>
+            <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+              <span style="font-size: 9px; color: rgba(255, 255, 255, 0.4); background: rgba(255, 255, 255, 0.04); padding: 2px 6px; border-radius: 2px;">#Shonen</span>
+              <span style="font-size: 9px; color: rgba(255, 255, 255, 0.4); background: rgba(255, 255, 255, 0.04); padding: 2px 6px; border-radius: 2px;">#Seinen</span>
+              <span style="font-size: 9px; color: rgba(255, 255, 255, 0.4); background: rgba(255, 255, 255, 0.04); padding: 2px 6px; border-radius: 2px;">#WeeklyManga</span>
+            </div>
+          </div>
+
+          <!-- 4. Digital Art -->
+          <div
+            class="brutal-border hobby-card"
+            data-category="creative"
+            style="
+              padding: 16px;
+              background: rgba(255, 255, 255, 0.02);
+              border: 1px solid rgba(255, 255, 255, 0.08);
+              transition: all 0.2s;
+            "
+            onmouseover="this.style.borderColor='rgba(168, 85, 247, 0.4)'; this.style.background='rgba(168, 85, 247, 0.03)'"
+            onmouseout="this.style.borderColor='rgba(255, 255, 255, 0.08)'; this.style.background='rgba(255, 255, 255, 0.02)'"
+          >
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 18px">🎨</span>
+                <span style="font-size: 12px; font-weight: 700; color: #fff; font-family: 'JetBrains Mono', monospace;">Digital Art &amp; Illustration</span>
+              </div>
+              <span style="font-size: 8px; color: #a855f7; letter-spacing: 1px; border: 1px solid rgba(168, 85, 247, 0.3); padding: 2px 6px; border-radius: 2px; font-family: 'JetBrains Mono', monospace;">DESIGN</span>
+            </div>
+            <p style="font-size: 11px; color: rgba(255, 255, 255, 0.65); line-height: 1.5; margin: 0 0 10px; font-family: 'JetBrains Mono', monospace;">
+              Experimenting with dark-aesthetic illustrations, cyberpunk character sketches, brutalist visuals, and UI concept mockups.
+            </p>
+            <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+              <span style="font-size: 9px; color: rgba(255, 255, 255, 0.4); background: rgba(255, 255, 255, 0.04); padding: 2px 6px; border-radius: 2px;">#VisualArt</span>
+              <span style="font-size: 9px; color: rgba(255, 255, 255, 0.4); background: rgba(255, 255, 255, 0.04); padding: 2px 6px; border-radius: 2px;">#DarkAesthetics</span>
+              <span style="font-size: 9px; color: rgba(255, 255, 255, 0.4); background: rgba(255, 255, 255, 0.04); padding: 2px 6px; border-radius: 2px;">#Illustration</span>
+            </div>
+          </div>
+
+          <!-- 5. Video Editing & Motion Graphics -->
+          <div
+            class="brutal-border hobby-card"
+            data-category="creative"
+            style="
+              padding: 16px;
+              background: rgba(255, 255, 255, 0.02);
+              border: 1px solid rgba(255, 255, 255, 0.08);
+              transition: all 0.2s;
+            "
+            onmouseover="this.style.borderColor='rgba(6, 182, 212, 0.4)'; this.style.background='rgba(6, 182, 212, 0.03)'"
+            onmouseout="this.style.borderColor='rgba(255, 255, 255, 0.08)'; this.style.background='rgba(255, 255, 255, 0.02)'"
+          >
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 18px">🎬</span>
+                <span style="font-size: 12px; font-weight: 700; color: #fff; font-family: 'JetBrains Mono', monospace;">Video Editing &amp; Motion</span>
+              </div>
+              <span style="font-size: 8px; color: #06b6d4; letter-spacing: 1px; border: 1px solid rgba(6, 182, 212, 0.3); padding: 2px 6px; border-radius: 2px; font-family: 'JetBrains Mono', monospace;">MOTION</span>
+            </div>
+            <p style="font-size: 11px; color: rgba(255, 255, 255, 0.65); line-height: 1.5; margin: 0 0 10px; font-family: 'JetBrains Mono', monospace;">
+              Editing visual beat-sync clips, AMVs, cinematic shorts, rhythmic transitions, sound design, and motion graphics.
+            </p>
+            <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+              <span style="font-size: 9px; color: rgba(255, 255, 255, 0.4); background: rgba(255, 255, 255, 0.04); padding: 2px 6px; border-radius: 2px;">#AMVs</span>
+              <span style="font-size: 9px; color: rgba(255, 255, 255, 0.4); background: rgba(255, 255, 255, 0.04); padding: 2px 6px; border-radius: 2px;">#CinematicCuts</span>
+              <span style="font-size: 9px; color: rgba(255, 255, 255, 0.4); background: rgba(255, 255, 255, 0.04); padding: 2px 6px; border-radius: 2px;">#MotionDesign</span>
+            </div>
+          </div>
+
+          <!-- 6. Local AI & Agent Testing -->
+          <div
+            class="brutal-border hobby-card"
+            data-category="tech"
+            style="
+              padding: 16px;
+              background: rgba(255, 255, 255, 0.02);
+              border: 1px solid rgba(255, 255, 255, 0.08);
+              transition: all 0.2s;
+            "
+            onmouseover="this.style.borderColor='rgba(255, 51, 0, 0.4)'; this.style.background='rgba(255, 51, 0, 0.03)'"
+            onmouseout="this.style.borderColor='rgba(255, 255, 255, 0.08)'; this.style.background='rgba(255, 255, 255, 0.02)'"
+          >
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 18px">🤖</span>
+                <span style="font-size: 12px; font-weight: 700; color: #fff; font-family: 'JetBrains Mono', monospace;">Local AI &amp; Agent Workflows</span>
+              </div>
+              <span style="font-size: 8px; color: var(--accent-color); letter-spacing: 1px; border: 1px solid rgba(255, 51, 0, 0.3); padding: 2px 6px; border-radius: 2px; font-family: 'JetBrains Mono', monospace;">AI AGENTS</span>
+            </div>
+            <p style="font-size: 11px; color: rgba(255, 255, 255, 0.65); line-height: 1.5; margin: 0 0 10px; font-family: 'JetBrains Mono', monospace;">
+              Experimenting with open-source LLMs (Ollama, Hermes, DeepSeek), tool calling, autonomous agent scripts, and prompt chaining.
+            </p>
+            <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+              <span style="font-size: 9px; color: rgba(255, 255, 255, 0.4); background: rgba(255, 255, 255, 0.04); padding: 2px 6px; border-radius: 2px;">#LocalLLMs</span>
+              <span style="font-size: 9px; color: rgba(255, 255, 255, 0.4); background: rgba(255, 255, 255, 0.04); padding: 2px 6px; border-radius: 2px;">#PromptCraft</span>
+              <span style="font-size: 9px; color: rgba(255, 255, 255, 0.4); background: rgba(255, 255, 255, 0.04); padding: 2px 6px; border-radius: 2px;">#AgenticAI</span>
+            </div>
+          </div>
+
+          <!-- 7. Listening to Music & Playlist Curation -->
+          <div
+            class="brutal-border hobby-card"
+            data-category="tech"
+            style="
+              padding: 16px;
+              background: rgba(255, 255, 255, 0.02);
+              border: 1px solid rgba(255, 255, 255, 0.08);
+              transition: all 0.2s;
+            "
+            onmouseover="this.style.borderColor='rgba(236, 72, 153, 0.4)'; this.style.background='rgba(236, 72, 153, 0.03)'"
+            onmouseout="this.style.borderColor='rgba(255, 255, 255, 0.08)'; this.style.background='rgba(255, 255, 255, 0.02)'"
+          >
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 18px">🎧</span>
+                <span style="font-size: 12px; font-weight: 700; color: #fff; font-family: 'JetBrains Mono', monospace;">Listening to Music &amp; Audio</span>
+              </div>
+              <span style="font-size: 8px; color: #ec4899; letter-spacing: 1px; border: 1px solid rgba(236, 72, 153, 0.3); padding: 2px 6px; border-radius: 2px; font-family: 'JetBrains Mono', monospace;">AUDIO</span>
+            </div>
+            <p style="font-size: 11px; color: rgba(255, 255, 255, 0.65); line-height: 1.5; margin: 0 0 10px; font-family: 'JetBrains Mono', monospace;">
+              Curating dark synthwave, phonk, anime soundtracks, and ambient lo-fi playlists. Music fuels every late-night coding session.
+            </p>
+            <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+              <span style="font-size: 9px; color: rgba(255, 255, 255, 0.4); background: rgba(255, 255, 255, 0.04); padding: 2px 6px; border-radius: 2px;">#DarkSynth</span>
+              <span style="font-size: 9px; color: rgba(255, 255, 255, 0.4); background: rgba(255, 255, 255, 0.04); padding: 2px 6px; border-radius: 2px;">#Phonk</span>
+              <span style="font-size: 9px; color: rgba(255, 255, 255, 0.4); background: rgba(255, 255, 255, 0.04); padding: 2px 6px; border-radius: 2px;">#FocusBeats</span>
+            </div>
+          </div>
+
+          <!-- 8. Tech & Story Podcasts -->
+          <div
+            class="brutal-border hobby-card"
+            data-category="tech"
+            style="
+              padding: 16px;
+              background: rgba(255, 255, 255, 0.02);
+              border: 1px solid rgba(255, 255, 255, 0.08);
+              transition: all 0.2s;
+            "
+            onmouseover="this.style.borderColor='rgba(16, 185, 129, 0.4)'; this.style.background='rgba(16, 185, 129, 0.03)'"
+            onmouseout="this.style.borderColor='rgba(255, 255, 255, 0.08)'; this.style.background='rgba(255, 255, 255, 0.02)'"
+          >
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 18px">🎙️</span>
+                <span style="font-size: 12px; font-weight: 700; color: #fff; font-family: 'JetBrains Mono', monospace;">Tech &amp; Story Podcasts</span>
+              </div>
+              <span style="font-size: 8px; color: #10b981; letter-spacing: 1px; border: 1px solid rgba(16, 185, 129, 0.3); padding: 2px 6px; border-radius: 2px; font-family: 'JetBrains Mono', monospace;">DEEP DIVES</span>
+            </div>
+            <p style="font-size: 11px; color: rgba(255, 255, 255, 0.65); line-height: 1.5; margin: 0 0 10px; font-family: 'JetBrains Mono', monospace;">
+              Listening to tech founder breakdowns, cyber mystery deep-dives, developer journeys, and investigative audio essays.
+            </p>
+            <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+              <span style="font-size: 9px; color: rgba(255, 255, 255, 0.4); background: rgba(255, 255, 255, 0.04); padding: 2px 6px; border-radius: 2px;">#DevStories</span>
+              <span style="font-size: 9px; color: rgba(255, 255, 255, 0.4); background: rgba(255, 255, 255, 0.04); padding: 2px 6px; border-radius: 2px;">#CyberLore</span>
+              <span style="font-size: 9px; color: rgba(255, 255, 255, 0.4); background: rgba(255, 255, 255, 0.04); padding: 2px 6px; border-radius: 2px;">#TechEssays</span>
+            </div>
+          </div>
+
+          <!-- 9. Competitive FPS & Ranked Gaming -->
+          <div
+            class="brutal-border hobby-card"
+            data-category="life"
+            style="
+              padding: 16px;
+              background: rgba(255, 255, 255, 0.02);
+              border: 1px solid rgba(255, 255, 255, 0.08);
+              transition: all 0.2s;
+            "
+            onmouseover="this.style.borderColor='rgba(239, 68, 68, 0.4)'; this.style.background='rgba(239, 68, 68, 0.03)'"
+            onmouseout="this.style.borderColor='rgba(255, 255, 255, 0.08)'; this.style.background='rgba(255, 255, 255, 0.02)'"
+          >
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 18px">🎯</span>
+                <span style="font-size: 12px; font-weight: 700; color: #fff; font-family: 'JetBrains Mono', monospace;">Competitive FPS &amp; Gaming</span>
+              </div>
+              <span style="font-size: 8px; color: #ef4444; letter-spacing: 1px; border: 1px solid rgba(239, 68, 68, 0.3); padding: 2px 6px; border-radius: 2px; font-family: 'JetBrains Mono', monospace;">REFLEX</span>
+            </div>
+            <p style="font-size: 11px; color: rgba(255, 255, 255, 0.65); line-height: 1.5; margin: 0 0 10px; font-family: 'JetBrains Mono', monospace;">
+              High-tension tactical shooters, clutch rounds, mechanical crosshair placement, team comms, and competitive lobby grinds.
+            </p>
+            <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+              <span style="font-size: 9px; color: rgba(255, 255, 255, 0.4); background: rgba(255, 255, 255, 0.04); padding: 2px 6px; border-radius: 2px;">#TacticalFPS</span>
+              <span style="font-size: 9px; color: rgba(255, 255, 255, 0.4); background: rgba(255, 255, 255, 0.04); padding: 2px 6px; border-radius: 2px;">#RankedGrind</span>
+              <span style="font-size: 9px; color: rgba(255, 255, 255, 0.4); background: rgba(255, 255, 255, 0.04); padding: 2px 6px; border-radius: 2px;">#ClutchRounds</span>
+            </div>
+          </div>
+
+          <!-- 10. Badminton & Sports -->
+          <div
+            class="brutal-border hobby-card"
+            data-category="life"
+            style="
+              padding: 16px;
+              background: rgba(255, 255, 255, 0.02);
+              border: 1px solid rgba(255, 255, 255, 0.08);
+              transition: all 0.2s;
+            "
+            onmouseover="this.style.borderColor='rgba(132, 204, 22, 0.4)'; this.style.background='rgba(132, 204, 22, 0.03)'"
+            onmouseout="this.style.borderColor='rgba(255, 255, 255, 0.08)'; this.style.background='rgba(255, 255, 255, 0.02)'"
+          >
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 18px">🏸</span>
+                <span style="font-size: 12px; font-weight: 700; color: #fff; font-family: 'JetBrains Mono', monospace;">Badminton &amp; Active Sports</span>
+              </div>
+              <span style="font-size: 8px; color: #84cc16; letter-spacing: 1px; border: 1px solid rgba(132, 204, 22, 0.3); padding: 2px 6px; border-radius: 2px; font-family: 'JetBrains Mono', monospace;">AGILITY</span>
+            </div>
+            <p style="font-size: 11px; color: rgba(255, 255, 255, 0.65); line-height: 1.5; margin: 0 0 10px; font-family: 'JetBrains Mono', monospace;">
+              Fast-paced court rallies, smashes, endurance, and quick footwork. The best way to touch grass and reset physical energy.
+            </p>
+            <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+              <span style="font-size: 9px; color: rgba(255, 255, 255, 0.4); background: rgba(255, 255, 255, 0.04); padding: 2px 6px; border-radius: 2px;">#Badminton</span>
+              <span style="font-size: 9px; color: rgba(255, 255, 255, 0.4); background: rgba(255, 255, 255, 0.04); padding: 2px 6px; border-radius: 2px;">#Reflexes</span>
+              <span style="font-size: 9px; color: rgba(255, 255, 255, 0.4); background: rgba(255, 255, 255, 0.04); padding: 2px 6px; border-radius: 2px;">#TouchingGrass</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer status -->
+        <div
+          style="
+            padding: 10px 14px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px dashed rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 9.5px;
+            font-family: 'JetBrains Mono', monospace;
+            color: rgba(255, 255, 255, 0.5);
+            flex-wrap: wrap;
+            gap: 6px;
+          "
+        >
+          <span>⚡ MENTALITY: BALANCING CODE, ART &amp; FAITH</span>
+          <span style="color: var(--accent-color);">STATUS: ALWAYS CURIOUS</span>
+        </div>
       </div>
     </div>
 
@@ -6541,10 +7114,9 @@
           case "secret":
             document.body.classList.toggle("secret-ayan");
             break;
-            
-
-
-
+          case "hobbies":
+            openHobbiesModal();
+            break;
 
           case "konami":
             document.body.style.filter = "invert(1)";
@@ -6699,6 +7271,42 @@
       animateCanvas();
 
       /* ── MODAL ── */
+      function openHobbiesModal() {
+        const modal = document.getElementById("hobbiesModal");
+        if (modal) {
+          modal.classList.add("on");
+          document.body.style.overflow = "hidden";
+        }
+      }
+      function closeHobbiesModal() {
+        const modal = document.getElementById("hobbiesModal");
+        if (modal) {
+          modal.classList.remove("on");
+          document.body.style.overflow = "";
+        }
+      }
+      function filterHobbies(category, btn) {
+        const cards = document.querySelectorAll(".hobby-card");
+        const buttons = document.querySelectorAll(".hobby-tab-btn");
+        buttons.forEach((b) => {
+          b.style.borderColor = "rgba(255, 255, 255, 0.12)";
+          b.style.color = "rgba(255, 255, 255, 0.6)";
+          b.style.background = "rgba(255, 255, 255, 0.02)";
+        });
+        if (btn) {
+          btn.style.borderColor = "var(--accent-color)";
+          btn.style.color = "#fff";
+          btn.style.background = "rgba(255, 51, 0, 0.12)";
+        }
+        cards.forEach((card) => {
+          if (category === "all" || card.dataset.category === category) {
+            card.style.display = "block";
+          } else {
+            card.style.display = "none";
+          }
+        });
+      }
+
       function openArchive() {
         document.getElementById("archiveModal").classList.add("on");
         if (window.heheBoiSfx) {
@@ -6714,6 +7322,13 @@
         .addEventListener("click", function (e) {
           if (e.target === this) closeArchive();
         });
+
+      document.addEventListener("keydown", function(e) {
+        if (e.key === "Escape") {
+          closeHobbiesModal();
+          closeArchive();
+        }
+      });
 
       /* ── LANG BARS ── */
       const observer = new IntersectionObserver(
@@ -7857,7 +8472,7 @@
     <!-- Floating Skill Icons -->
     <script>
       document.addEventListener("DOMContentLoaded", () => {
-        // Target Arsenal, Lingo, Toolkit, and Archive
+        // Target Arsenal, Lingo, Toolkit, and Archive (excluding hero banner)
         const skillSpans = document.querySelectorAll(
           "#skills span.brutal-border, #langBars > div, #mainToolsGrid > div.draw-card, #archiveGrid > div.draw-card",
         );
@@ -7877,9 +8492,6 @@
         const arsenalToSvg = {
           bot: "https://cdn.simpleicons.org/discord/ffffff",
           discord: "https://cdn.simpleicons.org/discord/ffffff",
-          prompt: "https://cdn.jsdelivr.net/gh/glincker/thesvg@main/public/icons/claude-code/default.svg",
-          agent: "https://cdn.jsdelivr.net/gh/glincker/thesvg@main/public/icons/claude-code/default.svg",
-          ai: "https://cdn.jsdelivr.net/gh/glincker/thesvg@main/public/icons/claude-code/default.svg",
           web: "https://cdn.simpleicons.org/w3c/ffffff",
           next: "https://cdn.simpleicons.org/nextdotjs/ffffff",
           saas: "https://cdn.simpleicons.org/nextdotjs/ffffff",
@@ -7892,6 +8504,7 @@
         };
 
         skillSpans.forEach((el) => {
+          if (el.id === "heroAiBanner" || el.closest("#heroAiBanner")) return;
           el.style.cursor = "pointer";
 
           el.addEventListener("mouseenter", () => {
@@ -7914,12 +8527,10 @@
 
             if (src) {
               floater.innerHTML = `<img src="${src}" style="width: 48px; height: 48px; object-fit: contain;">`;
+              floater.style.opacity = "1";
             } else {
-              // Ultimate fallback to an emoji if no image is found
-              floater.innerHTML = '<span style="font-size:48px;">✨</span>';
+              floater.style.opacity = "0";
             }
-
-            floater.style.opacity = "1";
           });
 
           el.addEventListener("mousemove", (e) => {
