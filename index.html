@@ -5091,8 +5091,16 @@
         </div>
       </div>
     </section>
-
-
+    <!-- ===== PROJECTS ===== -->
+    <section
+      id="projects"
+      style="
+        min-height: 100vh;
+        padding: 80px 28px;
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+      "
+    >
+      <div style="max-width: 960px; margin: 0 auto">
 
         <!-- SCROLL TEXT ANIMATION BLOCK -->
         <div
@@ -5146,49 +5154,7 @@
           MY WORK<br />&amp; CREATIONS.
         </h2>
 
-        <!-- Tabs/Selectors for AI vs Self Projects -->
-        <div style="display: flex; gap: 12px; margin-bottom: 32px">
-          <button
-            id="tabAI"
-            onclick="if(window.playExtra) window.playExtra('dio'); switchProjTab('ai')"
-            class="brutal-solid"
-            style="
-              padding: 10px 20px;
-              border: 1px solid var(--accent-color);
-              color: #000;
-              background: var(--accent-color);
-              font-family: &quot;JetBrains Mono&quot;, monospace;
-              font-size: 10px;
-              font-weight: 700;
-              letter-spacing: 2px;
-              cursor: pointer;
-              text-transform: uppercase;
-              transition: all 0.1s;
-            "
-          >
-            AI PROJECTS
-          </button>
-          <button
-            id="tabSelf"
-            onclick="if(window.wowSfx){window.wowSfx.currentTime=0; window.wowSfx.play().catch(e=>console.log(e));} switchProjTab('self')"
-            class="brutal-border"
-            style="
-              padding: 10px 20px;
-              border: 1px solid var(--border-color);
-              color: rgba(255, 255, 255, 0.5);
-              background: transparent;
-              font-family: &quot;JetBrains Mono&quot;, monospace;
-              font-size: 10px;
-              font-weight: 700;
-              letter-spacing: 2px;
-              cursor: pointer;
-              text-transform: uppercase;
-              transition: all 0.1s;
-            "
-          >
-            SELF PROJECTS
-          </button>
-        </div>
+
 
         <!-- AI Projects Content -->
         <div id="projContentAI" style="display: block">
@@ -5538,88 +5504,7 @@
       </div>
     </section>
 
-    <!-- ===== PROJECTS (// RECEIPTS) ===== -->
-    <section
-      id="projects"
-      style="
-        min-height: 100vh;
-        padding: 80px 28px;
-        border-top: 1px solid rgba(255, 255, 255, 0.06);
-      "
-    >
-      <div style="max-width: 960px; margin: 0 auto">
 
-
-        <!-- SCROLL TEXT ANIMATION BLOCK -->
-        <div
-          style="
-            margin: 60px 0;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 20vh;
-          "
-        >
-          <h2
-            class="letter-anime"
-            style="
-              font-size: clamp(18px, 3vw, 36px);
-              font-weight: 800;
-              color: var(--accent-color);
-              line-height: 1.4;
-              max-width: 600px;
-            "
-          >
-            Let's team up and turn ideas into reality ✨
-          </h2>
-          <p
-            class="blur-reveal slide-right"
-            style="
-              margin-top: 12px;
-              font-size: clamp(12px, 1.5vw, 16px);
-              color: rgba(255, 255, 255, 0.5);
-              max-width: 500px;
-            "
-          >
-            Dream big, work hard & achieve greatness.
-          </p>
-        </div>
-
-
-
-        <!-- AI Projects Content -->
-        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; margin-top: 10px;">
-          <!-- Prometheus Core Ultra-Compact Minimal Card -->
-          <div
-            class="project-card brutal-border"
-            style="padding: 12px 14px; background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); border-radius: 4px; display: flex; flex-direction: column; justify-content: space-between; gap: 8px; transition: transform 0.15s ease;"
-          >
-            <div>
-              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
-                <span style="font-size: 13px; font-weight: 800; color: #fff; text-transform: uppercase;">⚡ PROMETHEUS CORE</span>
-                <span style="font-size: 8px; color: #22c55e; font-family: 'JetBrains Mono', monospace; font-weight: 700;">● LIVE</span>
-              </div>
-              <p style="font-size: 10.5px; color: rgba(255,255,255,0.55); line-height: 1.4; margin: 0;">Full-stack AI Discord Bot &amp; Next.js SaaS Web Dashboard with Gemini 2.5.</p>
-            </div>
-            <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 8px;">
-              <div style="display: flex; gap: 4px;">
-                <span style="font-family: 'JetBrains Mono', monospace; font-size: 8px; color: rgba(255,255,255,0.4);">Next.js</span>
-                <span style="font-family: 'JetBrains Mono', monospace; font-size: 8px; color: rgba(255,255,255,0.4);">•</span>
-                <span style="font-family: 'JetBrains Mono', monospace; font-size: 8px; color: rgba(255,255,255,0.4);">Discord.js</span>
-                <span style="font-family: 'JetBrains Mono', monospace; font-size: 8px; color: rgba(255,255,255,0.4);">•</span>
-                <span style="font-family: 'JetBrains Mono', monospace; font-size: 8px; color: rgba(255,255,255,0.4);">Gemini</span>
-              </div>
-              <div style="display: flex; gap: 8px;">
-                <a href="https://github.com/carbonthecoder/prometheus-core" target="_blank" rel="noopener noreferrer" style="font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 700; color: var(--accent-color); text-decoration: none;">CODE ↗</a>
-                <a href="https://prometheus-core.vercel.app/" target="_blank" rel="noopener noreferrer" style="font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 700; color: #fff; text-decoration: none;">DEMO ↗</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
 
     <!-- SYSTEM FOOTER -->
     <div class="sys-footer">
