@@ -8114,20 +8114,64 @@
       let githubRawData = null;
       // Expose globally so setTheme can call it
       window.currentGithubYear = "2026";
-      
-      const bundledGithubData = {
-        total: { "2025": 10, "2026": 3, "lastYear": 13 },
-        contributions: []
-      };
+
+      async function fetchGithubYear(year) {
+        const url = `https://github.com/users/${GITHUB_USERNAME}/contributions?from=${year}-01-01&to=${year}-12-31`;
+        const res = await fetch(url);
+        if (!res.ok) throw new Error("GitHub fetch error " + res.status);
+        const html = await res.text();
+        
+        // Parse contribution cells from the HTML
+        const contributions = [];
+        let total = 0;
+        // Match all td elements with data-date and data-level
+        const regex = /data-date="(\d{4}-\d{2}-\d{2})"[^>]*data-level="(\d)"/g;
+        let match;
+        while ((match = regex.exec(html)) !== null) {
+          const date = match[1];
+          const level = parseInt(match[2]);
+          // Extract count from tooltip text nearby
+          const countRegex = new RegExp(`${date}[^<]*<\\/td>[\\s\\S]*?>(\\d+|No) contribution`);
+          const countMatch = html.match(new RegExp(`for="[^"]*"[^>]*>[^<]*(\\d+|No) contributions? on`));
+          // Use level as a proxy since tooltip parsing is fragile
+          let count = 0;
+          if (level === 1) count = 1;
+          else if (level === 2) count = 3;
+          else if (level === 3) count = 6;
+          else if (level === 4) count = 10;
+          contributions.push({ date, count, level });
+          total += count;
+        }
+
+        // Try to get actual total from the H2 text
+        const totalMatch = html.match(/([\d,]+)\s+contributions?\s+in\s+\d{4}/);
+        if (totalMatch) total = parseInt(totalMatch[1].replace(/,/g, ""));
+
+        return { contributions, total };
+      }
 
       async function fetchGithubData() {
         try {
-          const res = await fetch(`https://github-contributions-api.jogruber.de/v4/${GITHUB_USERNAME}`);
-          if (!res.ok) throw new Error("API error");
-          githubRawData = await res.json();
+          // Fetch both years
+          const [data2026, data2025] = await Promise.all([
+            fetchGithubYear("2026"),
+            fetchGithubYear("2025")
+          ]);
+
+          githubRawData = {
+            total: { "2026": data2026.total, "2025": data2025.total },
+            contributions: [...data2026.contributions, ...data2025.contributions]
+          };
         } catch (e) {
-          console.warn("Using fallback GitHub data.", e);
-          githubRawData = bundledGithubData;
+          console.warn("GitHub scrape failed, trying jogruber API...", e);
+          try {
+            const res = await fetch(`https://github-contributions-api.jogruber.de/v4/${GITHUB_USERNAME}`);
+            if (!res.ok) throw new Error("API error");
+            githubRawData = await res.json();
+          } catch (e2) {
+            console.warn("All GitHub data sources failed.", e2);
+            githubRawData = { total: { "2025": 0, "2026": 0 }, contributions: [] };
+          }
         }
         renderGithubHeatmap(window.currentGithubYear);
       }
