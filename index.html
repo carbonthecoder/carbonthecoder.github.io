@@ -3756,6 +3756,7 @@
     <!-- ===== ABOUT ===== -->
     <section
       id="about"
+      class="animate-on-scroll"
       style="
         min-height: 100vh;
         padding: 80px 28px;
@@ -4195,6 +4196,7 @@
     <!-- ===== SKILLS ===== -->
     <section
       id="skills"
+      class="animate-on-scroll"
       style="
         min-height: 100vh;
         padding: 80px 28px;
@@ -5087,6 +5089,7 @@
     <!-- ===== PROJECTS ===== -->
     <section
       id="projects"
+      class="animate-on-scroll"
       style="
         min-height: 100vh;
         padding: 80px 28px;
@@ -5230,9 +5233,10 @@
                   <span style="font-family: 'JetBrains Mono', monospace; font-size: 8px; color: rgba(255, 255, 255, 0.4);">•</span>
                   <span style="font-family: 'JetBrains Mono', monospace; font-size: 8px; color: rgba(255, 255, 255, 0.4);">Gemini</span>
                 </div>
-                <div style="display: flex; gap: 8px;">
+                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
                   <a href="https://github.com/carbonthecoder/prometheus-core" target="_blank" rel="noopener noreferrer" style="font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 700; color: var(--accent-color); text-decoration: none;">CODE ↗</a>
                   <a href="https://prometheus-core.vercel.app/" target="_blank" rel="noopener noreferrer" style="font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 700; color: #fff; text-decoration: none;">DEMO ↗</a>
+                  <button onclick="openDiscordDashboard()" style="font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 700; color: #7289da; background: none; border: none; padding: 0; cursor: pointer; letter-spacing: 0.5px;">DASHBOARD ⚡</button>
                 </div>
               </div>
             </div>
@@ -5291,6 +5295,7 @@
     <!-- ===== CONTACT ===== -->
     <section
       id="contact"
+      class="animate-on-scroll"
       style="
         min-height: 100vh;
         padding: 80px 28px;
@@ -6396,6 +6401,21 @@
         document.getElementById("scrollProgress").style.width = pct + "%";
       });
 
+      /* ── SCROLL ANIMATIONS ── */
+      const _scrollObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("in-view");
+            }
+          });
+        },
+        { threshold: 0.08, rootMargin: "0px 0px -40px 0px" }
+      );
+      document.querySelectorAll(".animate-on-scroll").forEach((el) => {
+        _scrollObserver.observe(el);
+      });
+
       /* ── LIVE METRICS ── */
       let uptimeSec = 0;
       setInterval(() => {
@@ -7271,6 +7291,12 @@
       function closeDiscordModal() {
         document.getElementById("discordModal").style.display = "none";
       }
+      function openDiscordDashboard() {
+        document.getElementById("discordDashboardModal").style.display = "flex";
+      }
+      function closeDiscordDashboard() {
+        document.getElementById("discordDashboardModal").style.display = "none";
+      }
 
       fetchDiscordStatus();
       setInterval(fetchDiscordStatus, 10000);
@@ -7341,6 +7367,138 @@
           style="display: flex; flex-direction: column; gap: 12px"
         >
           <!-- Dynamic content injected here -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Discord Dashboard Modal (UI Mockup) -->
+    <div
+      id="discordDashboardModal"
+      style="
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.55);
+        z-index: 999999;
+        align-items: center;
+        justify-content: center;
+        backdrop-filter: blur(14px);
+      "
+      onclick="if(event.target===this) closeDiscordDashboard()"
+    >
+      <div style="
+        background: rgba(12, 12, 20, 0.92);
+        backdrop-filter: blur(32px) saturate(180%);
+        max-width: 480px;
+        width: 94%;
+        padding: 0;
+        position: relative;
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 16px;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(88,101,242,0.3);
+        overflow: hidden;
+        max-height: 90vh;
+        overflow-y: auto;
+      ">
+        <!-- Header Banner -->
+        <div style="
+          background: linear-gradient(135deg, #5865F2 0%, #7289da 50%, #4752c4 100%);
+          padding: 28px 24px 20px;
+          position: relative;
+          overflow: hidden;
+        ">
+          <div style="position:absolute;top:-20px;right:-20px;width:120px;height:120px;background:rgba(255,255,255,0.05);border-radius:50%;"></div>
+          <div style="position:absolute;bottom:-30px;left:60px;width:80px;height:80px;background:rgba(255,255,255,0.04);border-radius:50%;"></div>
+          <button onclick="closeDiscordDashboard()" style="
+            position:absolute;top:14px;right:16px;
+            background:rgba(255,255,255,0.15);border:none;
+            color:#fff;width:28px;height:28px;border-radius:50%;
+            font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;
+            transition: background 0.2s;
+          " onmouseover="this.style.background='rgba(255,255,255,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.15)'">&times;</button>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="
+              width:48px;height:48px;border-radius:50%;
+              background:linear-gradient(135deg,#7289da,#5865F2);
+              display:flex;align-items:center;justify-content:center;
+              border:3px solid rgba(255,255,255,0.3);
+              font-size:22px;
+            ">⚡</div>
+            <div>
+              <div style="color:#fff;font-weight:800;font-size:16px;letter-spacing:0.5px;">PROMETHEUS DASHBOARD</div>
+              <div style="color:rgba(255,255,255,0.7);font-size:11px;font-family:'JetBrains Mono',monospace;letter-spacing:2px;margin-top:2px;">// PROMETHEUS CORE v2.1</div>
+            </div>
+          </div>
+          <!-- Bot Status -->
+          <div style="margin-top:16px;display:flex;gap:8px;flex-wrap:wrap;">
+            <span style="background:rgba(34,197,94,0.2);border:1px solid rgba(34,197,94,0.4);color:#22c55e;padding:3px 10px;border-radius:99px;font-size:9px;font-family:'JetBrains Mono',monospace;font-weight:700;letter-spacing:1px;">● ONLINE</span>
+            <span style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.7);padding:3px 10px;border-radius:99px;font-size:9px;font-family:'JetBrains Mono',monospace;letter-spacing:1px;">14 SERVERS</span>
+            <span style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.7);padding:3px 10px;border-radius:99px;font-size:9px;font-family:'JetBrains Mono',monospace;letter-spacing:1px;">2,341 USERS</span>
+          </div>
+        </div>
+
+        <!-- Body -->
+        <div style="padding:20px 24px 24px;">
+          <!-- Stats Row -->
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:20px;">
+            <div style="background:rgba(88,101,242,0.08);border:1px solid rgba(88,101,242,0.2);border-radius:10px;padding:12px;text-align:center;">
+              <div style="font-size:20px;font-weight:800;color:#7289da;font-family:'JetBrains Mono',monospace;" id="dd-cmds">1,247</div>
+              <div style="font-size:9px;color:rgba(255,255,255,0.4);margin-top:2px;letter-spacing:1px;">COMMANDS</div>
+            </div>
+            <div style="background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.2);border-radius:10px;padding:12px;text-align:center;">
+              <div style="font-size:20px;font-weight:800;color:#22c55e;font-family:'JetBrains Mono',monospace;" id="dd-uptime">99.9%</div>
+              <div style="font-size:9px;color:rgba(255,255,255,0.4);margin-top:2px;letter-spacing:1px;">UPTIME</div>
+            </div>
+            <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);border-radius:10px;padding:12px;text-align:center;">
+              <div style="font-size:20px;font-weight:800;color:#f59e0b;font-family:'JetBrains Mono',monospace;">2.5</div>
+              <div style="font-size:9px;color:rgba(255,255,255,0.4);margin-top:2px;letter-spacing:1px;">AI MODEL</div>
+            </div>
+          </div>
+
+          <!-- Settings -->
+          <div style="font-size:10px;letter-spacing:3px;color:rgba(255,255,255,0.3);font-family:'JetBrains Mono',monospace;margin-bottom:12px;">// BOT_SETTINGS</div>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <!-- Toggle row template -->
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 14px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:10px;">
+              <div>
+                <div style="color:#fff;font-size:12px;font-weight:600;">AI Auto-Response</div>
+                <div style="color:rgba(255,255,255,0.4);font-size:10px;margin-top:2px;">Respond to all mentions with Gemini 2.5</div>
+              </div>
+              <label style="position:relative;display:inline-block;width:40px;height:22px;cursor:pointer;">
+                <input type="checkbox" checked onchange="this.parentElement.querySelector('span').style.background=this.checked?'#22c55e':'rgba(255,255,255,0.15)'" style="opacity:0;width:0;height:0;">
+                <span style="position:absolute;inset:0;background:#22c55e;border-radius:99px;transition:background 0.2s;"></span>
+                <span style="position:absolute;top:3px;left:3px;width:16px;height:16px;background:#fff;border-radius:50%;transition:left 0.2s;"></span>
+              </label>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 14px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:10px;">
+              <div>
+                <div style="color:#fff;font-size:12px;font-weight:600;">Moderation Shield</div>
+                <div style="color:rgba(255,255,255,0.4);font-size:10px;margin-top:2px;">Auto-delete toxic messages</div>
+              </div>
+              <label style="position:relative;display:inline-block;width:40px;height:22px;cursor:pointer;">
+                <input type="checkbox" checked onchange="this.parentElement.querySelector('span').style.background=this.checked?'#22c55e':'rgba(255,255,255,0.15)'" style="opacity:0;width:0;height:0;">
+                <span style="position:absolute;inset:0;background:#22c55e;border-radius:99px;transition:background 0.2s;"></span>
+                <span style="position:absolute;top:3px;left:3px;width:16px;height:16px;background:#fff;border-radius:50%;transition:left 0.2s;"></span>
+              </label>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 14px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:10px;">
+              <div>
+                <div style="color:#fff;font-size:12px;font-weight:600;">Welcome Messages</div>
+                <div style="color:rgba(255,255,255,0.4);font-size:10px;margin-top:2px;">Send AI-generated welcome on join</div>
+              </div>
+              <label style="position:relative;display:inline-block;width:40px;height:22px;cursor:pointer;">
+                <input type="checkbox" onchange="this.parentElement.querySelector('span').style.background=this.checked?'#22c55e':'rgba(255,255,255,0.15)'" style="opacity:0;width:0;height:0;">
+                <span style="position:absolute;inset:0;background:rgba(255,255,255,0.15);border-radius:99px;transition:background 0.2s;"></span>
+                <span style="position:absolute;top:3px;left:3px;width:16px;height:16px;background:#fff;border-radius:50%;transition:left 0.2s;"></span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Footer note -->
+          <div style="margin-top:16px;padding:10px 14px;background:rgba(88,101,242,0.08);border:1px solid rgba(88,101,242,0.2);border-radius:8px;display:flex;align-items:center;gap:8px;">
+            <span style="font-size:14px;">🔗</span>
+            <div style="font-size:10px;color:rgba(255,255,255,0.5);font-family:'JetBrains Mono',monospace;">Full dashboard available at <a href="https://github.com/carbonthecoder" target="_blank" style="color:#7289da;text-decoration:none;">carbonthecoder.github.io</a> soon™</div>
+          </div>
         </div>
       </div>
     </div>
