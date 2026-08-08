@@ -4070,8 +4070,8 @@
                 -webkit-overflow-scrolling: touch;
               "
             >
-              <div id="githubCalendarContainer" style="min-width: 720px; display: flex; justify-content: center;">
-                <!-- Dynamically rendered SVG heatmap -->
+              <div id="githubCalendarContainer" style="min-width: 300px; display: flex; justify-content: center; align-items: center; min-height: 90px;">
+                <div id="ghLoadingState" style="color: rgba(255,255,255,0.3); font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 1px;">LOADING_CONTRIBUTIONS...</div>
               </div>
             </div>
 
@@ -8183,6 +8183,9 @@
         const cellGap = 2;
         const step = cellSize + cellGap;
 
+        const today = new Date();
+        today.setHours(23,59,59,999);
+
         // Build a map: date string → {count, level}
         const dayMap = {};
         dataToRender.forEach(d => { dayMap[d.date] = d; });
@@ -8192,9 +8195,12 @@
         const startSunday = new Date(firstDate);
         startSunday.setDate(firstDate.getDate() - firstDate.getDay());
 
-        const lastDate = new Date(dataToRender[dataToRender.length - 1].date + "T00:00:00");
-        const endSaturday = new Date(lastDate);
-        endSaturday.setDate(lastDate.getDate() + (6 - lastDate.getDay()));
+        // End at the earlier of: last data date OR today
+        const lastDataDate = new Date(dataToRender[dataToRender.length - 1].date + "T00:00:00");
+        const effectiveEnd = lastDataDate < today ? lastDataDate : today;
+        const endSaturday = new Date(effectiveEnd);
+        endSaturday.setDate(effectiveEnd.getDate() + (6 - effectiveEnd.getDay()));
+        if (endSaturday > today) endSaturday.setTime(today.getTime());
 
         const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 
