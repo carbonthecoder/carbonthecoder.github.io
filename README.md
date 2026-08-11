@@ -1,19 +1,29 @@
 <div align="center">
 
+# `> whoami`
+
+### **backend enthusiast & ai nerd**
+
+<br>
+
+<!-- PULSING LIVE NEON PORTAL BUTTON -->
 <a href="https://carbon-thecoder.vercel.app/">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=700&size=24&pause=1000&color=F97316&center=true&vcenter=true&width=600&lines=carbonthecoder;Backend+Enthusiast;AI+Nerd;Click+to+enter..." alt="Typing SVG" />
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=700&size=20&pause=1000&color=FF5500&center=true&vcenter=true&width=450&lines=%3E_ENTER_PORTFOLIO_CORE;%3E_INITIALIZE_UPLINK...;%3E_CLICK_TO_LAUNCH" alt="Terminal Link" />
 </a>
 
 <br><br>
 
-<a href="https://carbon-thecoder.vercel.app/">
-  <img src="https://img.shields.io/badge/ENTER_PORTFOLIO-carbon--thecoder.vercel.app-F97316?style=for-the-badge&logo=vercel&logoColor=white" alt="Portfolio Portal" />
-</a>
+<!-- RAW HTML/CSS GLITCH HOVER LINK -->
+<h2>
+  <a href="https://carbon-thecoder.vercel.app/">
+    <code>[ ⚡ carbon-thecoder.vercel.app ]</code>
+  </a>
+</h2>
 
-<br><br>
+<br>
 
-<a href="https://carbon-thecoder.vercel.app/">
-  <img src="https://komarev.com/ghpvc/?username=carbonthecoder&color=f97316&style=flat-square&label=VISITS" alt="Profile Views" />
-</a>
-
-</div>
+```sys
+--------------------------------------------------
+[SYSTEM_STATUS] : LOCKED_IN 🔒
+[PRIMARY_CORE]  : SERVER_LOGIC // AGENT_MODELS
+--------------------------------------------------
