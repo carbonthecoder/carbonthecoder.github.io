@@ -1,29 +1,24 @@
 <div align="center">
 
-# `> whoami`
-
-### **backend enthusiast & ai nerd**
+## `$ whoami`
+**backend enthusiast & ai nerd**
 
 <br>
 
-<!-- PULSING LIVE NEON PORTAL BUTTON -->
+<!-- Animated Terminal Connection Sequence -->
 <a href="https://carbon-thecoder.vercel.app/">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=700&size=20&pause=1000&color=FF5500&center=true&vcenter=true&width=450&lines=%3E_ENTER_PORTFOLIO_CORE;%3E_INITIALIZE_UPLINK...;%3E_CLICK_TO_LAUNCH" alt="Terminal Link" />
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=16&pause=800&color=A8B9CC&center=true&vcenter=true&width=450&lines=%3E_connecting_to_host...;%3E_bypassing_security...;%3E_access_granted_to_portfolio." alt="Terminal Animation" />
 </a>
 
 <br><br>
 
-<!-- RAW HTML/CSS GLITCH HOVER LINK -->
-<h2>
-  <a href="https://carbon-thecoder.vercel.app/">
-    <code>[ ⚡ carbon-thecoder.vercel.app ]</code>
-  </a>
-</h2>
+### [ ⚡ carbon-thecoder.vercel.app ](https://carbon-thecoder.vercel.app)
 
-<br>
+<br><br>
 
-```sys
---------------------------------------------------
-[SYSTEM_STATUS] : LOCKED_IN 🔒
-[PRIMARY_CORE]  : SERVER_LOGIC // AGENT_MODELS
---------------------------------------------------
+<!-- COOL ANIMATION: Just find any sick dark/cyberpunk GIF on Giphy/Pinterest and paste the image link here -->
+<a href="https://carbon-thecoder.vercel.app/">
+  <img src="https://i.pinimg.com/originals/3d/8e/ec/3d8eec7bf07073ebf1e1cbdaeb6e8e04.gif" width="450" style="border-radius: 8px;" alt="Aesthetic GIF" />
+</a>
+
+</div>
