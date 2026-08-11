@@ -1,7 +1,7 @@
 <div align="center">
 
 <a href="https://carbon-thecoder.vercel.app/">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=700&size=24&pause=1000&color=F97316&center=true&vcenter=true&width=600&lines=carbonthecoder;Backend+Enthusiast;AI+Agents+%2B+GenAI;Click+to+enter..." alt="Typing SVG" />
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=700&size=24&pause=1000&color=F97316&center=true&vcenter=true&width=600&lines=carbonthecoder;Backend+Enthusiast;AI+Nerd;Click+to+enter..." alt="Typing SVG" />
 </a>
 
 <br><br>
