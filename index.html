@@ -6168,6 +6168,7 @@
       function confirmLaunch(enableMusic) {
         // Unlock scroll after answering the prompt
         document.body.style.overflow = "";
+        document.documentElement.style.overflow = "";
         
         // Hide the music prompt
         const prompt = document.getElementById("musicPromptOverlay");
@@ -6933,6 +6934,7 @@
       const initialBootScreen = document.getElementById("bootScreen");
       if (initialBootScreen && !initialBootScreen.classList.contains("done")) {
          document.body.style.overflow = "hidden";
+         document.documentElement.style.overflow = "hidden";
       }
 
       /*  EMAIL SLIDER INTERACTIVE LOGIC  */
