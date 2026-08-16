@@ -3026,6 +3026,7 @@
         <!-- MOBILE MUSIC PLAYER TOGGLE -->
         <div class="music-mobile-controls" style="position: relative;">
           <div id="mobileMusicTooltip" style="
+            display: none !important;
             position: absolute;
             top: 40px;
             right: -20px;
@@ -3051,7 +3052,7 @@
             <span id="mobileMusicTooltipText">Check out the music player</span>
             <i class="fa-solid fa-xmark" style="cursor: pointer; opacity: 0.7; pointer-events: auto;" onclick="document.getElementById('mobileMusicTooltip').style.opacity='0'"></i>
           </div>
-          <button id="mobileMusicBtn" onclick="toggleMobilePlayer()" style="
+          <button id="mobileMusicBtn" style="
             background: transparent;
             border: none;
             color: var(--accent-color);
@@ -6091,7 +6092,8 @@
 
       let mobilePlayerTimeout;
       let _mobilePlayerListenerAttached = false;
-      function toggleMobilePlayer() {
+      function toggleMobilePlayer(e) {
+        if (e) e.preventDefault();
         const mp = document.getElementById("miniPlayer");
         if (!mp) return;
 
@@ -6912,6 +6914,12 @@
         // Use both touchstart and click to prevent double-tap issues on iOS
         mobileMenuBtn.addEventListener("touchstart", function(e) { e.preventDefault(); toggleMobileMenu(e); }, {passive: false});
         mobileMenuBtn.addEventListener("click", toggleMobileMenu);
+      }
+      
+      const mobileMusicBtnNode = document.getElementById("mobileMusicBtn");
+      if (mobileMusicBtnNode) {
+        mobileMusicBtnNode.addEventListener("touchstart", function(e) { e.preventDefault(); toggleMobilePlayer(e); }, {passive: false});
+        mobileMusicBtnNode.addEventListener("click", toggleMobilePlayer);
       }
 
       /*  MUSIC PLAYER MOBILE CLICK LOGIC  */
