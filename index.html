@@ -4074,12 +4074,8 @@
               "
             >
               <div id="githubCalendarContainer" style="min-width: 300px; text-align: center; min-height: 90px; white-space: nowrap;">
+                <div id="ghLoadingState" style="color: rgba(255,255,255,0.3); font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 1px; line-height: 90px;">LOADING_CONTRIBUTIONS...</div>
               </div>
-              <script>
-                // Dynamically load the image with a millisecond timestamp to permanently defeat caching
-                document.getElementById("githubCalendarContainer").innerHTML = 
-                  '<img src="https://ghchart.rshah.org/FF3300/carbonthecoder?v=' + Date.now() + '" alt="GitHub Contributions" style="width: 100%; max-width: 800px; margin: 0 auto; filter: hue-rotate(345deg);" />';
-              </script>
             </div>
 
             <!-- Legend & Footer -->
@@ -8508,7 +8504,7 @@
         const tt = document.createElement("div");
         tt.id = "ghTooltip";
         document.body.appendChild(tt);
-        // fetchGithubData() removed to prevent overwriting the dynamic ghchart image
+        fetchGithubData();
       });
     </script>
   </body>
