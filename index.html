@@ -4660,16 +4660,16 @@
           </div>
 
           <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; justify-content: flex-start; max-width: 650px; margin-left: auto; margin-right: auto;">
-            <button onclick="switchToolkitTab('software')" id="btn-software" class="brutal-solid" style="padding: 10px 18px; border: 1px solid var(--accent-color); background: var(--accent-color); color: #000; font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 1px; cursor: pointer; text-transform: uppercase; transition: all 0.2s;">
+            <button onclick="switchToolkitTab('software')" id="btn-software" class="toolkit-btn" style="padding: 10px 18px; border: 1px solid var(--accent-color); background: var(--accent-color); color: #000; font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 1px; cursor: pointer; text-transform: uppercase; transition: all 0.2s;">
               Software Tools
             </button>
-            <button onclick="switchToolkitTab('ai')" id="btn-ai" class="brutal-border" style="padding: 10px 18px; border: 1px solid var(--border-color); background: transparent; color: rgba(255, 255, 255, 0.5); font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 1px; cursor: pointer; text-transform: uppercase; transition: all 0.2s;">
+            <button onclick="switchToolkitTab('ai')" id="btn-ai" class="toolkit-btn" style="padding: 10px 18px; border: 1px solid var(--border-color); background: transparent; color: rgba(255, 255, 255, 0.5); font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 1px; cursor: pointer; text-transform: uppercase; transition: all 0.2s;">
               AI Tools
             </button>
-            <button onclick="switchToolkitTab('agentic')" id="btn-agentic" class="brutal-border" style="padding: 10px 18px; border: 1px solid var(--border-color); background: transparent; color: rgba(255, 255, 255, 0.5); font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 1px; cursor: pointer; text-transform: uppercase; transition: all 0.2s;">
+            <button onclick="switchToolkitTab('agentic')" id="btn-agentic" class="toolkit-btn" style="padding: 10px 18px; border: 1px solid var(--border-color); background: transparent; color: rgba(255, 255, 255, 0.5); font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 1px; cursor: pointer; text-transform: uppercase; transition: all 0.2s;">
               AI Agents
             </button>
-            <button onclick="switchToolkitTab('cli')" id="btn-cli" class="brutal-border" style="padding: 10px 18px; border: 1px solid var(--border-color); background: transparent; color: rgba(255, 255, 255, 0.5); font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 1px; cursor: pointer; text-transform: uppercase; transition: all 0.2s;">
+            <button onclick="switchToolkitTab('cli')" id="btn-cli" class="toolkit-btn" style="padding: 10px 18px; border: 1px solid var(--border-color); background: transparent; color: rgba(255, 255, 255, 0.5); font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 1px; cursor: pointer; text-transform: uppercase; transition: all 0.2s;">
               CLI & Environments
             </button>
           </div>
@@ -4807,7 +4807,7 @@
               const btns = ["btn-software", "btn-ai", "btn-agentic", "btn-cli"];
               btns.forEach(b => {
                 const el = document.getElementById(b);
-                el.className = "brutal-border";
+                el.className = "toolkit-btn";
                 el.style.background = "transparent";
                 el.style.color = "rgba(255, 255, 255, 0.5)";
                 el.style.border = "1px solid var(--border-color)";
@@ -4816,7 +4816,7 @@
               document.getElementById("toolkit-" + tabId).style.display = "block";
               
               const activeBtn = document.getElementById("btn-" + tabId);
-              activeBtn.className = "brutal-solid";
+              activeBtn.className = "toolkit-btn";
               activeBtn.style.background = "var(--accent-color)";
               activeBtn.style.color = "#000";
               activeBtn.style.border = "1px solid var(--accent-color)";
