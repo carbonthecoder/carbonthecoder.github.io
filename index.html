@@ -3888,6 +3888,91 @@
           <span class="tcursor" id="bioCursor"></span>
         </div>
 
+        <!-- Hobbies & Bucket List -->
+        <div class="reveal" style="margin-bottom: 36px; display: flex; flex-direction: column; gap: 12px; max-width: 640px;">
+          <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+            <button
+              onclick="document.getElementById('hobbiesList').classList.toggle('show-hobbies'); document.getElementById('bucketList').classList.remove('show-hobbies');"
+              class="brutal-border btn-slide-fill"
+              style="
+                background: transparent;
+                padding: 8px 16px;
+                color: var(--text-color);
+                font-family: 'JetBrains Mono', monospace;
+                font-size: 11px;
+                border: 1px solid var(--border-color);
+                cursor: pointer;
+              "
+            >
+              > run hobbies.sh
+            </button>
+            <button
+              onclick="document.getElementById('bucketList').classList.toggle('show-hobbies'); document.getElementById('hobbiesList').classList.remove('show-hobbies');"
+              class="brutal-border btn-slide-fill"
+              style="
+                background: transparent;
+                padding: 8px 16px;
+                color: var(--accent-color);
+                font-family: 'JetBrains Mono', monospace;
+                font-size: 11px;
+                border: 1px solid var(--accent-color);
+                cursor: pointer;
+              "
+            >
+              > cat bucket_list.txt
+            </button>
+          </div>
+
+          <div
+            id="hobbiesList"
+            style="
+              max-height: 0;
+              overflow: hidden;
+              transition: max-height 0.4s ease-out;
+              font-size: 12px;
+              color: rgba(255,255,255,0.7);
+              line-height: 1.8;
+            "
+          >
+            <div style="border-left: 2px solid var(--accent-color); padding-left: 16px; margin-top: 8px;">
+              <div style="color: var(--accent-color); margin-bottom: 8px;">[ Executing hobbies.sh... ]</div>
+              &bull; Reading Quran<br />
+              &bull; AI Tinkering & Backend Dev<br />
+              &bull; Web Design & Digital Art<br />
+              &bull; Cooking & Mindful Play<br />
+              &bull; Travelling & Exploring<br />
+              &bull; Sci-Fi Media, Anime & Manga<br />
+              &bull; Competitive & Story Gaming<br />
+              &bull; Curating Music Playlists<br />
+              &bull; Watching Cat Videos<br />
+            </div>
+          </div>
+
+          <div
+            id="bucketList"
+            style="
+              max-height: 0;
+              overflow: hidden;
+              transition: max-height 0.4s ease-out;
+              font-size: 12px;
+              color: rgba(255,255,255,0.7);
+              line-height: 1.8;
+            "
+          >
+            <div style="border-left: 2px solid var(--accent-color); padding-left: 16px; margin-top: 8px;">
+              <div style="color: var(--accent-color); margin-bottom: 8px;">[ Reading bucket_list.txt... ]</div>
+              &bull; Launch a successful tech startup<br />
+              &bull; Build an AI tool used by thousands<br />
+              &bull; Travel the world<br />
+              &bull; Contribute to major open-source projects<br />
+              <div style="color: rgba(255,255,255,0.3); font-size: 10px; margin-top: 8px;">// Add more targets to the queue...</div>
+            </div>
+          </div>
+        </div>
+        <style>
+          .show-hobbies { max-height: 500px !important; }
+        </style>
+
         <!-- Stats -->
         <div
           class="reveal"
