@@ -4659,14 +4659,25 @@
             THE TOOLKIT
           </div>
 
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; max-width: 650px; margin-bottom: 30px;">
-            
-            <!-- Software Tools -->
+          <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; justify-content: center;">
+            <button onclick="switchToolkitTab('software')" id="btn-software" class="brutal-solid" style="padding: 10px 18px; border: 1px solid var(--accent-color); background: var(--accent-color); color: #000; font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 1px; cursor: pointer; text-transform: uppercase; transition: all 0.2s;">
+              Software Tools
+            </button>
+            <button onclick="switchToolkitTab('ai')" id="btn-ai" class="brutal-border" style="padding: 10px 18px; border: 1px solid var(--border-color); background: transparent; color: rgba(255, 255, 255, 0.5); font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 1px; cursor: pointer; text-transform: uppercase; transition: all 0.2s;">
+              AI Tools
+            </button>
+            <button onclick="switchToolkitTab('agentic')" id="btn-agentic" class="brutal-border" style="padding: 10px 18px; border: 1px solid var(--border-color); background: transparent; color: rgba(255, 255, 255, 0.5); font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 1px; cursor: pointer; text-transform: uppercase; transition: all 0.2s;">
+              Agentic AI
+            </button>
+            <button onclick="switchToolkitTab('cli')" id="btn-cli" class="brutal-border" style="padding: 10px 18px; border: 1px solid var(--border-color); background: transparent; color: rgba(255, 255, 255, 0.5); font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 1px; cursor: pointer; text-transform: uppercase; transition: all 0.2s;">
+              CLI & Environments
+            </button>
+          </div>
+
+          <!-- Tab Contents -->
+          <div id="toolkit-software" class="toolkit-panel" style="display: block; max-width: 650px; margin-bottom: 30px; margin-left: auto; margin-right: auto;">
             <div class="brutal-border" style="padding: 16px; background: rgba(255, 255, 255, 0.01);">
-              <div style="font-size: 11px; font-weight: 800; color: #fff; letter-spacing: 1px; margin-bottom: 12px; text-transform: uppercase;">
-                Software Tools
-              </div>
-              <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+              <div style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;">
                 <div style="display: flex; align-items: center; gap: 6px; padding: 6px 10px; background: rgba(255,255,255,0.03); border-radius: 4px; font-size: 11px; border: 1px solid rgba(255,255,255,0.05);">
                   <img src="https://img.icons8.com/color/48/visual-studio-code-2019.png" style="width: 14px;" /> VS Code
                 </div>
@@ -4711,13 +4722,11 @@
                 </div>
               </div>
             </div>
+          </div>
 
-            <!-- AI Tools -->
+          <div id="toolkit-ai" class="toolkit-panel" style="display: none; max-width: 650px; margin-bottom: 30px; margin-left: auto; margin-right: auto;">
             <div class="brutal-border" style="padding: 16px; background: rgba(255, 255, 255, 0.01);">
-              <div style="font-size: 11px; font-weight: 800; color: #fff; letter-spacing: 1px; margin-bottom: 12px; text-transform: uppercase;">
-                AI Tools
-              </div>
-              <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+              <div style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;">
                 <div style="display: flex; align-items: center; gap: 6px; padding: 6px 10px; background: rgba(255,255,255,0.03); border-radius: 4px; font-size: 11px; border: 1px solid rgba(255,255,255,0.05);">
                   <img src="https://cdn.simpleicons.org/openai/ffffff" style="width: 14px;" /> ChatGPT
                 </div>
@@ -4741,13 +4750,11 @@
                 </div>
               </div>
             </div>
+          </div>
 
-            <!-- Agentic AI -->
+          <div id="toolkit-agentic" class="toolkit-panel" style="display: none; max-width: 650px; margin-bottom: 30px; margin-left: auto; margin-right: auto;">
             <div class="brutal-border" style="padding: 16px; background: rgba(255, 255, 255, 0.01);">
-              <div style="font-size: 11px; font-weight: 800; color: #22c55e; letter-spacing: 1px; margin-bottom: 12px; text-transform: uppercase;">
-                Agentic AI
-              </div>
-              <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+              <div style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;">
                 <div style="display: flex; align-items: center; gap: 6px; padding: 6px 10px; background: rgba(34,197,94,0.05); border-radius: 4px; font-size: 11px; border: 1px solid rgba(34,197,94,0.1);">
                   <img src="https://cdn.jsdelivr.net/gh/glincker/thesvg@main/public/icons/claude-code/default.svg" style="width: 14px;" /> Claude Code
                 </div>
@@ -4768,13 +4775,11 @@
                 </div>
               </div>
             </div>
+          </div>
 
-            <!-- CLI & Environments -->
+          <div id="toolkit-cli" class="toolkit-panel" style="display: none; max-width: 650px; margin-bottom: 30px; margin-left: auto; margin-right: auto;">
             <div class="brutal-border" style="padding: 16px; background: rgba(255, 255, 255, 0.01);">
-              <div style="font-size: 11px; font-weight: 800; color: #ffcc00; letter-spacing: 1px; margin-bottom: 12px; text-transform: uppercase;">
-                CLI & Environments
-              </div>
-              <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+              <div style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;">
                 <div style="display: flex; align-items: center; gap: 6px; padding: 6px 10px; background: rgba(255,204,0,0.05); border-radius: 4px; font-size: 11px; border: 1px solid rgba(255,204,0,0.1);">
                   <img src="https://cdn.simpleicons.org/linux/ffffff" style="width: 14px;" /> Linux CLI
                 </div>
@@ -4794,18 +4799,30 @@
             </div>
           </div>
 
-
           <script>
-            function openArchive() {
-              const archive = document.getElementById("archiveGrid");
-              if (archive.style.display === "none") {
-                archive.style.display = "grid";
-              } else {
-                archive.style.display = "none";
-              }
+            function switchToolkitTab(tabId) {
+              const panels = document.querySelectorAll(".toolkit-panel");
+              panels.forEach(p => p.style.display = "none");
+              
+              const btns = ["btn-software", "btn-ai", "btn-agentic", "btn-cli"];
+              btns.forEach(b => {
+                const el = document.getElementById(b);
+                el.className = "brutal-border";
+                el.style.background = "transparent";
+                el.style.color = "rgba(255, 255, 255, 0.5)";
+                el.style.border = "1px solid var(--border-color)";
+              });
+
+              document.getElementById("toolkit-" + tabId).style.display = "block";
+              
+              const activeBtn = document.getElementById("btn-" + tabId);
+              activeBtn.className = "brutal-solid";
+              activeBtn.style.background = "var(--accent-color)";
+              activeBtn.style.color = "#000";
+              activeBtn.style.border = "1px solid var(--accent-color)";
             }
           </script>
-        </div>
+
       </div>
     </section>
     <!-- ===== PROJECTS ===== -->
