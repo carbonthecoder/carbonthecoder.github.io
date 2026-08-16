@@ -6146,8 +6146,6 @@
         const boot = document.getElementById("bootScreen");
         if (boot) {
           boot.classList.add("done");
-          // Unlock scroll when boot finishes
-          document.body.style.overflow = "";
           // Hide it completely after fade
           setTimeout(() => {
             boot.style.display = "none";
@@ -6168,6 +6166,9 @@
       }
 
       function confirmLaunch(enableMusic) {
+        // Unlock scroll after answering the prompt
+        document.body.style.overflow = "";
+        
         // Hide the music prompt
         const prompt = document.getElementById("musicPromptOverlay");
         if (prompt) {
