@@ -3907,7 +3907,7 @@
               > run hobbies.sh
             </button>
             <button
-              onclick="document.getElementById('bucketList').classList.toggle('show-hobbies'); document.getElementById('hobbiesList').classList.remove('show-hobbies');"
+              onclick="checkBucketListPasscode()"
               class="brutal-border btn-slide-fill"
               style="
                 background: transparent;
@@ -3944,7 +3944,6 @@
               &bull; Sci-Fi Media, Anime & Manga<br />
               &bull; Competitive & Story Gaming<br />
               &bull; Curating Music Playlists<br />
-              &bull; Watching Cat Videos<br />
             </div>
           </div>
 
@@ -3961,7 +3960,15 @@
           >
             <div style="border-left: 2px solid var(--accent-color); padding-left: 16px; margin-top: 8px;">
               <div style="color: var(--accent-color); margin-bottom: 8px;">[ Executing bucket_list.sh... ]</div>
-              <div style="color: rgba(255,255,255,0.4); font-size: 11px; font-style: italic;">// Bucket list is currently being compiled...</div>
+              &bull; Hajj & Umrah with family<br />
+              &bull; Make my family proud enough to buy whatever they want<br />
+              &bull; Complete my 3-year roadmap with absolute consistency<br />
+              &bull; Secure a B.Tech seat in a Tier 1/Tier 2 college<br />
+              &bull; Land a paid internship or freelance project<br />
+              &bull; Build a SaaS that generates real revenue<br />
+              &bull; Hit &#8377;500k - &#8377;1M in the bank<br />
+              &bull; Help the poor and disabled<br />
+              &bull; Travel to different countries, specifically Japan<br />
             </div>
           </div>
         </div>
@@ -6924,6 +6931,27 @@
       );
       const aboutSec = document.getElementById("about");
       if (aboutSec) bioObserver.observe(aboutSec);
+
+      function checkBucketListPasscode() {
+        const bl = document.getElementById('bucketList');
+        const hl = document.getElementById('hobbiesList');
+        
+        if (bl.classList.contains('show-hobbies')) {
+          bl.classList.remove('show-hobbies');
+          return;
+        }
+
+        const pass = prompt("[ SYSTEM ALERT ] This file is encrypted. Enter passcode:");
+        if (pass === null) return;
+
+        const cleanPass = pass.toLowerCase().replace(/[^a-z]/g, '');
+        if (cleanPass === "ilovetech") {
+          bl.classList.add('show-hobbies');
+          if (hl) hl.classList.remove('show-hobbies');
+        } else {
+          alert("Access Denied! Nice try though. Hint: What's the one thing that connects us? (3 words)");
+        }
+      }
 
       /* ── QUOTE ROTATOR ── */
       const quotes = [
