@@ -3889,7 +3889,7 @@
         </div>
 
         <!-- Hobbies & Bucket List -->
-        <div class="reveal" style="margin-bottom: 36px; display: flex; flex-direction: column; gap: 12px; max-width: 640px;">
+        <div id="hobbiesContainer" style="margin-bottom: 36px; display: flex; flex-direction: column; gap: 12px; max-width: 640px; opacity: 0; transition: opacity 1s ease; pointer-events: none;">
           <div style="display: flex; gap: 12px; flex-wrap: wrap;">
             <button
               onclick="document.getElementById('hobbiesList').classList.toggle('show-hobbies'); document.getElementById('bucketList').classList.remove('show-hobbies');"
@@ -3919,7 +3919,7 @@
                 cursor: pointer;
               "
             >
-              > cat bucket_list.txt
+              > bucket_list.sh
             </button>
           </div>
 
@@ -3960,12 +3960,8 @@
             "
           >
             <div style="border-left: 2px solid var(--accent-color); padding-left: 16px; margin-top: 8px;">
-              <div style="color: var(--accent-color); margin-bottom: 8px;">[ Reading bucket_list.txt... ]</div>
-              &bull; Launch a successful tech startup<br />
-              &bull; Build an AI tool used by thousands<br />
-              &bull; Travel the world<br />
-              &bull; Contribute to major open-source projects<br />
-              <div style="color: rgba(255,255,255,0.3); font-size: 10px; margin-top: 8px;">// Add more targets to the queue...</div>
+              <div style="color: var(--accent-color); margin-bottom: 8px;">[ Executing bucket_list.sh... ]</div>
+              <div style="color: rgba(255,255,255,0.4); font-size: 11px; font-style: italic;">// Bucket list is currently being compiled...</div>
             </div>
           </div>
         </div>
@@ -6904,6 +6900,11 @@
           if (i >= bioFull.length) {
             const cur = document.getElementById("bioCursor");
             if (cur) cur.style.display = "none";
+            const hContainer = document.getElementById("hobbiesContainer");
+            if (hContainer) {
+              hContainer.style.opacity = "1";
+              hContainer.style.pointerEvents = "all";
+            }
             return;
           }
           tgt.innerHTML +=
