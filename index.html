@@ -3821,13 +3821,8 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             padding: 10px 18px;
             font-size: 12px;
-            color: rgba(255, 255, 255, 0.6);
-            margin-bottom: 24px;
-            flex-wrap: wrap;
-          "
-        >
-          <span style="color: var(--accent-color); font-size: 11px">@</span>
-          Mohammed Ibrahim &nbsp;·&nbsp; 17 y/o &nbsp;·&nbsp; Hyderabad, IN 🇮🇳
+        <div class="bio-location">
+          Mohammed Ibrahim &nbsp;•&nbsp; 16 y/o &nbsp;•&nbsp; India 🇮🇳
         </div>
 
         <!-- Languages -->
@@ -3886,15 +3881,22 @@
           "
         >
           <span id="aiBioTarget">
-            I'm a 17 y/o tech enthusiast who enjoys making things that actually
-            work — whether it's code or learning something new, I always try to
-            upskill myself.
-            <br /><br />
-            When I'm not locked in on VS Code, I'm probably touching grass,
-            binge-watching anime, or raging in competitive games.
+            I'm a 16 y/o backend developer and AI systems engineer. I focus on building robust infrastructure, learning low-level architecture, and writing clean, efficient code.<br /><br />
+            Outside of the terminal, I'm constantly researching new tech, analyzing systems, and pushing my own boundaries to build the future.
           </span>
           <span class="tcursor" id="bioCursor"></span>
         </div>
+
+          <div
+            style="border-left: 2px solid var(--accent-color); padding-left: 16px; margin-bottom: 32px;"
+          >
+            <div style="font-style: italic; color: rgba(255, 255, 255, 0.5); font-size: 13px; margin-bottom: 8px;">
+              "To achieve greatness, you must be willing to sacrifice. Nothing of true value comes for free."
+            </div>
+            <div style="font-size: 10px; color: var(--accent-color); font-weight: 800; letter-spacing: 2px;">
+              &mdash; MOHAMMED IBRAHIM
+            </div>
+          </div>
         <!-- Quote Rotator -->
         <div class="reveal" style="margin-bottom: 36px; max-width: 540px">
           <div class="quote-box" id="quoteBox">
@@ -3931,7 +3933,7 @@
                 margin-bottom: 6px;
               "
             >
-              17
+              16
             </div>
             <div
               style="
@@ -3967,7 +3969,7 @@
                 text-transform: uppercase;
               "
             >
-              Academic Validation
+              GRADE X
             </div>
           </div>
           <div
@@ -4039,6 +4041,13 @@
                 onclick="changeGithubYear('2025', this)"
               >
                 2025
+              </button>
+              <button
+                class="gh-year-btn"
+                data-year="2024"
+                onclick="changeGithubYear('2024', this)"
+              >
+                2024
               </button>
             </div>
           </div>
@@ -6817,7 +6826,7 @@
 
       /* ── AI TYPING BIO ── */
       const bioFull =
-        "I'm a 17 y/o tech enthusiast who enjoys making things that actually work — whether it's code or learning something new, I always try to upskill myself.\n\nWhen I'm not locked in on VS Code, I'm probably touching grass, binge-watching anime, or raging in competitive games.";
+        "I'm a 16 y/o backend developer and AI systems engineer. I focus on building robust infrastructure, learning low-level architecture, and writing clean, efficient code.\n\nOutside of the terminal, I'm constantly researching new tech, analyzing systems, and pushing my own boundaries to build the future.";
       let bioTyped = false;
       function startBioTyping() {
         if (bioTyped) return;
@@ -8394,14 +8403,15 @@
       async function fetchGithubData() {
         try {
           // Fetch both years
-          const [data2026, data2025] = await Promise.all([
+          const [data2026, data2025, data2024] = await Promise.all([
             fetchGithubYear("2026"),
-            fetchGithubYear("2025")
+            fetchGithubYear("2025"),
+            fetchGithubYear("2024")
           ]);
 
           githubRawData = {
-            total: { "2026": data2026.total, "2025": data2025.total },
-            contributions: [...data2026.contributions, ...data2025.contributions]
+            total: { "2026": data2026.total, "2025": data2025.total, "2024": data2024.total },
+            contributions: [...data2026.contributions, ...data2025.contributions, ...data2024.contributions]
           };
         } catch (e) {
           console.warn("GitHub scrape failed, trying jogruber API...", e);
