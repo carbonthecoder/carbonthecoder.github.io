@@ -7792,34 +7792,7 @@
       Select a network below to copy the address!
     </div>
 
-    <!-- Auto Donation Popup -->
-    <div id="donationPopup" style="
-      position: fixed;
-      bottom: 24px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 90%;
-      max-width: 320px;
-      background: rgba(25, 25, 25, 0.85);
-      backdrop-filter: blur(16px) saturate(180%);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-      z-index: 99998;
-      display: none;
-      overflow: hidden;
-      border-radius: 12px;
-      padding: 16px;
-      opacity: 0;
-      transition: opacity 0.3s;
-    ">
-      <button onclick="closeDonationPopup()" style="position: absolute; top: 8px; right: 8px; background: transparent; border: none; color: rgba(255,255,255,0.5); cursor: pointer; font-size: 18px; transition: color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">&times;</button>
-      <div style="font-weight: 900; font-size: 14px; margin-bottom: 8px; color: #fff;">Support the Mainframe</div>
-      <div style="font-size: 12px; color: rgba(255,255,255,0.7); margin-bottom: 16px; line-height: 1.4;">
-        If you're enjoying the experience, consider dropping a small tip to keep the servers running!
-      </div>
-      <button onclick="openCryptoModal(); closeDonationPopup();" style="width: 100%; padding: 10px; background: var(--accent-color); color: #000; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 12px; letter-spacing: 1px;">FUND MAINFRAME</button>
-      <div style="position: absolute; bottom: 0; left: 0; height: 3px; background: var(--accent-color); width: 100%; animation: popupProgress 5s linear forwards;"></div>
-    </div>
+    <!-- Auto Donation Popup Removed -->
 
     <script>
       function openCryptoModal() {
@@ -7876,40 +7849,7 @@
         }, 2000);
       }
 
-      // Auto Donation Popup logic
-      let donationPopupShown = false;
-      function closeDonationPopup() {
-        const popup = document.getElementById('donationPopup');
-        if(popup) {
-          popup.style.opacity = '0';
-          setTimeout(() => { popup.style.display = 'none'; }, 300);
-        }
-      }
-      
-      function showPopup(durationSecs) {
-        const popup = document.getElementById('donationPopup');
-        if(popup) {
-          // Re-trigger animation
-          const bar = popup.querySelector('div[style*="popupProgress"]');
-          if(bar) {
-            bar.style.animation = 'none';
-            bar.offsetHeight; /* trigger reflow */
-            bar.style.animation = `popupProgress ${durationSecs}s linear forwards`;
-          }
-          popup.style.display = 'block';
-          setTimeout(() => { popup.style.opacity = '1'; }, 10);
-          setTimeout(() => { closeDonationPopup(); }, durationSecs * 1000);
-        }
-      }
-
-      // 60s (1 min) popup for 10s
-      setTimeout(() => {
-        showPopup(10);
-        // After another 120s (2 mins), show again for 10s
-        setTimeout(() => {
-          showPopup(10);
-        }, 120000);
-      }, 60000);
+      // Auto Donation Popup Removed
     </script>
     <script>
       let bruhPlayed = false;
