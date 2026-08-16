@@ -2560,16 +2560,16 @@
         height: 54px;
         width: calc(100% - 32px);
         max-width: 1000px;
-        background: rgba(10, 10, 20, 0.5);
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(15, 15, 20, 0.7);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.15);
         border-radius: 100px;
         display: flex;
         align-items: center;
         padding: 0 24px;
         z-index: 700;
-        box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+        box-shadow: 0 10px 40px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.1);
       "
     >
       <span
@@ -2708,17 +2708,26 @@
         <div style="position: relative">
           <button
             id="paletteBtn"
-            class="brutal-border btn-slide-fill"
             style="
-              background: transparent;
-              padding: 4px 8px;
-              font-size: 9px;
-              letter-spacing: 1px;
-              color: rgba(255, 255, 255, 0.7);
+              background: rgba(255, 255, 255, 0.05);
+              padding: 8px 16px;
+              color: var(--text-color);
+              font-family: 'JetBrains Mono', monospace;
+              font-size: 11px;
+              font-weight: 800;
+              border: 1px solid rgba(255, 255, 255, 0.1);
+              border-radius: 100px;
               cursor: pointer;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+              transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+              box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             "
+            onmouseover="this.style.background='var(--accent-color)'; this.style.color='#000'; this.style.borderColor='var(--accent-color)'; this.style.boxShadow='0 4px 16px var(--accent-color)';"
+            onmouseout="this.style.background='rgba(255, 255, 255, 0.05)'; this.style.color='var(--text-color)'; this.style.borderColor='rgba(255, 255, 255, 0.1)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)';"
           >
-            🎨 PALETTE
+            <i class="fas fa-palette"></i> THEME
           </button>
           <div id="paletteDropdown" class="palette-dropdown">
             <div
@@ -3062,15 +3071,23 @@
             <i class="fa-solid fa-xmark" style="cursor: pointer; opacity: 0.7; pointer-events: auto;" onclick="document.getElementById('mobileMusicTooltip').style.opacity='0'"></i>
           </div>
           <button id="mobileMusicBtn" style="
-            background: transparent;
-            border: none;
-            color: var(--accent-color);
-            cursor: pointer;
-            font-size: 16px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--text-color);
+            width: 36px;
+            height: 36px;
             display: flex;
             align-items: center;
             justify-content: center;
-          ">
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            margin-left: 24px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+          "
+          onmouseover="this.style.background='var(--accent-color)'; this.style.color='#000'; this.style.transform='rotate(90deg) scale(1.1)';"
+          onmouseout="this.style.background='rgba(255,255,255,0.05)'; this.style.color='var(--text-color)'; this.style.transform='rotate(0deg) scale(1)';"
+        >
             <i id="mobileMusicIcon" class="fa-solid fa-compact-disc"></i>
             <div id="mobileVisualizer" class="visualizer" style="height: 16px; margin-left: 2px;"><span></span><span></span><span></span><span></span><span></span></div>
           </button>
