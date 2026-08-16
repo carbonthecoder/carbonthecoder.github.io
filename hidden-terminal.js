@@ -27,15 +27,15 @@
   function createTerminal() {
     terminalElement = document.createElement("div");
     terminalElement.id = "secret-terminal";
-    terminalElement.style.cssText = \`
+    terminalElement.style.cssText = `
       position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
       background: rgba(0, 0, 0, 0.95); z-index: 100000;
       color: #00FF00; font-family: 'Courier New', Courier, monospace; font-size: 16px;
       padding: 20px; box-sizing: border-box; overflow-y: auto; display: none;
       backdrop-filter: blur(5px);
-    \`;
+    `;
 
-    terminalElement.innerHTML = \`
+    terminalElement.innerHTML = `
       <div>[SYSTEM BOOT] Welcome to Ibrahim's internal server...</div>
       <div>Type 'help' for a list of commands.</div>
       <br/>
@@ -45,7 +45,7 @@
         <input type="text" id="term-input" autocomplete="off" spellcheck="false" autofocus
           style="background: transparent; border: none; color: #00FF00; font-family: inherit; font-size: inherit; outline: none; flex-grow: 1; width: 100%;" />
       </div>
-    \`;
+    `;
 
     document.body.appendChild(terminalElement);
     outputElement = document.getElementById("term-output");

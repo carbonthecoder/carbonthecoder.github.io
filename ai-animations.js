@@ -117,10 +117,10 @@
 
   const aurora = document.createElement("div");
   aurora.className = "aurora-bg";
-  aurora.innerHTML = \`
+  aurora.innerHTML = `
     <div class="aurora-orb orb-1"></div>
     <div class="aurora-orb orb-2"></div>
-  \`;
+  `;
   document.body.prepend(aurora);
 
   // Hide the old gamey canvas

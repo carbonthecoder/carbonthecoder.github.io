@@ -125,7 +125,7 @@
         
         // Pull element slightly towards mouse (only for small items like buttons/links)
         if (el.tagName === 'A' || el.tagName === 'BUTTON') {
-          el.style.transform = \`translate(\${distX * 0.2}px, \${distY * 0.2}px)\`;
+          el.style.transform = `translate(${distX * 0.2}px, ${distY * 0.2}px)`;
         }
       });
     });
