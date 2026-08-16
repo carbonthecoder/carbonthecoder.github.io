@@ -1833,7 +1833,8 @@
         height: 28px;
       }
 
-      .music-mini-player-container:hover .music-trigger {
+      .music-mini-player-container:hover .music-trigger,
+      .music-mini-player-container.open .music-trigger {
         border-color: var(--accent-color);
         color: var(--text-color);
       }
@@ -1861,7 +1862,8 @@
         z-index: 1000;
       }
 
-      .music-mini-player-container:hover .music-dropdown {
+      .music-mini-player-container:hover .music-dropdown,
+      .music-mini-player-container.open .music-dropdown {
         opacity: 1;
         visibility: visible;
         transform: translateY(0);
@@ -6144,6 +6146,8 @@
         const boot = document.getElementById("bootScreen");
         if (boot) {
           boot.classList.add("done");
+          // Unlock scroll when boot finishes
+          document.body.style.overflow = "";
           // Hide it completely after fade
           setTimeout(() => {
             boot.style.display = "none";
@@ -6878,8 +6882,12 @@
         "mobileThemesContainer",
       );
 
-      function toggleMobileMenu() {
-        if (mobileMenuDropdown.style.display === "flex") {
+      function toggleMobileMenu(e) {
+        if (e) e.preventDefault();
+        // Get the computed style to avoid first-click failures if it was hidden via CSS classes initially
+        const isHidden = window.getComputedStyle(mobileMenuDropdown).display === "none";
+        
+        if (!isHidden) {
           mobileMenuDropdown.style.display = "none";
           mobileThemesContainer.style.display = "none";
           mobileMenuBtn.innerHTML = '<i class="fa-solid fa-bars"></i>';
@@ -6899,10 +6907,34 @@
       }
 
       if (mobileMenuBtn) {
+        // Use both touchstart and click to prevent double-tap issues on iOS
+        mobileMenuBtn.addEventListener("touchstart", function(e) { e.preventDefault(); toggleMobileMenu(e); }, {passive: false});
         mobileMenuBtn.addEventListener("click", toggleMobileMenu);
       }
 
-      /* ── EMAIL SLIDER INTERACTIVE LOGIC ── */
+      /*  MUSIC PLAYER MOBILE CLICK LOGIC  */
+      const musicContainer = document.querySelector(".music-mini-player-container");
+      if (musicContainer) {
+        musicContainer.addEventListener("click", function(e) {
+          // Toggle open class on click
+          this.classList.toggle("open");
+          e.stopPropagation(); // prevent document click from firing immediately
+        });
+        // Close when tapping anywhere else on the screen
+        document.addEventListener("click", function(e) {
+          if (musicContainer.classList.contains("open") && !musicContainer.contains(e.target)) {
+            musicContainer.classList.remove("open");
+          }
+        });
+      }
+
+      /*  BOOT SCREEN INITIAL SCROLL LOCK  */
+      const initialBootScreen = document.getElementById("bootScreen");
+      if (initialBootScreen && !initialBootScreen.classList.contains("done")) {
+         document.body.style.overflow = "hidden";
+      }
+
+      /*  EMAIL SLIDER INTERACTIVE LOGIC  */
       const mailSlider = document.getElementById("mailSlider");
       const sliderThumb = document.getElementById("sliderThumb");
       const sliderFill = document.getElementById("sliderFill");
