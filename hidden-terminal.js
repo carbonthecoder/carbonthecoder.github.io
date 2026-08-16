@@ -110,4 +110,20 @@
     }
   });
 
+  // Triple Click Secret Trigger (For Mobile / Non-US Keyboards)
+  let clickCount = 0;
+  let clickTimer = null;
+  document.addEventListener("click", function(e) {
+    // Ignore clicks inside the terminal itself
+    if (terminalElement && terminalElement.contains(e.target)) return;
+    
+    clickCount++;
+    if (clickCount === 3) {
+      toggleTerminal();
+      clickCount = 0;
+    }
+    clearTimeout(clickTimer);
+    clickTimer = setTimeout(() => { clickCount = 0; }, 600);
+  });
+
 })();
