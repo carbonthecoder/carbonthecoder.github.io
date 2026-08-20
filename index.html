@@ -217,6 +217,54 @@
         #contact { z-index: 5; }
       }
 
+      
+      /* --- SKILLS SECTION IMAGE & GLOW EFFECT --- */
+      #skills {
+        position: relative;
+        background-image: url('assets/stitch_extract/download.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+      
+      /* Dark Overlay to make text perfectly readable */
+      #skills::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(10, 10, 10, 0.82); /* Deep dark overlay */
+        z-index: 0;
+        border-top-left-radius: inherit;
+        border-top-right-radius: inherit;
+      }
+
+      /* Pulsing Bright Light Effect where the hands point */
+      #skills::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        /* Dynamic glowing light from the center */
+        background: radial-gradient(circle at 50% 40%, rgba(255, 255, 255, 0.15), transparent 50%);
+        animation: pulseLight 2.5s infinite alternate ease-in-out;
+        z-index: 0;
+        mix-blend-mode: screen;
+        pointer-events: none;
+        border-top-left-radius: inherit;
+        border-top-right-radius: inherit;
+      }
+
+      @keyframes pulseLight {
+        0% { opacity: 0.6; transform: scale(0.95); filter: brightness(1) blur(0px); }
+        100% { opacity: 1; transform: scale(1.05); filter: brightness(1.8) blur(4px); }
+      }
+
+      /* Ensure all content stays above the overlays */
+      #skills > div {
+        position: relative;
+        z-index: 2;
+        text-shadow: 0 2px 10px rgba(0,0,0,0.8); /* Extra legibility */
+      }
+
       /* Premium Animations & Effects */
       .scroll-fade {
         opacity: 0;
