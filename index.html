@@ -3768,6 +3768,16 @@
             </button>
           </div>
         </div>
+        <div style="display: flex; justify-content: center; align-items: center; position: relative;">
+          <video 
+            id="asciiHomeVideo" 
+            src="assets/home_ascii_art.mp4" 
+            muted 
+            playsinline 
+            style="width: 100%; max-width: 500px; height: auto; border-radius: 12px; object-fit: contain; pointer-events: none;"
+          ></video>
+        </div>
+
       </div>
     </section>
 
@@ -8311,5 +8321,27 @@
         fetchGithubData();
       });
     </script>
-  </body>
+  
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const asciiVideo = document.getElementById("asciiHomeVideo");
+        if (asciiVideo) {
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                // When user scrolls back, play it
+                asciiVideo.play().catch(e => console.log("Video play prevented", e));
+              } else {
+                // When user scrolls away, pause it
+                asciiVideo.pause();
+                asciiVideo.currentTime = 0; // "play then stop" (start from beginning)
+              }
+            });
+          }, { threshold: 0.1 });
+          
+          observer.observe(asciiVideo);
+        }
+      });
+    </script>
+</body>
 </html>
