@@ -2058,6 +2058,56 @@
       }
     </style>
 
+  
+    <style id="modern-header-and-mobile-padding">
+      /* Modern Floating Glass Navbar Styling */
+      .nav-links-desktop a {
+        font-family: system-ui, -apple-system, sans-serif !important;
+        font-size: 12px !important;
+        font-weight: 700 !important;
+        letter-spacing: 1.5px !important;
+        color: rgba(255, 255, 255, 0.7) !important;
+        text-decoration: none !important;
+        text-transform: uppercase !important;
+        padding: 7px 16px !important;
+        border-radius: 20px !important;
+        background: transparent;
+        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+      }
+
+      .nav-links-desktop a:hover {
+        color: #ffffff !important;
+        background: rgba(255, 255, 255, 0.08) !important;
+        transform: translateY(-1px);
+      }
+
+      .nav-links-desktop a.active, #mobileMenuDropdown a.active {
+        color: #000000 !important;
+        background: var(--accent-color) !important;
+        font-weight: 800 !important;
+        box-shadow: 0 0 16px rgba(0, 255, 255, 0.4) !important;
+      }
+
+      /* Mobile Top Padding Fix - Pushes text cleanly below header */
+      @media (max-width: 768px) {
+        nav {
+          height: 56px !important;
+          padding: 0 16px !important;
+        }
+
+        #mobileMenuDropdown {
+          top: 56px !important;
+        }
+
+        section, #home, .active-page-section {
+          padding-top: 96px !important;
+          padding-bottom: 40px !important;
+          padding-left: 20px !important;
+          padding-right: 20px !important;
+        }
+      }
+    </style>
+
   </head>
   <body class="text-white">
     <!-- CANVAS BACKGROUND -->
