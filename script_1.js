@@ -872,29 +872,15 @@
         if (bioTyped) return;
         bioTyped = true;
         const tgt = document.getElementById("aiBioTarget");
-        if (!tgt) return;
-        tgt.innerHTML = ""; // Prevent duplication by clearing the pre-loaded HTML
-        let i = 0;
-        function typeChar() {
-          if (i >= bioFull.length) {
-            const cur = document.getElementById("bioCursor");
-            if (cur) cur.style.display = "none";
-            const hContainer = document.getElementById("hobbiesContainer");
-            if (hContainer) {
-              hContainer.style.opacity = "1";
-              hContainer.style.pointerEvents = "all";
-            }
-            return;
-          }
-          tgt.innerHTML +=
-            bioFull.charAt(i) === "\n" ? "<br>" : bioFull.charAt(i);
-          i++;
-          setTimeout(typeChar, 14 + Math.random() * 16);
+        const cur = document.getElementById("bioCursor");
+        const hContainer = document.getElementById("hobbiesContainer");
+
+        if (cur) cur.style.display = "none";
+        if (hContainer) {
+          hContainer.style.opacity = "1";
+          hContainer.style.pointerEvents = "all";
         }
-        typeChar();
       }
-      // Start typing after a short delay
-      setTimeout(startBioTyping, 800);
       const bioObserver = new IntersectionObserver(
         (entries) => {
           if (entries[0].isIntersecting && !bioTyped) startBioTyping();
