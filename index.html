@@ -152,6 +152,47 @@
         100% { opacity: 0; transform: scale(1); filter: contrast(1); }
       }
 
+      
+      /* --- BRAND SPECIFIC FLIP CARDS --- */
+      .flip-back {
+        transition: all 0.3s ease;
+      }
+      .flip-card[data-brand="github"]:hover .flip-back {
+        background: rgba(255, 255, 255, 0.1) !important;
+        border-color: #ffffff !important;
+        box-shadow: 0 0 16px rgba(255, 255, 255, 0.4);
+        color: #ffffff !important;
+        text-shadow: 0 0 8px #ffffff;
+      }
+      .flip-card[data-brand="linkedin"]:hover .flip-back {
+        background: rgba(0, 119, 181, 0.15) !important;
+        border-color: #0077b5 !important;
+        box-shadow: 0 0 16px rgba(0, 119, 181, 0.5);
+        color: #0077b5 !important;
+        text-shadow: 0 0 8px #0077b5;
+      }
+      .flip-card[data-brand="twitter"]:hover .flip-back {
+        background: rgba(29, 161, 242, 0.15) !important;
+        border-color: #1DA1F2 !important;
+        box-shadow: 0 0 16px rgba(29, 161, 242, 0.5);
+        color: #1DA1F2 !important;
+        text-shadow: 0 0 8px #1DA1F2;
+      }
+      .flip-card[data-brand="stackoverflow"]:hover .flip-back {
+        background: rgba(245, 128, 37, 0.15) !important;
+        border-color: #f58025 !important;
+        box-shadow: 0 0 16px rgba(245, 128, 37, 0.5);
+        color: #f58025 !important;
+        text-shadow: 0 0 8px #f58025;
+      }
+      .flip-card[data-brand="leetcode"]:hover .flip-back {
+        background: rgba(255, 161, 22, 0.15) !important;
+        border-color: #ffa116 !important;
+        box-shadow: 0 0 16px rgba(255, 161, 22, 0.5);
+        color: #ffa116 !important;
+        text-shadow: 0 0 8px #ffa116;
+      }
+
       /* Premium Animations & Effects */
       .scroll-fade {
         opacity: 0;
@@ -5454,7 +5495,7 @@
                 </div>
               </a>
 
-              <a class="flip-card" href="https://github.com/carbonthecoder" target="_blank" style="text-decoration: none">
+              <a class="flip-card" data-brand="github" href="https://github.com/carbonthecoder" target="_blank" style="text-decoration: none">
                 <div class="flip-inner">
                   <div class="flip-front">
                     <img src="https://cdn.simpleicons.org/github/ffffff" style="width: 20px; height: 20px" alt="" />
@@ -5467,7 +5508,7 @@
                 </div>
               </a>
 
-              <a class="flip-card" href="https://www.linkedin.com/in/mohammed-ibrahim-486782416/" target="_blank" style="text-decoration: none">
+              <a class="flip-card" data-brand="linkedin" href="https://www.linkedin.com/in/mohammed-ibrahim-486782416/" target="_blank" style="text-decoration: none">
                 <div class="flip-inner">
                   <div class="flip-front">
                     <img src="https://img.icons8.com/ios-filled/50/ffffff/linkedin.png" style="width: 20px; height: 20px" alt="" />
@@ -5480,7 +5521,7 @@
                 </div>
               </a>
 
-              <a class="flip-card" href="https://x.com/carb0nthecoder" target="_blank" style="text-decoration: none">
+              <a class="flip-card" data-brand="twitter" href="https://x.com/carb0nthecoder" target="_blank" style="text-decoration: none">
                 <div class="flip-inner">
                   <div class="flip-front">
                     <img src="https://cdn.simpleicons.org/x/ffffff" style="width: 20px; height: 20px" alt="" />
@@ -5493,7 +5534,7 @@
                 </div>
               </a>
 
-              <a class="flip-card" href="https://stackoverflow.com/users/32973183/carbonthecoder" target="_blank" style="text-decoration: none">
+              <a class="flip-card" data-brand="stackoverflow" href="https://stackoverflow.com/users/32973183/carbonthecoder" target="_blank" style="text-decoration: none">
                 <div class="flip-inner">
                   <div class="flip-front">
                     <img src="https://cdn.simpleicons.org/stackoverflow/f58025" style="width: 20px; height: 20px" alt="" />
@@ -5506,7 +5547,7 @@
                 </div>
               </a>
 
-              <a class="flip-card" href="https://leetcode.com/u/carbonthecoder/" target="_blank" style="text-decoration: none">
+              <a class="flip-card" data-brand="leetcode" href="https://leetcode.com/u/carbonthecoder/" target="_blank" style="text-decoration: none">
                 <div class="flip-inner">
                   <div class="flip-front">
                     <img src="https://cdn.simpleicons.org/leetcode/ffa116" style="width: 20px; height: 20px" alt="" />
