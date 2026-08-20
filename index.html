@@ -8692,5 +8692,90 @@
       });
     </script>
 
+
+<script>
+// --- Added by antigravity: Feature Updates & Scroll Spy ---
+document.addEventListener("DOMContentLoaded", () => {
+    // 1. Skill Bars Percentage & Animation
+    const langBars = document.querySelectorAll('.lang-bar');
+    const skillObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const fill = entry.target.querySelector('.lang-fill');
+          if (fill && fill.getAttribute('data-width')) {
+            fill.style.width = fill.getAttribute('data-width');
+            fill.style.boxShadow = `0 0 12px ${fill.style.backgroundColor || 'var(--accent-color)'}`;
+          }
+        }
+      });
+    }, { threshold: 0.1 });
+
+    langBars.forEach(bar => {
+      const fill = bar.querySelector('.lang-fill');
+      if (fill) {
+        const w = fill.style.width;
+        fill.setAttribute('data-width', w);
+        fill.style.width = '0%';
+        
+        const parent = bar.previousElementSibling;
+        if (parent) {
+          const textSpan = parent.lastElementChild;
+          if (textSpan && textSpan.innerText.includes('1-UP')) {
+            textSpan.innerHTML = `<span style="color:var(--accent-color); font-weight:800; font-family:'JetBrains Mono', monospace;">${w}</span> <span style="opacity:0.5; margin:0 4px;">&bull;</span> 1-UP`;
+          }
+        }
+        fill.style.background = `linear-gradient(90deg, transparent, ${fill.style.backgroundColor})`;
+        skillObserver.observe(bar);
+      }
+    });
+
+    // 2. Project card tag styling upgrade
+    document.querySelectorAll('.project-card').forEach(card => {
+       const tags = card.querySelectorAll('span');
+       tags.forEach(tag => {
+          if (tag.style.border && tag.style.fontSize) {
+             tag.style.background = 'rgba(255, 255, 255, 0.05)';
+             tag.style.border = '1px solid rgba(255, 255, 255, 0.15)';
+             tag.style.borderRadius = '12px';
+             tag.style.padding = '4px 10px';
+             tag.style.color = '#fff';
+             tag.style.transition = 'all 0.2s';
+             tag.onmouseover = () => { tag.style.borderColor = 'var(--accent-color)'; tag.style.boxShadow = '0 0 8px var(--accent-color)'; };
+             tag.onmouseout = () => { tag.style.borderColor = 'rgba(255, 255, 255, 0.15)'; tag.style.boxShadow = 'none'; };
+          }
+       });
+    });
+
+    // 3. Header Scroll Spy
+    const dLinks = document.querySelectorAll('.desktop-nav-link');
+    const sections = Array.from(dLinks).map(a => {
+       const href = a.getAttribute('href');
+       return href ? document.querySelector(href) : null;
+    }).filter(Boolean);
+
+    const spyOptions = {
+      root: null,
+      rootMargin: '-30% 0px -60% 0px',
+      threshold: 0
+    };
+
+    const spyObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          dLinks.forEach(link => {
+            if (link.getAttribute('href') === '#' + entry.target.id) {
+              link.classList.add('nav-active');
+            } else {
+              link.classList.remove('nav-active');
+            }
+          });
+        }
+      });
+    }, spyOptions);
+
+    sections.forEach(sec => spyObserver.observe(sec));
+});
+</script>
 </body>
+
 </html>
