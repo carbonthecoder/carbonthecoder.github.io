@@ -193,6 +193,30 @@
         text-shadow: 0 0 8px #ffa116;
       }
 
+      
+      /* --- IOS STACKING SECTIONS (PC ONLY) --- */
+      @media (min-width: 769px) {
+        section {
+          background-color: var(--bg-color); /* Must be solid to hide sections beneath */
+          transition: background-color 0.3s ease; /* For theme switches */
+        }
+        
+        /* Add the curve to all sections except home */
+        section:not(#home) {
+          border-top-left-radius: 40px;
+          border-top-right-radius: 40px;
+          box-shadow: 0 -20px 50px rgba(0,0,0,0.5);
+          border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Enforce stacking order */
+        #home { z-index: 1; }
+        #about { z-index: 2; }
+        #skills { z-index: 3; }
+        #projects { z-index: 4; }
+        #contact { z-index: 5; }
+      }
+
       /* Premium Animations & Effects */
       .scroll-fade {
         opacity: 0;
@@ -8797,6 +8821,39 @@ document.addEventListener("DOMContentLoaded", () => {
           }
        });
     });
+
+    
+    // --- Added by antigravity: iOS Stacking Cards Logic ---
+    function updateStackingCards() {
+        if (window.innerWidth > 768) {
+            document.querySelectorAll('section').forEach((sec) => {
+                sec.style.position = 'sticky';
+                // If section is taller than viewport, stick it when its BOTTOM hits the viewport bottom
+                const h = sec.offsetHeight;
+                const vh = window.innerHeight;
+                if (h > vh) {
+                    sec.style.top = `calc(100vh - ${h}px)`;
+                } else {
+                    // If it fits in viewport, stick it at the top
+                    // Or add a little offset (like 60px) for the header?
+                    // The user's header is fixed, so let's stick at top: 0
+                    sec.style.top = '0px';
+                }
+            });
+        } else {
+            // Remove sticky on mobile
+            document.querySelectorAll('section').forEach(sec => {
+                sec.style.position = 'static';
+                sec.style.top = 'auto';
+            });
+        }
+    }
+    
+    // Run on load and resize
+    window.addEventListener('resize', updateStackingCards);
+    // Use a small timeout to let fonts/images load and calculate correct heights
+    setTimeout(updateStackingCards, 100);
+    setTimeout(updateStackingCards, 1000);
 
     // 3. Header Scroll Spy
     const dLinks = document.querySelectorAll('.desktop-nav-link');
