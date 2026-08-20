@@ -3843,7 +3843,8 @@
         <div style="display: flex; justify-content: center; align-items: center; position: relative;">
           <video 
             id="asciiHomeVideo" 
-            src="assets/home_ascii_art.mp4?v=11" 
+            src="assets/home_ascii_art.mp4?v=12" 
+            preload="auto"
             muted 
             playsinline 
             style="width: 100%; max-width: 500px; height: auto; border-radius: 12px; object-fit: contain; pointer-events: none;"
@@ -6025,6 +6026,7 @@
         }
 
         sfx.init();
+        if (typeof window.playHeroVideoOnce === "function") window.playHeroVideoOnce();
 
         if (enableMusic && !isPlaying) {
           mbToggle();
@@ -8364,22 +8366,36 @@
     <script>
       document.addEventListener("DOMContentLoaded", () => {
         const asciiVideo = document.getElementById("asciiHomeVideo");
-        if (asciiVideo) {
-          const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                // When user scrolls back, play it
-                asciiVideo.play().catch(e => console.log("Video play prevented", e));
-              } else {
-                // When user scrolls away, pause it
-                asciiVideo.pause();
-                asciiVideo.currentTime = 0; // "play then stop" (start from beginning)
+        if (!asciiVideo) return;
+
+        // Ensure video does NOT loop continuously
+        asciiVideo.loop = false;
+
+        let hasLeftHome = false;
+
+        window.playHeroVideoOnce = function() {
+          if (!asciiVideo) return;
+          asciiVideo.currentTime = 0;
+          asciiVideo.play().catch(e => console.log("Video play prevented", e));
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              // If user scrolled down and came back up to home section
+              if (hasLeftHome) {
+                window.playHeroVideoOnce();
               }
-            });
-          }, { threshold: 0.1 });
-          
-          observer.observe(asciiVideo);
-        }
+            } else {
+              // When user scrolls away from home page, stop video and mark left
+              hasLeftHome = true;
+              asciiVideo.pause();
+              asciiVideo.currentTime = 0;
+            }
+          });
+        }, { threshold: 0.2 });
+
+        observer.observe(asciiVideo);
       });
     </script>
 </body>
