@@ -642,8 +642,9 @@
         transition: transform 0.1s ease, stroke 0.1s ease, opacity 0.15s ease;
       }
       .gh-cell:hover {
-        stroke: #ffffff;
+        stroke: var(--accent-color);
         stroke-width: 1.5px;
+        filter: drop-shadow(0 0 5px var(--accent-color));
       }
       #ghTooltip {
         position: fixed;
@@ -686,11 +687,17 @@
       /* Project Cards */
       .project-card {
         background: rgba(255, 255, 255, 0.02);
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
         padding: 20px;
-        transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         position: relative;
         overflow: hidden;
+      }
+      .project-card:hover {
+        transform: translateY(-6px) scale(1.01);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.5), 0 0 15px rgba(255,255,255,0.05);
       }
       .project-card::before {
         content: "";
@@ -769,14 +776,19 @@
         border-radius: 50%;
         background: var(--accent-color);
         border: 2px solid #000;
-        box-shadow: 0 0 8px rgba(255, 51, 0, 0.5);
+        box-shadow: 0 0 12px var(--accent-color);
       }
       .timeline-year {
         font-size: 10px;
         color: var(--accent-color);
         letter-spacing: 2px;
         font-weight: 700;
-        margin-bottom: 6px;
+        margin-bottom: 12px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid var(--border-color);
+        padding: 4px 10px;
+        border-radius: 4px;
+        display: inline-block;
       }
       .timeline-text {
         font-size: 13px;
@@ -4378,7 +4390,7 @@
                 -webkit-overflow-scrolling: touch;
               "
             >
-              <div id="githubCalendarContainer" style="min-width: 300px; text-align: center; min-height: 90px; white-space: nowrap;">
+              <div id="githubCalendarContainer" style="min-width: 300px; text-align: center; min-height: 90px; white-space: nowrap; overflow-x: auto; max-width: 100%; padding-bottom: 10px; scrollbar-width: thin;">
                 <div id="ghLoadingState" style="color: rgba(255,255,255,0.3); font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 1px; line-height: 90px;">LOADING_CONTRIBUTIONS...</div>
               </div>
             </div>
@@ -5483,8 +5495,8 @@
                 type="text"
                 placeholder="WHO DIS? (Name)"
                 style="padding: 16px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.1); color: #fff; font-family: 'JetBrains Mono', monospace; font-size: 12px; outline: none; transition: border-color 0.2s;"
-                onfocus="this.style.borderColor='var(--accent-color)'"
-                onblur="this.style.borderColor='rgba(255,255,255,0.1)'"
+                onfocus="this.style.borderColor='var(--accent-color)'; this.style.boxShadow='0 0 10px var(--accent-color)'; this.style.outline='none';"
+                onblur="this.style.borderColor='rgba(255,255,255,0.1)'; this.style.boxShadow='none';"
                 required
               />
               <input
@@ -5492,8 +5504,8 @@
                 type="email"
                 placeholder="WHERE CAN I PING YOU? (Email)"
                 style="padding: 16px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.1); color: #fff; font-family: 'JetBrains Mono', monospace; font-size: 12px; outline: none; transition: border-color 0.2s;"
-                onfocus="this.style.borderColor='var(--accent-color)'"
-                onblur="this.style.borderColor='rgba(255,255,255,0.1)'"
+                onfocus="this.style.borderColor='var(--accent-color)'; this.style.boxShadow='0 0 10px var(--accent-color)'; this.style.outline='none';"
+                onblur="this.style.borderColor='rgba(255,255,255,0.1)'; this.style.boxShadow='none';"
                 required
               />
               <textarea
@@ -5501,8 +5513,8 @@
                 placeholder="WHAT'S GOOD? (Message)"
                 rows="5"
                 style="padding: 16px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.1); color: #fff; font-family: 'JetBrains Mono', monospace; font-size: 12px; outline: none; resize: vertical; transition: border-color 0.2s;"
-                onfocus="this.style.borderColor='var(--accent-color)'"
-                onblur="this.style.borderColor='rgba(255,255,255,0.1)'"
+                onfocus="this.style.borderColor='var(--accent-color)'; this.style.boxShadow='0 0 10px var(--accent-color)'; this.style.outline='none';"
+                onblur="this.style.borderColor='rgba(255,255,255,0.1)'; this.style.boxShadow='none';"
                 required
               ></textarea>
               <button
@@ -7722,7 +7734,7 @@
               <div style="font-size: 14px; font-weight: bold; color: #fff;">Solana</div>
             </div>
             <div style="display: flex; align-items: center; gap: 12px; position: relative;">
-              <img src="assets/solana-qr.png" style="width: 24px; height: 24px; border-radius: 4px; cursor: crosshair; transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-origin: right center;" onclick="if(window.playExtra) window.playExtra('shadowClone'); if(this.style.transform.includes('scale(6)')){this.style.transform='scale(1) translateX(0)'; this.style.zIndex='1';}else{this.style.transform='scale(6) translateX(-4px)'; this.style.zIndex='9999'; this.style.position='relative';}" alt="Solana QR" />
+              <img src="assets/solana-qr.png" style="width: 24px; height: 24px; border-radius: 4px; cursor: crosshair; transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-origin: right center;" onclick="if(window.playExtra) window.playExtra('shadowClone'); if(this.style.transform.includes('scale(6)')){this.style.transform='scale(1) translateX(0)'; this.style.zIndex='1'; this.style.boxShadow='none'; this.style.border='none';}else{this.style.transform='scale(6) translateX(-4px)'; this.style.zIndex='9999'; this.style.position='relative'; this.style.boxShadow='0 4px 20px rgba(0,0,0,0.9), 0 0 15px var(--accent-color)'; this.style.border='0.5px solid var(--accent-color)';}" alt="Solana QR" />
               <button onclick="navigator.clipboard.writeText('BiaCN5ukpUQoNx2pP3T8tVL2W4pDbu429K9dow8r2Mam'); showCryptoCopyToast(this);" style="background: var(--accent-color); color: #000; border: none; padding: 6px 12px; border-radius: 4px; font-size: 10px; font-weight: bold; cursor: pointer;">COPY</button>
             </div>
           </div>
@@ -7733,7 +7745,7 @@
               <div style="font-size: 14px; font-weight: bold; color: #fff;">Ethereum / EVM</div>
             </div>
             <div style="display: flex; align-items: center; gap: 12px; position: relative;">
-              <img src="assets/ethereum-qr.png" style="width: 24px; height: 24px; border-radius: 4px; cursor: crosshair; transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-origin: right center;" onclick="if(window.playExtra) window.playExtra('shadowClone'); if(this.style.transform.includes('scale(6)')){this.style.transform='scale(1) translateX(0)'; this.style.zIndex='1';}else{this.style.transform='scale(6) translateX(-4px)'; this.style.zIndex='9999'; this.style.position='relative';}" alt="Ethereum QR" />
+              <img src="assets/ethereum-qr.png" style="width: 24px; height: 24px; border-radius: 4px; cursor: crosshair; transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-origin: right center;" onclick="if(window.playExtra) window.playExtra('shadowClone'); if(this.style.transform.includes('scale(6)')){this.style.transform='scale(1) translateX(0)'; this.style.zIndex='1'; this.style.boxShadow='none'; this.style.border='none';}else{this.style.transform='scale(6) translateX(-4px)'; this.style.zIndex='9999'; this.style.position='relative'; this.style.boxShadow='0 4px 20px rgba(0,0,0,0.9), 0 0 15px var(--accent-color)'; this.style.border='0.5px solid var(--accent-color)';}" alt="Ethereum QR" />
               <button onclick="navigator.clipboard.writeText('0x0b38a27a3aba8e735363dfde2499cc5e06316c90'); showCryptoCopyToast(this);" style="background: var(--accent-color); color: #000; border: none; padding: 6px 12px; border-radius: 4px; font-size: 10px; font-weight: bold; cursor: pointer;">COPY</button>
             </div>
           </div>
@@ -7744,7 +7756,7 @@
               <div style="font-size: 14px; font-weight: bold; color: #fff;">Bitcoin</div>
             </div>
             <div style="display: flex; align-items: center; gap: 12px; position: relative;">
-              <img src="assets/bitcoin-qr.png" style="width: 24px; height: 24px; border-radius: 4px; cursor: crosshair; transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-origin: right center;" onclick="if(window.playExtra) window.playExtra('shadowClone'); if(this.style.transform.includes('scale(6)')){this.style.transform='scale(1) translateX(0)'; this.style.zIndex='1';}else{this.style.transform='scale(6) translateX(-4px)'; this.style.zIndex='9999'; this.style.position='relative';}" alt="Bitcoin QR" />
+              <img src="assets/bitcoin-qr.png" style="width: 24px; height: 24px; border-radius: 4px; cursor: crosshair; transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-origin: right center;" onclick="if(window.playExtra) window.playExtra('shadowClone'); if(this.style.transform.includes('scale(6)')){this.style.transform='scale(1) translateX(0)'; this.style.zIndex='1'; this.style.boxShadow='none'; this.style.border='none';}else{this.style.transform='scale(6) translateX(-4px)'; this.style.zIndex='9999'; this.style.position='relative'; this.style.boxShadow='0 4px 20px rgba(0,0,0,0.9), 0 0 15px var(--accent-color)'; this.style.border='0.5px solid var(--accent-color)';}" alt="Bitcoin QR" />
               <button onclick="navigator.clipboard.writeText('bc1qhfy8llyztulndhcyfkcdh3aswmmqu52sh8ml7r'); showCryptoCopyToast(this);" style="background: var(--accent-color); color: #000; border: none; padding: 6px 12px; border-radius: 4px; font-size: 10px; font-weight: bold; cursor: pointer;">COPY</button>
             </div>
           </div>
