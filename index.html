@@ -4232,21 +4232,16 @@
           </div>
         </div>
 
-        <!-- Journey Timeline -->
-        <div class="reveal" style="margin-bottom: 48px">
-          <div
-            style="
-              font-size: 12px;
-              letter-spacing: 3px;
-              color: var(--accent-color);
-              text-transform: uppercase;
-              margin-bottom: 20px;
-            "
-          >
-            // MY_JOURNEY
-          </div>
-          <div class="timeline" style="max-width: 650px; max-height: 480px; overflow-y: auto; padding-right: 16px; scrollbar-width: thin; scrollbar-color: var(--accent-color) rgba(255,255,255,0.05);">
-            <div class="timeline-item">
+        <!-- Journey Timeline & Motivation Video Container -->
+        <div style="display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start; margin-bottom: 48px;">
+          
+          <!-- Timeline Column -->
+          <div class="reveal" style="flex: 1; min-width: 300px;">
+            <div style="font-size: 12px; letter-spacing: 3px; color: var(--accent-color); text-transform: uppercase; margin-bottom: 20px;">
+              // MY_JOURNEY
+            </div>
+            <div class="timeline" style="max-width: 650px; max-height: 480px; overflow-y: auto; padding-right: 16px; scrollbar-width: thin; scrollbar-color: var(--accent-color) rgba(255,255,255,0.05);">
+              <div class="timeline-item">
               <div class="timeline-year">2022 | 14y/o</div>
               <div class="timeline-text">
                 <strong>First Real Project</strong><br />
@@ -4320,6 +4315,18 @@
               </div>
             </div>
           </div>
+          
+          <!-- Motivation Video Column -->
+          <div class="reveal slide-right" style="flex: 1; min-width: 300px; display: flex; justify-content: center; align-items: center;">
+            <video 
+              src="assets/journey_motivation.mp4" 
+              controls 
+              playsinline
+              onplay="if(window.isPlaying && typeof window.mbToggle === 'function') window.mbToggle();"
+              style="width: 100%; max-width: 400px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.5); object-fit: cover;"
+            ></video>
+          </div>
+          
         </div>
       </div>
     </section>
