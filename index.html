@@ -16,10 +16,7 @@
     />
 
     <script src="https://cdn.tailwindcss.com"></script>
-    <link
-      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100;400;700;800&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@100;400;700;800&display=swap" rel="stylesheet" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -28,6 +25,8 @@
     <style>
       /* Dynamic Theme Variables Setup */
       :root {
+        --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        --font-mono: 'JetBrains Mono', monospace;
         --bg-color: #000000;
         --text-color: #ffffff;
         --accent-color: #ff3300;
@@ -72,6 +71,40 @@
         --border-color: rgba(0, 229, 255, 0.4);
         --hover-bg: rgba(0, 229, 255, 0.08);
         --grid-dot-color: rgba(0, 0, 0, 0.1);
+      }
+
+      
+      /* --- TYPOGRAPHY ARCHITECTURE --- */
+      h1, h2, h3, h4, h5, h6, 
+      .glitch, 
+      nav a, 
+      #bootScreen, 
+      .term-line, 
+      .gh-year-btn, 
+      #ghTooltip,
+      .timeline-year,
+      .project-status,
+      .quote-author,
+      .slider-text,
+      .logo-text,
+      .nav-link,
+      .mono-tag {
+        font-family: var(--font-mono) !important;
+      }
+      
+      p, .timeline-text, .quote-box, .bio-text {
+        font-family: var(--font-sans);
+        line-height: 1.7;
+      }
+      
+      /* Make sure inputs and buttons use mono */
+      input, textarea, button {
+        font-family: var(--font-mono);
+      }
+      
+      /* Force body to Sans */
+      body {
+        font-family: var(--font-sans);
       }
 
       /* Premium Animations & Effects */
@@ -120,7 +153,7 @@
       body {
         background-color: var(--bg-color);
         color: var(--text-color);
-        font-family: "JetBrains Mono", monospace;
+        font-family: var(--font-sans);
         cursor: url("miku_normal.cur"), auto;
         transition:
           background-color 0.3s,
@@ -610,7 +643,7 @@
         background: rgba(255, 255, 255, 0.03);
         border: 1px solid rgba(255, 255, 255, 0.12);
         color: rgba(255, 255, 255, 0.6);
-        font-family: 'JetBrains Mono', monospace;
+        font-family: var(--font-mono);
         font-size: 10px;
         font-weight: 700;
         padding: 4px 10px;
@@ -652,7 +685,7 @@
         background: #0d0d0d;
         border: 1px solid var(--accent-color);
         color: #ffffff;
-        font-family: 'JetBrains Mono', monospace;
+        font-family: var(--font-mono);
         font-size: 10.5px;
         padding: 6px 10px;
         border-radius: 4px;
@@ -856,7 +889,7 @@
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         padding: 14px 16px;
         color: #fff;
-        font-family: "JetBrains Mono", monospace;
+        font-family: var(--font-sans);
         font-size: 12px;
         outline: none;
       }
@@ -901,7 +934,7 @@
         text-align: right;
         line-height: 1.8;
         z-index: 600;
-        font-family: "JetBrains Mono", monospace;
+        font-family: var(--font-sans);
         letter-spacing: 0.5px;
       }
 
@@ -1899,7 +1932,7 @@
       .music-dropdown .track-time {
         font-size: 8px;
         color: rgba(255, 255, 255, 0.5);
-        font-family: "JetBrains Mono", monospace;
+        font-family: var(--font-sans);
       }
 
       .music-dropdown .player-controls {
@@ -2450,7 +2483,7 @@
       border: 1px solid rgba(255, 255, 255, 0.15);
       border-radius: 16px;
       box-shadow: 0 8px 32px rgba(0,0,0,0.2);
-      font-family: 'JetBrains Mono', monospace;
+      font-family: var(--font-mono);
     ">
 <div id="mpTrackInfo" style="display: flex; flex-direction: column; width: 100px;">
         <span style="font-size: 8px; color: var(--accent-color); letter-spacing: 1px;">NOW PLAYING</span>
@@ -2902,7 +2935,7 @@
               background: rgba(255, 255, 255, 0.05);
               padding: 8px 16px;
               color: var(--text-color);
-              font-family: 'JetBrains Mono', monospace;
+              font-family: var(--font-mono);
               font-size: 11px;
               font-weight: 800;
               border: 1px solid rgba(255, 255, 255, 0.1);
@@ -3271,7 +3304,7 @@
             padding: 8px 14px;
             font-size: 11px;
             font-weight: 700;
-            font-family: 'JetBrains Mono', monospace;
+            font-family: var(--font-mono);
             white-space: nowrap;
             opacity: 0;
             transform: translateY(6px);
@@ -3946,7 +3979,7 @@
               class="magnetic-btn brutal-solid btn-glow"
               style="
                 padding: 16px 32px;
-                font-family: 'JetBrains Mono', monospace;
+                font-family: var(--font-mono);
                 font-size: 14px;
                 font-weight: 800;
                 color: #000;
@@ -4121,7 +4154,7 @@
                 background: transparent;
                 padding: 8px 16px;
                 color: var(--text-color);
-                font-family: 'JetBrains Mono', monospace;
+                font-family: var(--font-mono);
                 font-size: 11px;
                 border: 1px solid var(--border-color);
                 cursor: pointer;
@@ -4136,7 +4169,7 @@
                 background: transparent;
                 padding: 8px 16px;
                 color: var(--accent-color);
-                font-family: 'JetBrains Mono', monospace;
+                font-family: var(--font-mono);
                 font-size: 11px;
                 border: 1px solid var(--accent-color);
                 cursor: pointer;
@@ -4361,7 +4394,7 @@
                 justify-content: space-between;
                 margin-bottom: 14px;
                 font-size: 11px;
-                font-family: 'JetBrains Mono', monospace;
+                font-family: var(--font-mono);
                 color: rgba(255, 255, 255, 0.6);
                 flex-wrap: wrap;
                 gap: 8px;
@@ -4391,7 +4424,7 @@
               "
             >
               <div id="githubCalendarContainer" style="min-width: 300px; text-align: center; min-height: 90px; white-space: nowrap; overflow-x: auto; max-width: 100%; padding-bottom: 10px; scrollbar-width: thin;">
-                <div id="ghLoadingState" style="color: rgba(255,255,255,0.3); font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 1px; line-height: 90px;">LOADING_CONTRIBUTIONS...</div>
+                <div id="ghLoadingState" style="color: rgba(255,255,255,0.3); font-family: var(--font-mono); font-size: 11px; letter-spacing: 1px; line-height: 90px;">LOADING_CONTRIBUTIONS...</div>
               </div>
             </div>
 
@@ -4404,7 +4437,7 @@
                 margin-top: 14px;
                 font-size: 10px;
                 color: rgba(255, 255, 255, 0.4);
-                font-family: 'JetBrains Mono', monospace;
+                font-family: var(--font-mono);
                 flex-wrap: wrap;
                 gap: 8px;
               "
@@ -4656,7 +4689,7 @@
                   font-weight: 800;
                   color: #22c55e;
                   letter-spacing: 1px;
-                  font-family: 'JetBrains Mono', monospace;
+                  font-family: var(--font-mono);
                   text-transform: uppercase;
                 "
               >
@@ -4668,7 +4701,7 @@
                   color: rgba(255, 255, 255, 0.7);
                   line-height: 1.6;
                   margin: 0;
-                  font-family: 'JetBrains Mono', monospace;
+                  font-family: var(--font-mono);
                 "
               >
                 Harnessing Gemini and antigravity, Claude Code, hermes agent &amp; AI Agentic workflows to build production systems.
@@ -4886,16 +4919,16 @@
           </div>
 
           <div style="display: flex; gap: 8px; margin-bottom: 24px; justify-content: flex-start; overflow-x: auto; padding-bottom: 4px;">
-            <button onclick="switchToolkitTab('dev')" id="btn-dev" class="toolkit-btn" style="padding: 10px 18px; border: 1px solid var(--accent-color); background: var(--accent-color); color: #000; font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 1px; cursor: pointer; text-transform: uppercase; transition: all 0.2s; border-radius: 6px; white-space: nowrap;">
+            <button onclick="switchToolkitTab('dev')" id="btn-dev" class="toolkit-btn" style="padding: 10px 18px; border: 1px solid var(--accent-color); background: var(--accent-color); color: #000; font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 1px; cursor: pointer; text-transform: uppercase; transition: all 0.2s; border-radius: 6px; white-space: nowrap;">
               Development Tools
             </button>
-            <button onclick="switchToolkitTab('backend')" id="btn-backend" class="toolkit-btn" style="padding: 10px 18px; border: 1px solid var(--border-color); background: transparent; color: rgba(255, 255, 255, 0.5); font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 1px; cursor: pointer; text-transform: uppercase; transition: all 0.2s; border-radius: 6px; white-space: nowrap;">
+            <button onclick="switchToolkitTab('backend')" id="btn-backend" class="toolkit-btn" style="padding: 10px 18px; border: 1px solid var(--border-color); background: transparent; color: rgba(255, 255, 255, 0.5); font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 1px; cursor: pointer; text-transform: uppercase; transition: all 0.2s; border-radius: 6px; white-space: nowrap;">
               Backend Stack
             </button>
-            <button onclick="switchToolkitTab('ai')" id="btn-ai" class="toolkit-btn" style="padding: 10px 18px; border: 1px solid var(--border-color); background: transparent; color: rgba(255, 255, 255, 0.5); font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 1px; cursor: pointer; text-transform: uppercase; transition: all 0.2s; border-radius: 6px; white-space: nowrap;">
+            <button onclick="switchToolkitTab('ai')" id="btn-ai" class="toolkit-btn" style="padding: 10px 18px; border: 1px solid var(--border-color); background: transparent; color: rgba(255, 255, 255, 0.5); font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 1px; cursor: pointer; text-transform: uppercase; transition: all 0.2s; border-radius: 6px; white-space: nowrap;">
               AI Tools
             </button>
-            <button onclick="switchToolkitTab('agents')" id="btn-agents" class="toolkit-btn" style="padding: 10px 18px; border: 1px solid var(--border-color); background: transparent; color: rgba(255, 255, 255, 0.5); font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 1px; cursor: pointer; text-transform: uppercase; transition: all 0.2s; border-radius: 6px; white-space: nowrap;">
+            <button onclick="switchToolkitTab('agents')" id="btn-agents" class="toolkit-btn" style="padding: 10px 18px; border: 1px solid var(--border-color); background: transparent; color: rgba(255, 255, 255, 0.5); font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 1px; cursor: pointer; text-transform: uppercase; transition: all 0.2s; border-radius: 6px; white-space: nowrap;">
               AI Agents
             </button>
           </div>
@@ -5129,7 +5162,7 @@
               border: 1px solid var(--accent-color);
               color: #000;
               background: var(--accent-color);
-              font-family: 'JetBrains Mono', monospace;
+              font-family: var(--font-mono);
               font-size: 10px;
               font-weight: 700;
               letter-spacing: 2px;
@@ -5149,7 +5182,7 @@
               border: 1px solid var(--border-color);
               color: rgba(255, 255, 255, 0.5);
               background: transparent;
-              font-family: 'JetBrains Mono', monospace;
+              font-family: var(--font-mono);
               font-size: 10px;
               font-weight: 700;
               letter-spacing: 2px;
@@ -5187,25 +5220,25 @@
                   <span style="font-size: 14px; font-weight: 800; color: #fff; text-transform: uppercase;">
                     ⚡ PROMETHEUS CORE
                   </span>
-                  <span style="font-size: 8px; color: #22c55e; font-family: 'JetBrains Mono', monospace; font-weight: 700;">● LIVE</span>
+                  <span style="font-size: 8px; color: #22c55e; font-family: var(--font-mono); font-weight: 700;">● LIVE</span>
                 </div>
                 <p style="font-size: 11px; color: rgba(255, 255, 255, 0.6); line-height: 1.5; margin: 0 0 8px 0;">
                   Full-stack AI Discord Bot &amp; Next.js SaaS Web Dashboard with Gemini 2.5.
                 </p>
-                <span style="color: var(--accent-color); font-weight: 700; font-family: 'JetBrains Mono', monospace; font-size: 10px; display: inline-block;">⏱ 2 WEEKS BUILD</span>
+                <span style="color: var(--accent-color); font-weight: 700; font-family: var(--font-mono); font-size: 10px; display: inline-block;">⏱ 2 WEEKS BUILD</span>
               </div>
 
               <div style="border-top: 1px solid rgba(255, 255, 255, 0.06); padding-top: 10px;">
                 <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px;">
-                  <span style="font-family: 'JetBrains Mono', monospace; font-size: 9px; color: rgba(255, 255, 255, 0.5);">Next.js</span>
-                  <span style="font-family: 'JetBrains Mono', monospace; font-size: 9px; color: rgba(255, 255, 255, 0.3);">•</span>
-                  <span style="font-family: 'JetBrains Mono', monospace; font-size: 9px; color: rgba(255, 255, 255, 0.5);">Discord.js</span>
-                  <span style="font-family: 'JetBrains Mono', monospace; font-size: 9px; color: rgba(255, 255, 255, 0.3);">•</span>
-                  <span style="font-family: 'JetBrains Mono', monospace; font-size: 9px; color: rgba(255, 255, 255, 0.5);">Gemini API</span>
+                  <span style="font-family: var(--font-mono); font-size: 9px; color: rgba(255, 255, 255, 0.5);">Next.js</span>
+                  <span style="font-family: var(--font-mono); font-size: 9px; color: rgba(255, 255, 255, 0.3);">•</span>
+                  <span style="font-family: var(--font-mono); font-size: 9px; color: rgba(255, 255, 255, 0.5);">Discord.js</span>
+                  <span style="font-family: var(--font-mono); font-size: 9px; color: rgba(255, 255, 255, 0.3);">•</span>
+                  <span style="font-family: var(--font-mono); font-size: 9px; color: rgba(255, 255, 255, 0.5);">Gemini API</span>
                 </div>
                 <div style="display: flex; gap: 10px; align-items: center;">
-                  <a href="https://github.com/carbonthecoder/prometheus-core" target="_blank" rel="noopener noreferrer" style="font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 800; color: #fff; text-decoration: none; background: var(--accent-color); padding: 6px 12px; border-radius: 4px; transition: all 0.2s ease; display: inline-block;">→ CODE</a>
-                  <a href="https://prometheus-core.vercel.app/" target="_blank" rel="noopener noreferrer" style="font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 800; color: var(--accent-color); text-decoration: none; border: 1px solid var(--accent-color); padding: 5px 11px; border-radius: 4px; transition: all 0.2s ease; display: inline-block;">→ DEMO</a>
+                  <a href="https://github.com/carbonthecoder/prometheus-core" target="_blank" rel="noopener noreferrer" style="font-family: var(--font-mono); font-size: 10px; font-weight: 800; color: #fff; text-decoration: none; background: var(--accent-color); padding: 6px 12px; border-radius: 4px; transition: all 0.2s ease; display: inline-block;">→ CODE</a>
+                  <a href="https://prometheus-core.vercel.app/" target="_blank" rel="noopener noreferrer" style="font-family: var(--font-mono); font-size: 10px; font-weight: 800; color: var(--accent-color); text-decoration: none; border: 1px solid var(--accent-color); padding: 5px 11px; border-radius: 4px; transition: all 0.2s ease; display: inline-block;">→ DEMO</a>
                 </div>
               </div>
             </div>
@@ -5232,7 +5265,7 @@
             "
           >
             <div style="display: flex; align-items: center; gap: 8px;">
-              <span style="font-size: 13px; font-weight: 800; color: #ffcc00; font-family: 'JetBrains Mono', monospace; letter-spacing: 2px;">
+              <span style="font-size: 13px; font-weight: 800; color: #ffcc00; font-family: var(--font-mono); letter-spacing: 2px;">
                 🚧 COOKING SOON
               </span>
             </div>
@@ -5494,7 +5527,7 @@
                 name="Name"
                 type="text"
                 placeholder="WHO DIS? (Name)"
-                style="padding: 16px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.1); color: #fff; font-family: 'JetBrains Mono', monospace; font-size: 12px; outline: none; transition: border-color 0.2s;"
+                style="padding: 16px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.1); color: #fff; font-family: var(--font-mono); font-size: 12px; outline: none; transition: border-color 0.2s;"
                 onfocus="this.style.borderColor='var(--accent-color)'; this.style.boxShadow='0 0 10px var(--accent-color)'; this.style.outline='none';"
                 onblur="this.style.borderColor='rgba(255,255,255,0.1)'; this.style.boxShadow='none';"
                 required
@@ -5503,7 +5536,7 @@
                 name="Email"
                 type="email"
                 placeholder="WHERE CAN I PING YOU? (Email)"
-                style="padding: 16px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.1); color: #fff; font-family: 'JetBrains Mono', monospace; font-size: 12px; outline: none; transition: border-color 0.2s;"
+                style="padding: 16px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.1); color: #fff; font-family: var(--font-mono); font-size: 12px; outline: none; transition: border-color 0.2s;"
                 onfocus="this.style.borderColor='var(--accent-color)'; this.style.boxShadow='0 0 10px var(--accent-color)'; this.style.outline='none';"
                 onblur="this.style.borderColor='rgba(255,255,255,0.1)'; this.style.boxShadow='none';"
                 required
@@ -5512,7 +5545,7 @@
                 name="Message"
                 placeholder="WHAT'S GOOD? (Message)"
                 rows="5"
-                style="padding: 16px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.1); color: #fff; font-family: 'JetBrains Mono', monospace; font-size: 12px; outline: none; resize: vertical; transition: border-color 0.2s;"
+                style="padding: 16px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.1); color: #fff; font-family: var(--font-mono); font-size: 12px; outline: none; resize: vertical; transition: border-color 0.2s;"
                 onfocus="this.style.borderColor='var(--accent-color)'; this.style.boxShadow='0 0 10px var(--accent-color)'; this.style.outline='none';"
                 onblur="this.style.borderColor='rgba(255,255,255,0.1)'; this.style.boxShadow='none';"
                 required
@@ -5520,7 +5553,7 @@
               <button
                 type="submit"
                 class="magnetic-btn brutal-border"
-                style="padding: 16px; background: transparent; border: 1px solid var(--accent-color); color: var(--accent-color); font-family: 'JetBrains Mono', monospace; font-weight: 800; cursor: pointer; font-size: 12px; transition: all 0.2s;"
+                style="padding: 16px; background: transparent; border: 1px solid var(--accent-color); color: var(--accent-color); font-family: var(--font-mono); font-weight: 800; cursor: pointer; font-size: 12px; transition: all 0.2s;"
                 onmouseover="this.style.background='var(--accent-color)'; this.style.color='#000';"
                 onmouseout="this.style.background='transparent'; this.style.color='var(--accent-color)';"
               >
@@ -7591,14 +7624,14 @@
             ">⚡</div>
             <div>
               <div style="color:#fff;font-weight:800;font-size:16px;letter-spacing:0.5px;">PROMETHEUS DASHBOARD</div>
-              <div style="color:rgba(255,255,255,0.7);font-size:11px;font-family:'JetBrains Mono',monospace;letter-spacing:2px;margin-top:2px;">// PROMETHEUS CORE v2.1</div>
+              <div style="color:rgba(255,255,255,0.7);font-size:11px;font-family: var(--font-mono);letter-spacing:2px;margin-top:2px;">// PROMETHEUS CORE v2.1</div>
             </div>
           </div>
           <!-- Bot Status -->
           <div style="margin-top:16px;display:flex;gap:8px;flex-wrap:wrap;">
-            <span style="background:rgba(34,197,94,0.2);border:1px solid rgba(34,197,94,0.4);color:#22c55e;padding:3px 10px;border-radius:99px;font-size:12px;font-family:'JetBrains Mono',monospace;font-weight:700;letter-spacing:1px;">● ONLINE</span>
-            <span style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.7);padding:3px 10px;border-radius:99px;font-size:12px;font-family:'JetBrains Mono',monospace;letter-spacing:1px;">14 SERVERS</span>
-            <span style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.7);padding:3px 10px;border-radius:99px;font-size:12px;font-family:'JetBrains Mono',monospace;letter-spacing:1px;">2,341 USERS</span>
+            <span style="background:rgba(34,197,94,0.2);border:1px solid rgba(34,197,94,0.4);color:#22c55e;padding:3px 10px;border-radius:99px;font-size:12px;font-family: var(--font-mono);font-weight:700;letter-spacing:1px;">● ONLINE</span>
+            <span style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.7);padding:3px 10px;border-radius:99px;font-size:12px;font-family: var(--font-mono);letter-spacing:1px;">14 SERVERS</span>
+            <span style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.7);padding:3px 10px;border-radius:99px;font-size:12px;font-family: var(--font-mono);letter-spacing:1px;">2,341 USERS</span>
           </div>
         </div>
 
@@ -7607,21 +7640,21 @@
           <!-- Stats Row -->
           <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:20px;">
             <div style="background:rgba(88,101,242,0.08);border:1px solid rgba(88,101,242,0.2);border-radius:10px;padding:12px;text-align:center;">
-              <div style="font-size:20px;font-weight:800;color:#7289da;font-family:'JetBrains Mono',monospace;" id="dd-cmds">1,247</div>
+              <div style="font-size:20px;font-weight:800;color:#7289da;font-family: var(--font-mono);" id="dd-cmds">1,247</div>
               <div style="font-size:12px;color:rgba(255,255,255,0.4);margin-top:2px;letter-spacing:1px;">COMMANDS</div>
             </div>
             <div style="background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.2);border-radius:10px;padding:12px;text-align:center;">
-              <div style="font-size:20px;font-weight:800;color:#22c55e;font-family:'JetBrains Mono',monospace;" id="dd-uptime">99.9%</div>
+              <div style="font-size:20px;font-weight:800;color:#22c55e;font-family: var(--font-mono);" id="dd-uptime">99.9%</div>
               <div style="font-size:12px;color:rgba(255,255,255,0.4);margin-top:2px;letter-spacing:1px;">UPTIME</div>
             </div>
             <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);border-radius:10px;padding:12px;text-align:center;">
-              <div style="font-size:20px;font-weight:800;color:#f59e0b;font-family:'JetBrains Mono',monospace;">2.5</div>
+              <div style="font-size:20px;font-weight:800;color:#f59e0b;font-family: var(--font-mono);">2.5</div>
               <div style="font-size:12px;color:rgba(255,255,255,0.4);margin-top:2px;letter-spacing:1px;">AI MODEL</div>
             </div>
           </div>
 
           <!-- Settings -->
-          <div style="font-size:10px;letter-spacing:3px;color:rgba(255,255,255,0.3);font-family:'JetBrains Mono',monospace;margin-bottom:12px;">// BOT_SETTINGS</div>
+          <div style="font-size:10px;letter-spacing:3px;color:rgba(255,255,255,0.3);font-family: var(--font-mono);margin-bottom:12px;">// BOT_SETTINGS</div>
           <div style="display:flex;flex-direction:column;gap:8px;">
             <!-- Toggle row template -->
             <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 14px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:10px;">
@@ -7662,7 +7695,7 @@
           <!-- Footer note -->
           <div style="margin-top:16px;padding:10px 14px;background:rgba(88,101,242,0.08);border:1px solid rgba(88,101,242,0.2);border-radius:8px;display:flex;align-items:center;gap:8px;">
             <span style="font-size:14px;">🔗</span>
-            <div style="font-size:10px;color:rgba(255,255,255,0.5);font-family:'JetBrains Mono',monospace;">Full dashboard available at <a href="https://github.com/carbonthecoder" target="_blank" style="color:#7289da;text-decoration:none;">carbonthecoder.github.io</a> soon™</div>
+            <div style="font-size:10px;color:rgba(255,255,255,0.5);font-family: var(--font-mono);">Full dashboard available at <a href="https://github.com/carbonthecoder" target="_blank" style="color:#7289da;text-decoration:none;">carbonthecoder.github.io</a> soon™</div>
           </div>
         </div>
       </div>
@@ -8528,7 +8561,7 @@
         const svgW = weeks.length * step + 40;
         const svgH = 7 * step + 30;
 
-        let svg = `<svg width="${svgW}" height="${svgH}" viewBox="-28 -18 ${svgW + 32} ${svgH + 4}" style="font-family:'JetBrains Mono',monospace;font-size:12px;fill:rgba(255,255,255,0.4); margin: 0 auto; display: inline-block;">`;
+        let svg = `<svg width="${svgW}" height="${svgH}" viewBox="-28 -18 ${svgW + 32} ${svgH + 4}" style="font-family: var(--font-mono);font-size:12px;fill:rgba(255,255,255,0.4); margin: 0 auto; display: inline-block;">`;
 
         // Day labels
         svg += `<text x="-4" y="${1 * step + 9}" text-anchor="end">Mon</text>`;
