@@ -1933,6 +1933,15 @@
         }
       }
     </style>
+  
+    <style>
+      @media (max-width: 768px) {
+        .journey-container {
+          flex-direction: column !important;
+        }
+      }
+    </style>
+
   </head>
   <body class="text-white">
     <!-- CANVAS BACKGROUND -->
@@ -4233,10 +4242,10 @@
         </div>
 
         <!-- Journey Timeline & Motivation Video Container -->
-        <div style="display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start; margin-bottom: 48px;">
+        <div class="journey-container" style="display: flex; gap: 40px; align-items: center; margin-bottom: 48px;">
           
           <!-- Timeline Column -->
-          <div class="reveal" style="flex: 1; min-width: 300px;">
+          <div class="reveal" style="flex: 1; min-width: 0;">
             <div style="font-size: 12px; letter-spacing: 3px; color: var(--accent-color); text-transform: uppercase; margin-bottom: 20px;">
               // MY_JOURNEY
             </div>
@@ -4317,7 +4326,7 @@
           </div>
           
           <!-- Motivation Video Column -->
-          <div class="reveal slide-right" style="flex: 1; min-width: 300px; display: flex; justify-content: center; align-items: center;">
+          <div class="reveal slide-right" style="flex: 0.8; min-width: 0; display: flex; justify-content: center; align-items: center;">
             <video 
               src="assets/journey_motivation.mp4" 
               controls 
