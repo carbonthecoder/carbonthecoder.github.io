@@ -2566,19 +2566,20 @@
         z-index: 700;
       "
     >
-      <span
+      <div
         id="navLogo"
         class="logo-glitch"
         style="
-          font-size: 11px;
-          font-weight: 800;
-          letter-spacing: 4px;
-          color: var(--accent-color);
           cursor: pointer;
           position: relative;
+          display: flex;
+          align-items: center;
+          gap: 10px;
         "
-        >MI //</span
       >
+        <div style="width: 24px; height: 24px; background-color: var(--accent-color); -webkit-mask: url('assets/mr_logo.png') center/contain no-repeat; mask: url('assets/mr_logo.png') center/contain no-repeat; transition: background-color 0.3s ease;"></div>
+        <span style="font-size: 14px; font-weight: 800; letter-spacing: 2px; color: var(--accent-color); transition: color 0.3s ease;">CARBON</span>
+      </div>
 
       <div
         class="nav-links-desktop"
@@ -5902,6 +5903,10 @@
       }
 
       function launchPortfolio() {
+        // Prevent multiple clicks
+        const boot = document.getElementById("bootScreen");
+        if (boot) boot.removeAttribute("onclick");
+
         // Start the 8-second bruh timer
         window.bruhTimerActive = true;
         setTimeout(() => {
