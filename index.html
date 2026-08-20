@@ -3271,6 +3271,50 @@
             <div id="mobileVisualizer" class="visualizer" style="height: 16px; margin-left: 2px;"><span></span><span></span><span></span><span></span><span></span></div>
           </button>
         </div>
+        
+        <!-- HAMBURGER MENU NOTIFICATION TOOLTIP WITH ARROW -->
+        <div style="position: relative; display: flex; align-items: center;">
+          <div id="hamburgerTooltip" style="
+            position: absolute;
+            top: 48px;
+            right: 0px;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--accent-color);
+            color: #ffffff;
+            padding: 8px 14px;
+            font-size: 11px;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+            white-space: nowrap;
+            opacity: 0;
+            transform: translateY(6px);
+            pointer-events: none;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6), 0 0 14px rgba(0, 255, 255, 0.25);
+            z-index: 1000010;
+          ">
+            <!-- Arrow pointing up to the hamburger button -->
+            <div style="
+              position: absolute;
+              top: -6px;
+              right: 16px;
+              width: 0;
+              height: 0;
+              border-left: 6px solid transparent;
+              border-right: 6px solid transparent;
+              border-bottom: 6px solid var(--accent-color);
+            "></div>
+            <i class="fa-solid fa-compass" style="color: var(--accent-color);"></i>
+            <span>Check out more pages!</span>
+            <i class="fa-solid fa-arrow-up" style="color: var(--accent-color); font-size: 10px; transform: rotate(45deg);"></i>
+          </div>
+
         <!-- MOBILE HAMBURGER BUTTON -->
         <button
           id="mobileMenuBtn"
@@ -3287,6 +3331,7 @@
         >
           <i class="fa-solid fa-bars"></i>
         </button>
+        </div>
       </div>
     </nav>
 
@@ -6137,6 +6182,7 @@
 
         sfx.init();
         if (typeof window.playHeroVideoOnce === "function") window.playHeroVideoOnce();
+        setTimeout(() => { if (typeof window.showHamburgerTooltip === "function") window.showHamburgerTooltip(); }, 600);
 
         if (enableMusic && !isPlaying) {
           mbToggle();
@@ -6565,6 +6611,22 @@
         if (history.pushState) {
           history.pushState(null, null, '#' + targetSec);
         }
+      };
+
+      
+      window.showHamburgerTooltip = function() {
+        const tip = document.getElementById("hamburgerTooltip");
+        if (!tip) return;
+        
+        // Show tooltip with smooth slide/fade
+        tip.style.opacity = "1";
+        tip.style.transform = "translateY(0)";
+        
+        // Hide automatically after 3 seconds (2-3 sec requirement)
+        setTimeout(() => {
+          tip.style.opacity = "0";
+          tip.style.transform = "translateY(6px)";
+        }, 3000);
       };
 
       window.scrollToSection = function(id, delay) {
@@ -8581,7 +8643,7 @@
         if (mBtn) {
           mBtn.addEventListener('click', (e) => {
             e.stopPropagation();
-            if (typeof toggleMobileMenu === 'function') toggleMobileMenu();
+            const tip = document.getElementById('hamburgerTooltip'); if (tip) tip.style.opacity = '0'; if (typeof toggleMobileMenu === 'function') toggleMobileMenu();
           });
         }
       });
