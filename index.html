@@ -2008,7 +2008,7 @@
 
   
     <style id="spa-no-scroll-and-hamburger-fix">
-      /* --- MOBILE ONLY NO-SCROLL TABBED MODEL --- */
+      /* --- MOBILE ONLY NO-SCROLL TABBED MODEL (SLIDE RIGHT ANIMATION) --- */
       @media (max-width: 768px) {
         section {
           display: none !important;
@@ -2018,22 +2018,36 @@
         section.active-page-section {
           display: block !important;
           opacity: 1 !important;
-          animation: pageFadeIn 0.3s ease-out forwards;
+          animation: mobileSlideRight 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
         }
       }
 
-      /* --- DESKTOP DEFAULT SMOOTH SCROLLING MODEL (ALL SECTIONS VISIBLE) --- */
+      /* --- DESKTOP DEFAULT SCROLLING MODEL (SLIDE DOWN ANIMATION) --- */
       @media (min-width: 769px) {
         section {
           display: block !important;
           opacity: 1 !important;
         }
+        section.active-page-section {
+          animation: pcSlideDown 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+        }
       }
 
-      @keyframes pageFadeIn {
+      @keyframes mobileSlideRight {
         from {
           opacity: 0;
-          transform: translateY(6px);
+          transform: translateX(-40px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes pcSlideDown {
+        from {
+          opacity: 0;
+          transform: translateY(-30px);
         }
         to {
           opacity: 1;
@@ -6380,6 +6394,7 @@
 
       /* ── SCROLL PROGRESS ── */
       window.addEventListener("scroll", () => {
+          if (window.innerWidth <= 768) return; // Disable top/bottom scroll sounds on mobile
         const scrollTop = window.scrollY;
         const docHeight =
           document.documentElement.scrollHeight - window.innerHeight;
@@ -8241,6 +8256,7 @@
         let endSoundPlayed = false;
         let topSoundPlayed = true; // start true so it doesn't play immediately on load
         window.addEventListener("scroll", () => {
+          if (window.innerWidth <= 768) return; // Disable top/bottom scroll sounds on mobile
           // Check if user is near the bottom (within 20px)
           if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 20) {
             if (!endSoundPlayed && window.endSfx) {
