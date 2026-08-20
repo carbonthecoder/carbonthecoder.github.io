@@ -2901,7 +2901,7 @@
         "
       >
         <a class="desktop-nav-link" href="#home"
-          onclick="scrollToSection('home')"
+          onclick="event.preventDefault(); scrollToSection('home')"
           style="
             font-size: 13px;
             font-weight: 700;
@@ -2916,7 +2916,7 @@
           >HOME</a
         >
         <a class="desktop-nav-link" href="#about"
-          onclick="scrollToSection('about')"
+          onclick="event.preventDefault(); scrollToSection('about')"
           style="
             font-size: 13px;
             font-weight: 700;
@@ -2931,7 +2931,7 @@
           >ABOUT</a
         >
         <a class="desktop-nav-link" href="#skills"
-          onclick="scrollToSection('skills')"
+          onclick="event.preventDefault(); scrollToSection('skills')"
           style="
             font-size: 13px;
             font-weight: 700;
@@ -2946,7 +2946,7 @@
           >SKILLS</a
         >
         <a class="desktop-nav-link" href="#projects"
-          onclick="scrollToSection('projects')"
+          onclick="event.preventDefault(); scrollToSection('projects')"
           style="
             font-size: 13px;
             font-weight: 700;
@@ -2961,7 +2961,7 @@
           >PROJECTS</a
         >
         <a class="desktop-nav-link" href="#contact"
-          onclick="scrollToSection('contact')"
+          onclick="event.preventDefault(); scrollToSection('contact')"
           style="
             font-size: 13px;
             font-weight: 700;
@@ -3455,10 +3455,7 @@
     >
       <a
         href="#home"
-        onclick="
-          toggleMobileMenu();
-          scrollToSection('home', 350);
-        "
+        onclick="event.preventDefault(); toggleMobileMenu(); scrollToSection('home', 350);"
         style="
           font-size: 11px;
           letter-spacing: 2px;
@@ -3472,10 +3469,7 @@
       >
       <a
         href="#about"
-        onclick="
-          toggleMobileMenu();
-          scrollToSection('about', 350);
-        "
+        onclick="event.preventDefault(); toggleMobileMenu(); scrollToSection('about', 350);"
         style="
           font-size: 11px;
           letter-spacing: 2px;
@@ -3489,10 +3483,7 @@
       >
       <a
         href="#skills"
-        onclick="
-          toggleMobileMenu();
-          scrollToSection('skills', 350);
-        "
+        onclick="event.preventDefault(); toggleMobileMenu(); scrollToSection('skills', 350);"
         style="
           font-size: 11px;
           letter-spacing: 2px;
@@ -3506,10 +3497,7 @@
       >
       <a
         href="#projects"
-        onclick="
-          toggleMobileMenu();
-          scrollToSection('projects', 350);
-        "
+        onclick="event.preventDefault(); toggleMobileMenu(); scrollToSection('projects', 350);"
         style="
           font-size: 11px;
           letter-spacing: 2px;
@@ -3523,10 +3511,7 @@
       >
       <a
         href="#contact"
-        onclick="
-          toggleMobileMenu();
-          scrollToSection('contact', 350);
-        "
+        onclick="event.preventDefault(); toggleMobileMenu(); scrollToSection('contact', 350);"
         style="
           font-size: 11px;
           letter-spacing: 2px;
@@ -4075,7 +4060,7 @@
               LINK UP →
             </button>
             <button
-              onclick="scrollToSection('about')"
+              onclick="event.preventDefault(); scrollToSection('about')"
               class="brutal-border magnetic-btn btn-slide-fill"
               style="
                 padding: 12px 28px;
