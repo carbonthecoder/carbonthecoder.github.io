@@ -2002,6 +2002,62 @@
       }
     </style>
 
+  
+    <style id="spa-no-scroll-and-hamburger-fix">
+      /* --- TABBED SINGLE-PAGE ARCHITECTURE (NO VERTICAL SCROLL ACROSS SECTIONS) --- */
+      section {
+        display: none !important;
+        opacity: 0;
+      }
+
+      section.active-page-section {
+        display: block !important;
+        opacity: 1 !important;
+        animation: pageFadeIn 0.3s ease-out forwards;
+      }
+
+      @keyframes pageFadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(6px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* --- PERFECT HAMBURGER & EQUALIZER Z-INDEX FIX --- */
+      #mobileMenuBtn {
+        position: relative !important;
+        z-index: 1000005 !important;
+        pointer-events: auto !important;
+        width: 44px !important;
+        height: 44px !important;
+        min-width: 44px !important;
+        min-height: 44px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        font-size: 22px !important;
+        cursor: pointer !important;
+        touch-action: manipulation !important;
+      }
+
+      #mobileMenuDropdown {
+        z-index: 1000000 !important;
+      }
+
+      #miniPlayer {
+        z-index: 999990 !important;
+      }
+
+      /* Prevent audio visualizer bars from intercepting clicks */
+      .visualizer, #desktopVisualizer, #mobileVisualizer, #mobileVisualizer span, #desktopVisualizer span {
+        pointer-events: none !important;
+      }
+    </style>
+
   </head>
   <body class="text-white">
     <!-- CANVAS BACKGROUND -->
@@ -6410,6 +6466,72 @@
       setInterval(tick, 1000);
 
       /* ── SCROLL NAV ── */
+
+      /* ── SPA TABBED PAGE NAVIGATION (NO SCROLL) ── */
+      window.showSection = function(id) {
+        const targetId = id ? id.replace('#', '') : 'home';
+        const validSections = ['home', 'about', 'skills', 'projects', 'contact'];
+        const targetSec = validSections.includes(targetId) ? targetId : 'home';
+
+        // Hide all sections
+        validSections.forEach(secId => {
+          const secEl = document.getElementById(secId);
+          if (secEl) {
+            secEl.classList.remove('active-page-section');
+            secEl.style.display = 'none';
+          }
+        });
+
+        // Show target section exclusively
+        const activeEl = document.getElementById(targetSec);
+        if (activeEl) {
+          activeEl.style.display = 'block';
+          activeEl.classList.add('active-page-section');
+        }
+
+        // Reset scroll to top
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+
+        // Play hero video if returning to home
+        if (targetSec === 'home' && typeof window.playHeroVideoOnce === 'function') {
+          window.playHeroVideoOnce();
+        }
+
+        // Update nav links active class
+        document.querySelectorAll('.nav-links a, #mobileMenuDropdown a').forEach(a => {
+          const href = a.getAttribute('href') || '';
+          if (href === '#' + targetSec || href === targetSec) {
+            a.classList.add('active');
+          } else {
+            a.classList.remove('active');
+          }
+        });
+
+        // Update URL hash smoothly
+        if (history.pushState) {
+          history.pushState(null, null, '#' + targetSec);
+        }
+      };
+
+      window.scrollToSection = function(id, delay) {
+        if (window.playExtra) window.playExtra('glitch');
+        const target = id ? id.replace('#', '') : 'home';
+        setTimeout(() => {
+          window.showSection(target);
+        }, delay || 50);
+      };
+
+      // Initialize default section on load and hashchange
+      document.addEventListener('DOMContentLoaded', () => {
+        const initialHash = (window.location.hash || '#home').replace('#', '');
+        window.showSection(initialHash || 'home');
+      });
+
+      window.addEventListener('hashchange', () => {
+        const newHash = (window.location.hash || '#home').replace('#', '');
+        window.showSection(newHash || 'home');
+      });
+
       function scrollToSection(id, delay) {
         document.body.classList.add('page-transition-glitch');
         if(window.playExtra) window.playExtra('glitch');
@@ -8398,5 +8520,18 @@
         observer.observe(asciiVideo);
       });
     </script>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const mBtn = document.getElementById('mobileMenuBtn');
+        if (mBtn) {
+          mBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (typeof toggleMobileMenu === 'function') toggleMobileMenu();
+          });
+        }
+      });
+    </script>
+
 </body>
 </html>
