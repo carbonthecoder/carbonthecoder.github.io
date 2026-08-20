@@ -197,6 +197,9 @@
       /* --- IOS STACKING SECTIONS (PC ONLY) --- */
       @media (min-width: 769px) {
         section {
+          transform: translateZ(0);
+          backface-visibility: hidden;
+          will-change: transform, filter;
           background-color: var(--bg-color); /* Must be solid to hide sections beneath */
           transition: background-color 0.3s ease; /* For theme switches */
         }
@@ -254,8 +257,8 @@
       }
 
       @keyframes pulseLight {
-        0% { opacity: 0.6; transform: scale(0.95); filter: brightness(1) blur(0px); }
-        100% { opacity: 1; transform: scale(1.05); filter: brightness(1.8) blur(4px); }
+        0% { opacity: 0.3; transform: scale(0.95); }
+        100% { opacity: 0.8; transform: scale(1.1); }
       }
 
       /* Ensure all content stays above the overlays */
@@ -8938,7 +8941,16 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
     
-    window.addEventListener('scroll', applyStackingBlur, { passive: true });
+    let blurTicking = false;
+    window.addEventListener('scroll', () => {
+      if (!blurTicking) {
+        window.requestAnimationFrame(() => {
+          applyStackingBlur();
+          blurTicking = false;
+        });
+        blurTicking = true;
+      }
+    }, { passive: true });
     window.addEventListener('resize', applyStackingBlur);
     setTimeout(applyStackingBlur, 100);
 
