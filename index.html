@@ -8855,6 +8855,45 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(updateStackingCards, 100);
     setTimeout(updateStackingCards, 1000);
 
+    
+    // --- Added by antigravity: Dynamic Blur for Stacking Cards ---
+    function applyStackingBlur() {
+        if (window.innerWidth <= 768) {
+            // Reset filters on mobile
+            document.querySelectorAll('section').forEach(sec => {
+                sec.style.filter = 'none';
+            });
+            return;
+        }
+        
+        const sections = document.querySelectorAll('section');
+        const vh = window.innerHeight;
+        
+        sections.forEach((sec, i) => {
+            const nextSec = sections[i + 1];
+            if (nextSec) {
+                const nextTop = nextSec.getBoundingClientRect().top;
+                
+                if (nextTop < vh && nextTop >= 0) {
+                    // Next section is sliding up over this one!
+                    const progress = 1 - (nextTop / vh); // 0.0 to 1.0
+                    // Apply blur up to 12px, and darken up to 0.5 brightness
+                    sec.style.filter = `blur(${progress * 12}px) brightness(${1 - (progress * 0.5)})`;
+                } else if (nextTop < 0) {
+                    // Next section fully covers it
+                    sec.style.filter = `blur(12px) brightness(0.5)`;
+                } else {
+                    // Next section is completely below viewport
+                    sec.style.filter = `blur(0px) brightness(1)`;
+                }
+            }
+        });
+    }
+    
+    window.addEventListener('scroll', applyStackingBlur, { passive: true });
+    window.addEventListener('resize', applyStackingBlur);
+    setTimeout(applyStackingBlur, 100);
+
     // 3. Header Scroll Spy
     const dLinks = document.querySelectorAll('.desktop-nav-link');
     const sections = Array.from(dLinks).map(a => {
