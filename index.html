@@ -74,6 +74,32 @@
       }
 
       
+      
+      /* --- HEADER NAV STYLING --- */
+      .desktop-nav-link {
+        transition: color 0.2s, text-shadow 0.2s;
+      }
+      .desktop-nav-link:hover {
+        color: var(--accent-color) !important;
+        text-shadow: 0 0 8px var(--accent-color);
+      }
+      .desktop-nav-link.nav-active {
+        color: var(--accent-color) !important;
+        text-shadow: 0 0 8px var(--accent-color);
+        position: relative;
+      }
+      .desktop-nav-link.nav-active::after {
+        content: '';
+        position: absolute;
+        bottom: -6px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: var(--accent-color);
+        box-shadow: 0 0 8px var(--accent-color);
+        border-radius: 2px;
+      }
+
       /* --- TYPOGRAPHY ARCHITECTURE --- */
       h1, h2, h3, h4, h5, h6, 
       .glitch, 
@@ -2814,8 +2840,7 @@
           position: relative;
         "
       >
-        <a
-          href="#home"
+        <a class="desktop-nav-link" href="#home"
           onclick="scrollToSection('home')"
           style="
             font-size: 13px;
@@ -2826,12 +2851,11 @@
             text-transform: uppercase;
             transition: color 0.2s;
           "
-          onmouseover="this.style.color = 'var(--accent-color)'"
-          onmouseout="this.style.color = 'rgba(255,255,255,0.85)'"
+          
+          
           >HOME</a
         >
-        <a
-          href="#about"
+        <a class="desktop-nav-link" href="#about"
           onclick="scrollToSection('about')"
           style="
             font-size: 13px;
@@ -2842,12 +2866,11 @@
             text-transform: uppercase;
             transition: color 0.2s;
           "
-          onmouseover="this.style.color = 'var(--accent-color)'"
-          onmouseout="this.style.color = 'rgba(255,255,255,0.85)'"
+          
+          
           >ABOUT</a
         >
-        <a
-          href="#skills"
+        <a class="desktop-nav-link" href="#skills"
           onclick="scrollToSection('skills')"
           style="
             font-size: 13px;
@@ -2858,12 +2881,11 @@
             text-transform: uppercase;
             transition: color 0.2s;
           "
-          onmouseover="this.style.color = 'var(--accent-color)'"
-          onmouseout="this.style.color = 'rgba(255,255,255,0.85)'"
+          
+          
           >SKILLS</a
         >
-        <a
-          href="#projects"
+        <a class="desktop-nav-link" href="#projects"
           onclick="scrollToSection('projects')"
           style="
             font-size: 13px;
@@ -2874,12 +2896,11 @@
             text-transform: uppercase;
             transition: color 0.2s;
           "
-          onmouseover="this.style.color = 'var(--accent-color)'"
-          onmouseout="this.style.color = 'rgba(255,255,255,0.85)'"
+          
+          
           >PROJECTS</a
         >
-        <a
-          href="#contact"
+        <a class="desktop-nav-link" href="#contact"
           onclick="scrollToSection('contact')"
           style="
             font-size: 13px;
@@ -2890,8 +2911,8 @@
             text-transform: uppercase;
             transition: color 0.2s;
           "
-          onmouseover="this.style.color = 'var(--accent-color)'"
-          onmouseout="this.style.color = 'rgba(255,255,255,0.85)'"
+          
+          
           >CONTACT</a
         >
 
