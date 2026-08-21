@@ -1197,7 +1197,7 @@
           display: none !important;
         }
         #heroTitle {
-          font-size: clamp(38px, 10vw, 56px) !important;
+          font-size: clamp(48px, 14vw, 68px) !important;
           white-space: normal !important;
           line-height: 1 !important;
         }
@@ -2519,6 +2519,7 @@
       border-radius: 16px;
       box-shadow: 0 8px 32px rgba(0,0,0,0.2);
       font-family: var(--font-mono);
+      transition: opacity 0.3s ease;
     ">
 <div id="mpTrackInfo" style="display: flex; flex-direction: column; width: 100px;">
         <span style="font-size: 8px; color: var(--accent-color); letter-spacing: 1px;">NOW PLAYING</span>
@@ -8765,6 +8766,46 @@ document.addEventListener("DOMContentLoaded", () => {
     sections.forEach(sec => spyObserver.observe(sec));
 });
 </script>
+
+<!-- Footer Intersection Observer to hide fixed elements -->
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const footerObserver = new IntersectionObserver((entries) => {
+      const discordBanner = document.getElementById('heroDiscordBanner');
+      const miniPlayer = document.getElementById('miniPlayer');
+      
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+           // Footer is visible, hide fixed elements
+           if (discordBanner) {
+             discordBanner.style.opacity = '0';
+             discordBanner.style.pointerEvents = 'none';
+           }
+           if (miniPlayer) {
+             miniPlayer.style.opacity = '0';
+             miniPlayer.style.pointerEvents = 'none';
+           }
+        } else {
+           // Footer is hidden, show fixed elements
+           if (discordBanner) {
+             discordBanner.style.opacity = '1';
+             discordBanner.style.pointerEvents = 'auto';
+           }
+           if (miniPlayer && miniPlayer.style.display !== 'none') {
+             miniPlayer.style.opacity = '1';
+             miniPlayer.style.pointerEvents = 'auto';
+           }
+        }
+      });
+    }, { threshold: 0.1 });
+    
+    const sysFooter = document.querySelector('.sys-footer');
+    if (sysFooter) {
+      footerObserver.observe(sysFooter);
+    }
+  });
+</script>
 </body>
+
 
 </html>
