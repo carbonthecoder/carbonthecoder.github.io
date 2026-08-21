@@ -194,40 +194,15 @@
       }
 
       
-      /* --- IOS STACKING SECTIONS (PC ONLY) --- */
-      @media (min-width: 769px) {
-        section {
-          transform: translateZ(0);
-          backface-visibility: hidden;
-          will-change: transform, filter;
-          background-color: var(--bg-color); /* Must be solid to hide sections beneath */
-          transition: background-color 0.3s ease; /* For theme switches */
-        }
-        
-        /* Add the curve to all sections except home */
-        section:not(#home) {
-          border-top-left-radius: 40px;
-          border-top-right-radius: 40px;
-          box-shadow: 0 -20px 50px rgba(0,0,0,0.5);
-          border-top: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        /* Enforce stacking order */
-        #home { z-index: 1; }
-        #about { z-index: 2; }
-        #skills { z-index: 3; }
-        #projects { z-index: 4; }
-        #contact { z-index: 5; }
-      }
-
-      
       /* --- SKILLS SECTION IMAGE & GLOW EFFECT --- */
-      #skills {
+      @media (min-width: 769px) {
+        #skills {
         position: relative;
         background-image: url('assets/stitch_extract/download.jpg');
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
+      }
       }
       /* Premium Animations & Effects */
       .scroll-fade {
@@ -8835,86 +8810,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     
-    // --- Added by antigravity: iOS Stacking Cards Logic ---
-    function updateStackingCards() {
-        if (window.innerWidth > 768) {
-            document.querySelectorAll('section').forEach((sec) => {
-                sec.style.position = 'sticky';
-                // If section is taller than viewport, stick it when its BOTTOM hits the viewport bottom
-                const h = sec.offsetHeight;
-                const vh = window.innerHeight;
-                if (h > vh) {
-                    sec.style.top = `calc(100vh - ${h}px)`;
-                } else {
-                    // If it fits in viewport, stick it at the top
-                    // Or add a little offset (like 60px) for the header?
-                    // The user's header is fixed, so let's stick at top: 0
-                    sec.style.top = '0px';
-                }
-            });
-        } else {
-            // Remove sticky on mobile
-            document.querySelectorAll('section').forEach(sec => {
-                sec.style.position = 'static';
-                sec.style.top = 'auto';
-            });
-        }
-    }
-    
-    // Run on load and resize
-    window.addEventListener('resize', updateStackingCards);
-    // Use a small timeout to let fonts/images load and calculate correct heights
-    setTimeout(updateStackingCards, 100);
-    setTimeout(updateStackingCards, 1000);
-
-    
-    // --- Added by antigravity: Dynamic Blur for Stacking Cards ---
-    function applyStackingBlur() {
-        if (window.innerWidth <= 768) {
-            // Reset filters on mobile
-            document.querySelectorAll('section').forEach(sec => {
-                sec.style.filter = 'none';
-            });
-            return;
-        }
-        
-        const sections = document.querySelectorAll('section');
-        const vh = window.innerHeight;
-        
-        sections.forEach((sec, i) => {
-            const nextSec = sections[i + 1];
-            if (nextSec) {
-                const nextTop = nextSec.getBoundingClientRect().top;
-                
-                if (nextTop < vh && nextTop >= 0) {
-                    // Next section is sliding up over this one!
-                    const progress = 1 - (nextTop / vh); // 0.0 to 1.0
-                    // Apply blur up to 12px, and darken up to 0.5 brightness
-                    sec.style.filter = `blur(${progress * 12}px) brightness(${1 - (progress * 0.5)})`;
-                } else if (nextTop < 0) {
-                    // Next section fully covers it
-                    sec.style.filter = `blur(12px) brightness(0.5)`;
-                } else {
-                    // Next section is completely below viewport
-                    sec.style.filter = `blur(0px) brightness(1)`;
-                }
-            }
-        });
-    }
-    
-    let blurTicking = false;
-    window.addEventListener('scroll', () => {
-      if (!blurTicking) {
-        window.requestAnimationFrame(() => {
-          applyStackingBlur();
-          blurTicking = false;
-        });
-        blurTicking = true;
-      }
-    }, { passive: true });
-    window.addEventListener('resize', applyStackingBlur);
-    setTimeout(applyStackingBlur, 100);
-
     // 3. Header Scroll Spy
     const dLinks = document.querySelectorAll('.desktop-nav-link');
     const sections = Array.from(dLinks).map(a => {
