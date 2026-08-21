@@ -311,16 +311,21 @@
         box-shadow: 0 0 10px rgba(255, 51, 0, 0.5);
       }
 
-      /* Audio Visualizer */
-      .visualizer { display: none; align-items: flex-end; gap: 2px; height: 12px; margin-left: 6px; }
-      .visualizer.active { display: flex; }
-      .visualizer span { display: block; width: 3px; background: var(--accent-color); border-radius: 2px; animation: eqPulse 0.5s infinite ease-in-out alternate; }
-      .visualizer span:nth-child(1) { animation-delay: 0.1s; }
-      .visualizer span:nth-child(2) { animation-delay: 0.3s; }
-      .visualizer span:nth-child(3) { animation-delay: 0.0s; }
-      .visualizer span:nth-child(4) { animation-delay: 0.4s; }
-      .visualizer span:nth-child(5) { animation-delay: 0.2s; }
-      @keyframes eqPulse { 0% { height: 2px; } 100% { height: 12px; } }
+      /* Audio Visualizer - Upgraded */
+.visualizer { display: none; align-items: flex-end; gap: 3px; height: 18px; margin-left: 6px; }
+.visualizer.active { display: flex; }
+.visualizer span { display: block; width: 4px; background: linear-gradient(to top, var(--accent-color), #fff); border-radius: 4px; animation: eqPulseCool 0.6s infinite ease-in-out alternate; box-shadow: 0 0 6px var(--accent-color); }
+.visualizer span:nth-child(1) { animation-duration: 0.4s; }
+.visualizer span:nth-child(2) { animation-duration: 0.7s; }
+.visualizer span:nth-child(3) { animation-duration: 0.5s; }
+.visualizer span:nth-child(4) { animation-duration: 0.8s; }
+.visualizer span:nth-child(5) { animation-duration: 0.6s; }
+/* Visualizer animations */
+@keyframes eqPulseCool {
+  0% { height: 4px; opacity: 0.6; }
+  50% { height: 12px; opacity: 1; }
+  100% { height: 18px; opacity: 0.8; filter: brightness(1.5); }
+}
 
       /* Cyberpunk Glitch Transition */
       .page-transition-glitch { animation: pageGlitch 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both; }
@@ -3335,7 +3340,7 @@
         <div class="music-mobile-controls" style="position: relative;">
 
         <div style="position: relative; display: flex; align-items: center; justify-content: center;">
-          <button id="mobileMusicBtn" onclick="const mt=document.getElementById('musicTooltip'); if(mt)mt.style.opacity='0';" style="
+          <button id="mobileMusicBtn"  style="
             background: rgba(255,255,255,0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 50%;
@@ -6115,6 +6120,14 @@
             mobIcon.className = "fa-solid fa-compact-disc";
           }
           statusTexts.forEach((txt) => (txt.innerText = "OFF"));
+          
+          const mt = document.getElementById("musicTooltip");
+          if(mt) {
+            const span = mt.querySelector("span");
+            if(span) span.innerText = "Check the music out there";
+            mt.style.opacity = '1';
+            setTimeout(() => { mt.style.opacity = '0'; }, 3000);
+          }
         } else {
           bgMusic
             .play()
@@ -6135,6 +6148,14 @@
                 mobIcon.className = "fa-solid fa-compact-disc fa-spin";
               }
               statusTexts.forEach((txt) => (txt.innerText = "ON"));
+              
+              const mt = document.getElementById("musicTooltip");
+              if(mt) {
+                const span = mt.querySelector("span");
+                if(span) span.innerText = "Check out the new songs here";
+                mt.style.opacity = '1';
+                setTimeout(() => { mt.style.opacity = '0'; }, 3000);
+              }
             })
             .catch((e) => {
               alert("Click anywhere on the page first, then toggle music!");
@@ -6156,7 +6177,7 @@
         }
 
         // Hide tooltip notification when disc is clicked
-        const tooltip = document.getElementById('mobileMusicTooltip');
+        const tooltip = document.getElementById('musicTooltip');
         if (tooltip) tooltip.style.opacity = '0';
 
         mp.classList.add("show-mobile");
