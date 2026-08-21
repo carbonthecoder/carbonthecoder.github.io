@@ -312,19 +312,23 @@
       }
 
       /* Audio Visualizer - Upgraded */
-.visualizer { display: none; align-items: flex-end; gap: 3px; height: 18px; margin-left: 6px; }
+.visualizer { display: none; align-items: flex-end; gap: 3px; height: 16px; }
 .visualizer.active { display: flex; }
-.visualizer span { display: block; width: 4px; background: linear-gradient(to top, var(--accent-color), #fff); border-radius: 4px; animation: eqPulseCool 0.6s infinite ease-in-out alternate; box-shadow: 0 0 6px var(--accent-color); }
+.visualizer span { display: block; width: 3px; background: linear-gradient(to top, var(--accent-color), #fff); border-radius: 4px; animation: eqPulseCool 0.6s infinite ease-in-out alternate; box-shadow: 0 0 5px var(--accent-color); }
 .visualizer span:nth-child(1) { animation-duration: 0.4s; }
 .visualizer span:nth-child(2) { animation-duration: 0.7s; }
 .visualizer span:nth-child(3) { animation-duration: 0.5s; }
 .visualizer span:nth-child(4) { animation-duration: 0.8s; }
 .visualizer span:nth-child(5) { animation-duration: 0.6s; }
-/* Visualizer animations */
+
+#desktopVisualizer { margin-left: 8px; }
+#mobileVisualizer { gap: 2px; height: 14px; margin: 0; }
+#mobileVisualizer span { width: 2.5px; }
+
 @keyframes eqPulseCool {
   0% { height: 4px; opacity: 0.6; }
-  50% { height: 12px; opacity: 1; }
-  100% { height: 18px; opacity: 0.8; filter: brightness(1.5); }
+  50% { height: 10px; opacity: 1; }
+  100% { height: 100%; opacity: 0.8; filter: brightness(1.5); }
 }
 
       /* Cyberpunk Glitch Transition */
@@ -3359,7 +3363,7 @@
           onmouseout="this.style.background='rgba(255,255,255,0.05)'; this.style.color='var(--text-color)'; this.style.transform='rotate(0deg) scale(1)';"
         >
             <i id="mobileMusicIcon" class="fa-solid fa-compact-disc"></i>
-            <div id="mobileVisualizer" class="visualizer" style="height: 16px; margin-left: 2px;"><span></span><span></span><span></span><span></span><span></span></div>
+            <div id="mobileVisualizer" class="visualizer"><span></span><span></span><span></span><span></span><span></span></div>
           </button>
           <div id="musicTooltip" style="
             position: absolute;
@@ -6118,6 +6122,7 @@
           const mobIcon = document.getElementById("mobileMusicIcon");
           if (mobIcon) {
             mobIcon.className = "fa-solid fa-compact-disc";
+            mobIcon.style.display = 'inline-block';
           }
           statusTexts.forEach((txt) => (txt.innerText = "OFF"));
           
@@ -6145,7 +6150,7 @@
               }
               const mobIcon = document.getElementById("mobileMusicIcon");
               if (mobIcon) {
-                mobIcon.className = "fa-solid fa-compact-disc fa-spin";
+                mobIcon.style.display = 'none'; // hide CD icon so equalizer fits perfectly
               }
               statusTexts.forEach((txt) => (txt.innerText = "ON"));
               
