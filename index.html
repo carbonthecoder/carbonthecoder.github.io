@@ -3837,103 +3837,24 @@
             >
           </div>
 
-          <!-- Floating Discord Live Widget -->
-          <div
-            id="heroDiscordBanner"
-            onclick="openDiscordModal()"
-            class="snap-in snap-delay-2"
-            style="
-              display: none;
-              cursor: pointer;
-              position: fixed;
-              bottom: 24px;
-              right: 24px;
-              z-index: 90000;
-              align-items: center;
-              gap: 12px;
-              padding: 12px 20px;
-              background: rgba(255, 255, 255, 0.05);
-              backdrop-filter: blur(16px) saturate(180%);
-              border: 1px solid rgba(255, 255, 255, 0.15);
-              border-radius: 16px;
-              box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-              width: fit-content;
-              max-width: 90vw;
-              transition: all 0.2s;
-            "
-            onmouseover="
-              this.style.background = 'rgba(255, 255, 255, 0.1)';
-              this.style.transform = 'scale(1.02)';
-            "
-            onmouseout="
-              this.style.background = 'rgba(255, 255, 255, 0.05)';
-              this.style.transform = 'scale(1)';
-            "
-          >
-            <div
-              id="heroDiscordIndicator"
-              style="
-                width: 10px;
-                height: 10px;
-                border-radius: 50%;
-                background: #747f8d;
-                transition: all 0.3s;
-                flex-shrink: 0;
-              "
-            ></div>
-            <div style="display: flex; flex-direction: column">
-              <span
-                style="
-                  font-size: 9px;
-                  letter-spacing: 2px;
-                  color: var(--accent-color);
-                  text-transform: uppercase;
-                  font-weight: 700;
-                  margin-bottom: 2px;
-                "
-                >// SYSTEM_PRESENCE</span
-              >
-              <div style="display: flex; align-items: center">
-                <span
-                  id="heroDiscordText"
-                  style="
-                    font-size: 11px;
-                    color: rgba(255, 255, 255, 0.9);
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                  "
-                  >Connecting to uplink...</span
-                >
-                <span
-                  id="heroDiscordTimer"
-                  style="
-                    font-size: 10px;
-                    color: var(--accent-color);
-                    font-family: monospace;
-                    margin-left: 8px;
-                    white-space: nowrap;
-                  "
-                ></span>
-              </div>
-            </div>
-          </div>
+          
 
-          <p
-            class="snap-in snap-delay-2"
-            style="
-              color: rgba(255, 255, 255, 0.75);
-              font-family: system-ui, -apple-system, sans-serif;
-              font-size: clamp(16px, 2.5vw, 19px);
+          <p class="snap-in snap-delay-2" style="
+              color: rgba(255, 255, 255, 0.85);
+              font-family: var(--font-mono);
+              font-size: clamp(13px, 2vw, 15px);
               font-weight: 400;
               letter-spacing: 0.5px;
-              line-height: 1.6;
-              max-width: 900px;
+              line-height: 1.8;
+              max-width: 650px;
               margin-bottom: 32px;
-            "
-          >
-            I'm an aspiring backend & AI systems engineer and a pro AI user. 
-            "Building unshakable foundations."
+              border-left: 3px solid var(--accent-color);
+              padding-left: 18px;
+              background: linear-gradient(90deg, rgba(255,255,255,0.03) 0%, transparent 100%);
+              padding-top: 10px; padding-bottom: 10px;
+            ">
+            I'm an aspiring Backend & AI Systems Engineer and a pro AI user. <br>
+            <span style="color: var(--accent-color); font-weight: 700; font-size: 13px; text-transform: uppercase;">"Building unshakable foundations."</span>
           </p>
 
           <div
@@ -5614,6 +5535,88 @@
 
 
 
+    <!-- Floating Discord Live Widget -->
+          <div
+            id="heroDiscordBanner"
+            onclick="openDiscordModal()"
+            class="snap-in snap-delay-2"
+            style="
+              display: none;
+              cursor: pointer;
+              position: fixed;
+              bottom: 24px;
+              right: 24px;
+              z-index: 90000;
+              align-items: center;
+              gap: 12px;
+              padding: 12px 20px;
+              background: rgba(255, 255, 255, 0.05);
+              backdrop-filter: blur(16px) saturate(180%);
+              border: 1px solid rgba(255, 255, 255, 0.15);
+              border-radius: 16px;
+              box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+              width: fit-content;
+              max-width: 90vw;
+              transition: all 0.2s;
+            "
+            onmouseover="
+              this.style.background = 'rgba(255, 255, 255, 0.1)';
+              this.style.transform = 'scale(1.02)';
+            "
+            onmouseout="
+              this.style.background = 'rgba(255, 255, 255, 0.05)';
+              this.style.transform = 'scale(1)';
+            "
+          >
+            <div
+              id="heroDiscordIndicator"
+              style="
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                background: #747f8d;
+                transition: all 0.3s;
+                flex-shrink: 0;
+              "
+            ></div>
+            <div style="display: flex; flex-direction: column">
+              <span
+                style="
+                  font-size: 9px;
+                  letter-spacing: 2px;
+                  color: var(--accent-color);
+                  text-transform: uppercase;
+                  font-weight: 700;
+                  margin-bottom: 2px;
+                "
+                >// SYSTEM_PRESENCE</span
+              >
+              <div style="display: flex; align-items: center">
+                <span
+                  id="heroDiscordText"
+                  style="
+                    font-size: 11px;
+                    color: rgba(255, 255, 255, 0.9);
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                  "
+                  >Connecting to uplink...</span
+                >
+                <span
+                  id="heroDiscordTimer"
+                  style="
+                    font-size: 10px;
+                    color: var(--accent-color);
+                    font-family: monospace;
+                    margin-left: 8px;
+                    white-space: nowrap;
+                  "
+                ></span>
+              </div>
+            </div>
+          </div>
+
     <!-- SYSTEM FOOTER -->
     <div class="sys-footer">
       <div>
@@ -6731,35 +6734,18 @@
       };
 
       // Initialize default section on load and hashchange
-      document.addEventListener('DOMContentLoaded', () => {
-        const initialHash = (window.location.hash || '#home').replace('#', '');
-        window.showSection(initialHash || 'home');
-      });
+      
 
-      window.addEventListener('hashchange', () => {
-        const newHash = (window.location.hash || '#home').replace('#', '');
-        window.showSection(newHash || 'home');
-      });
+      
 
       function scrollToSection(id, delay) {
-        if (window.innerWidth <= 768) {
-          // Mobile Tabbed SPA
-          if (typeof window.showSection === 'function') {
-             window.showSection(id);
-          } else {
-             const validSections = ['home', 'about', 'skills', 'projects', 'contact'];
-             validSections.forEach(secId => {
-               const el = document.getElementById(secId);
-               if(el) { el.style.display = 'none'; el.classList.remove('active-page-section'); }
-             });
-             const activeEl = document.getElementById(id ? id.replace('#', '') : 'home');
-             if(activeEl) { activeEl.style.display = 'block'; activeEl.classList.add('active-page-section'); }
-             window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-          }
-          return;
-        }
+        // Ensure all sections are visible first (in case showSection was previously called)
+        const validSections = ['home', 'about', 'skills', 'projects', 'contact'];
+        validSections.forEach(secId => {
+          const el = document.getElementById(secId);
+          if(el) { el.style.display = 'block'; el.classList.remove('active-page-section'); }
+        });
 
-        // PC Normal Scroll
         setTimeout(() => {
           const el = document.getElementById(id);
           if (el) {
