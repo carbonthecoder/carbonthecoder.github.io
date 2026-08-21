@@ -2133,52 +2133,7 @@
 
   
     <style id="spa-no-scroll-and-hamburger-fix">
-      /* --- MOBILE ONLY NO-SCROLL TABBED MODEL (SLIDE RIGHT ANIMATION) --- */
-      @media (max-width: 768px) {
-        section {
-          display: none !important;
-          opacity: 0;
-        }
 
-        section.active-page-section {
-          display: block !important;
-          opacity: 1 !important;
-          animation: mobileSlideRight 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
-        }
-      }
-
-      /* --- DESKTOP DEFAULT SCROLLING MODEL (SLIDE DOWN ANIMATION) --- */
-      @media (min-width: 769px) {
-        section {
-          display: block !important;
-          opacity: 1 !important;
-        }
-        section.active-page-section {
-          animation: pcSlideDown 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
-        }
-      }
-
-      @keyframes mobileSlideRight {
-        from {
-          opacity: 0;
-          transform: translateX(-40px);
-        }
-        to {
-          opacity: 1;
-          transform: translateX(0);
-        }
-      }
-
-      @keyframes pcSlideDown {
-        from {
-          opacity: 0;
-          transform: translateY(-30px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
 
       /* --- PERFECT HAMBURGER & EQUALIZER Z-INDEX FIX --- */
       #mobileMenuBtn {
